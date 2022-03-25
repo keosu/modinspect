@@ -1,17 +1,18 @@
 import { protobuf } from "./protobuf.js";
-var $root = {};
-export {$root};
 
-$root.tensorflow = {};
+var tensorflow = {};
+export {tensorflow};
 
-$root.tensorflow.SavedModel = class SavedModel {
+tensorflow = {};
+
+tensorflow.SavedModel = class SavedModel {
 
     constructor() {
         this.meta_graphs = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedModel();
+        const message = new tensorflow.SavedModel();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -20,7 +21,7 @@ $root.tensorflow.SavedModel = class SavedModel {
                     message.saved_model_schema_version = reader.int64();
                     break;
                 case 2:
-                    message.meta_graphs.push($root.tensorflow.MetaGraphDef.decode(reader, reader.uint32()));
+                    message.meta_graphs.push(tensorflow.MetaGraphDef.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -31,7 +32,7 @@ $root.tensorflow.SavedModel = class SavedModel {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedModel();
+        const message = new tensorflow.SavedModel();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -40,7 +41,7 @@ $root.tensorflow.SavedModel = class SavedModel {
                     message.saved_model_schema_version = reader.int64();
                     break;
                 case "meta_graphs":
-                    message.meta_graphs.push($root.tensorflow.MetaGraphDef.decodeText(reader));
+                    message.meta_graphs.push(tensorflow.MetaGraphDef.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -51,9 +52,9 @@ $root.tensorflow.SavedModel = class SavedModel {
     }
 };
 
-$root.tensorflow.SavedModel.prototype.saved_model_schema_version = protobuf.Int64.create(0);
+tensorflow.SavedModel.prototype.saved_model_schema_version = protobuf.Int64.create(0);
 
-$root.tensorflow.MetaGraphDef = class MetaGraphDef {
+tensorflow.MetaGraphDef = class MetaGraphDef {
 
     constructor() {
         this.collection_def = {};
@@ -62,31 +63,31 @@ $root.tensorflow.MetaGraphDef = class MetaGraphDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.MetaGraphDef();
+        const message = new tensorflow.MetaGraphDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.meta_info_def = $root.tensorflow.MetaGraphDef.MetaInfoDef.decode(reader, reader.uint32());
+                    message.meta_info_def = tensorflow.MetaGraphDef.MetaInfoDef.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.graph_def = $root.tensorflow.GraphDef.decode(reader, reader.uint32());
+                    message.graph_def = tensorflow.GraphDef.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.saver_def = $root.tensorflow.SaverDef.decode(reader, reader.uint32());
+                    message.saver_def = tensorflow.SaverDef.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    reader.entry(message.collection_def, () => reader.string(), () => $root.tensorflow.CollectionDef.decode(reader, reader.uint32()));
+                    reader.entry(message.collection_def, () => reader.string(), () => tensorflow.CollectionDef.decode(reader, reader.uint32()));
                     break;
                 case 5:
-                    reader.entry(message.signature_def, () => reader.string(), () => $root.tensorflow.SignatureDef.decode(reader, reader.uint32()));
+                    reader.entry(message.signature_def, () => reader.string(), () => tensorflow.SignatureDef.decode(reader, reader.uint32()));
                     break;
                 case 6:
-                    message.asset_file_def.push($root.tensorflow.AssetFileDef.decode(reader, reader.uint32()));
+                    message.asset_file_def.push(tensorflow.AssetFileDef.decode(reader, reader.uint32()));
                     break;
                 case 7:
-                    message.object_graph_def = $root.tensorflow.SavedObjectGraph.decode(reader, reader.uint32());
+                    message.object_graph_def = tensorflow.SavedObjectGraph.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -97,31 +98,31 @@ $root.tensorflow.MetaGraphDef = class MetaGraphDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.MetaGraphDef();
+        const message = new tensorflow.MetaGraphDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "meta_info_def":
-                    message.meta_info_def = $root.tensorflow.MetaGraphDef.MetaInfoDef.decodeText(reader);
+                    message.meta_info_def = tensorflow.MetaGraphDef.MetaInfoDef.decodeText(reader);
                     break;
                 case "graph_def":
-                    message.graph_def = $root.tensorflow.GraphDef.decodeText(reader);
+                    message.graph_def = tensorflow.GraphDef.decodeText(reader);
                     break;
                 case "saver_def":
-                    message.saver_def = $root.tensorflow.SaverDef.decodeText(reader);
+                    message.saver_def = tensorflow.SaverDef.decodeText(reader);
                     break;
                 case "collection_def":
-                    reader.entry(message.collection_def, () => reader.string(), () => $root.tensorflow.CollectionDef.decodeText(reader));
+                    reader.entry(message.collection_def, () => reader.string(), () => tensorflow.CollectionDef.decodeText(reader));
                     break;
                 case "signature_def":
-                    reader.entry(message.signature_def, () => reader.string(), () => $root.tensorflow.SignatureDef.decodeText(reader));
+                    reader.entry(message.signature_def, () => reader.string(), () => tensorflow.SignatureDef.decodeText(reader));
                     break;
                 case "asset_file_def":
-                    message.asset_file_def.push($root.tensorflow.AssetFileDef.decodeText(reader));
+                    message.asset_file_def.push(tensorflow.AssetFileDef.decodeText(reader));
                     break;
                 case "object_graph_def":
-                    message.object_graph_def = $root.tensorflow.SavedObjectGraph.decodeText(reader);
+                    message.object_graph_def = tensorflow.SavedObjectGraph.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -132,12 +133,12 @@ $root.tensorflow.MetaGraphDef = class MetaGraphDef {
     }
 };
 
-$root.tensorflow.MetaGraphDef.prototype.meta_info_def = null;
-$root.tensorflow.MetaGraphDef.prototype.graph_def = null;
-$root.tensorflow.MetaGraphDef.prototype.saver_def = null;
-$root.tensorflow.MetaGraphDef.prototype.object_graph_def = null;
+tensorflow.MetaGraphDef.prototype.meta_info_def = null;
+tensorflow.MetaGraphDef.prototype.graph_def = null;
+tensorflow.MetaGraphDef.prototype.saver_def = null;
+tensorflow.MetaGraphDef.prototype.object_graph_def = null;
 
-$root.tensorflow.MetaGraphDef.MetaInfoDef = class MetaInfoDef {
+tensorflow.MetaGraphDef.MetaInfoDef = class MetaInfoDef {
 
     constructor() {
         this.tags = [];
@@ -145,7 +146,7 @@ $root.tensorflow.MetaGraphDef.MetaInfoDef = class MetaInfoDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.MetaGraphDef.MetaInfoDef();
+        const message = new tensorflow.MetaGraphDef.MetaInfoDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -154,10 +155,10 @@ $root.tensorflow.MetaGraphDef.MetaInfoDef = class MetaInfoDef {
                     message.meta_graph_version = reader.string();
                     break;
                 case 2:
-                    message.stripped_op_list = $root.tensorflow.OpList.decode(reader, reader.uint32());
+                    message.stripped_op_list = tensorflow.OpList.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.any_info = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                    message.any_info = google.protobuf.Any.decode(reader, reader.uint32());
                     break;
                 case 4:
                     message.tags.push(reader.string());
@@ -183,7 +184,7 @@ $root.tensorflow.MetaGraphDef.MetaInfoDef = class MetaInfoDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.MetaGraphDef.MetaInfoDef();
+        const message = new tensorflow.MetaGraphDef.MetaInfoDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -192,10 +193,10 @@ $root.tensorflow.MetaGraphDef.MetaInfoDef = class MetaInfoDef {
                     message.meta_graph_version = reader.string();
                     break;
                 case "stripped_op_list":
-                    message.stripped_op_list = $root.tensorflow.OpList.decodeText(reader);
+                    message.stripped_op_list = tensorflow.OpList.decodeText(reader);
                     break;
                 case "any_info":
-                    message.any_info = $root.google.protobuf.Any.decodeText(reader);
+                    message.any_info = google.protobuf.Any.decodeText(reader);
                     break;
                 case "tags":
                     reader.array(message.tags, () => reader.string());
@@ -221,43 +222,43 @@ $root.tensorflow.MetaGraphDef.MetaInfoDef = class MetaInfoDef {
     }
 };
 
-$root.tensorflow.MetaGraphDef.MetaInfoDef.prototype.meta_graph_version = "";
-$root.tensorflow.MetaGraphDef.MetaInfoDef.prototype.stripped_op_list = null;
-$root.tensorflow.MetaGraphDef.MetaInfoDef.prototype.any_info = null;
-$root.tensorflow.MetaGraphDef.MetaInfoDef.prototype.tensorflow_version = "";
-$root.tensorflow.MetaGraphDef.MetaInfoDef.prototype.tensorflow_git_version = "";
-$root.tensorflow.MetaGraphDef.MetaInfoDef.prototype.stripped_default_attrs = false;
+tensorflow.MetaGraphDef.MetaInfoDef.prototype.meta_graph_version = "";
+tensorflow.MetaGraphDef.MetaInfoDef.prototype.stripped_op_list = null;
+tensorflow.MetaGraphDef.MetaInfoDef.prototype.any_info = null;
+tensorflow.MetaGraphDef.MetaInfoDef.prototype.tensorflow_version = "";
+tensorflow.MetaGraphDef.MetaInfoDef.prototype.tensorflow_git_version = "";
+tensorflow.MetaGraphDef.MetaInfoDef.prototype.stripped_default_attrs = false;
 
-$root.tensorflow.CollectionDef = class CollectionDef {
+tensorflow.CollectionDef = class CollectionDef {
 
     constructor() {
     }
 
     get kind() {
-        $root.tensorflow.CollectionDef.kindSet = $root.tensorflow.CollectionDef.kindSet || new Set([ "node_list", "bytes_list", "int64_list", "float_list", "any_list"]);
-        return Object.keys(this).find((key) => $root.tensorflow.CollectionDef.kindSet.has(key) && this[key] != null);
+        tensorflow.CollectionDef.kindSet = tensorflow.CollectionDef.kindSet || new Set([ "node_list", "bytes_list", "int64_list", "float_list", "any_list"]);
+        return Object.keys(this).find((key) => tensorflow.CollectionDef.kindSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CollectionDef();
+        const message = new tensorflow.CollectionDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.node_list = $root.tensorflow.CollectionDef.NodeList.decode(reader, reader.uint32());
+                    message.node_list = tensorflow.CollectionDef.NodeList.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.bytes_list = $root.tensorflow.CollectionDef.BytesList.decode(reader, reader.uint32());
+                    message.bytes_list = tensorflow.CollectionDef.BytesList.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.int64_list = $root.tensorflow.CollectionDef.Int64List.decode(reader, reader.uint32());
+                    message.int64_list = tensorflow.CollectionDef.Int64List.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.float_list = $root.tensorflow.CollectionDef.FloatList.decode(reader, reader.uint32());
+                    message.float_list = tensorflow.CollectionDef.FloatList.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.any_list = $root.tensorflow.CollectionDef.AnyList.decode(reader, reader.uint32());
+                    message.any_list = tensorflow.CollectionDef.AnyList.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -268,25 +269,25 @@ $root.tensorflow.CollectionDef = class CollectionDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CollectionDef();
+        const message = new tensorflow.CollectionDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "node_list":
-                    message.node_list = $root.tensorflow.CollectionDef.NodeList.decodeText(reader);
+                    message.node_list = tensorflow.CollectionDef.NodeList.decodeText(reader);
                     break;
                 case "bytes_list":
-                    message.bytes_list = $root.tensorflow.CollectionDef.BytesList.decodeText(reader);
+                    message.bytes_list = tensorflow.CollectionDef.BytesList.decodeText(reader);
                     break;
                 case "int64_list":
-                    message.int64_list = $root.tensorflow.CollectionDef.Int64List.decodeText(reader);
+                    message.int64_list = tensorflow.CollectionDef.Int64List.decodeText(reader);
                     break;
                 case "float_list":
-                    message.float_list = $root.tensorflow.CollectionDef.FloatList.decodeText(reader);
+                    message.float_list = tensorflow.CollectionDef.FloatList.decodeText(reader);
                     break;
                 case "any_list":
-                    message.any_list = $root.tensorflow.CollectionDef.AnyList.decodeText(reader);
+                    message.any_list = tensorflow.CollectionDef.AnyList.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -297,14 +298,14 @@ $root.tensorflow.CollectionDef = class CollectionDef {
     }
 };
 
-$root.tensorflow.CollectionDef.NodeList = class NodeList {
+tensorflow.CollectionDef.NodeList = class NodeList {
 
     constructor() {
         this.value = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CollectionDef.NodeList();
+        const message = new tensorflow.CollectionDef.NodeList();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -321,7 +322,7 @@ $root.tensorflow.CollectionDef.NodeList = class NodeList {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CollectionDef.NodeList();
+        const message = new tensorflow.CollectionDef.NodeList();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -338,14 +339,14 @@ $root.tensorflow.CollectionDef.NodeList = class NodeList {
     }
 };
 
-$root.tensorflow.CollectionDef.BytesList = class BytesList {
+tensorflow.CollectionDef.BytesList = class BytesList {
 
     constructor() {
         this.value = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CollectionDef.BytesList();
+        const message = new tensorflow.CollectionDef.BytesList();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -362,7 +363,7 @@ $root.tensorflow.CollectionDef.BytesList = class BytesList {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CollectionDef.BytesList();
+        const message = new tensorflow.CollectionDef.BytesList();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -379,14 +380,14 @@ $root.tensorflow.CollectionDef.BytesList = class BytesList {
     }
 };
 
-$root.tensorflow.CollectionDef.Int64List = class Int64List {
+tensorflow.CollectionDef.Int64List = class Int64List {
 
     constructor() {
         this.value = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CollectionDef.Int64List();
+        const message = new tensorflow.CollectionDef.Int64List();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -403,7 +404,7 @@ $root.tensorflow.CollectionDef.Int64List = class Int64List {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CollectionDef.Int64List();
+        const message = new tensorflow.CollectionDef.Int64List();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -420,14 +421,14 @@ $root.tensorflow.CollectionDef.Int64List = class Int64List {
     }
 };
 
-$root.tensorflow.CollectionDef.FloatList = class FloatList {
+tensorflow.CollectionDef.FloatList = class FloatList {
 
     constructor() {
         this.value = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CollectionDef.FloatList();
+        const message = new tensorflow.CollectionDef.FloatList();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -444,7 +445,7 @@ $root.tensorflow.CollectionDef.FloatList = class FloatList {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CollectionDef.FloatList();
+        const message = new tensorflow.CollectionDef.FloatList();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -461,20 +462,20 @@ $root.tensorflow.CollectionDef.FloatList = class FloatList {
     }
 };
 
-$root.tensorflow.CollectionDef.AnyList = class AnyList {
+tensorflow.CollectionDef.AnyList = class AnyList {
 
     constructor() {
         this.value = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CollectionDef.AnyList();
+        const message = new tensorflow.CollectionDef.AnyList();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.value.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                    message.value.push(google.protobuf.Any.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -485,13 +486,13 @@ $root.tensorflow.CollectionDef.AnyList = class AnyList {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CollectionDef.AnyList();
+        const message = new tensorflow.CollectionDef.AnyList();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "value":
-                    reader.anyarray(message.value, () => new $root.google.protobuf.Any());
+                    reader.anyarray(message.value, () => new google.protobuf.Any());
                     break;
                 default:
                     reader.field(tag, message);
@@ -502,18 +503,18 @@ $root.tensorflow.CollectionDef.AnyList = class AnyList {
     }
 };
 
-$root.tensorflow.TensorInfo = class TensorInfo {
+tensorflow.TensorInfo = class TensorInfo {
 
     constructor() {
     }
 
     get encoding() {
-        $root.tensorflow.TensorInfo.encodingSet = $root.tensorflow.TensorInfo.encodingSet || new Set([ "name", "coo_sparse", "composite_tensor"]);
-        return Object.keys(this).find((key) => $root.tensorflow.TensorInfo.encodingSet.has(key) && this[key] != null);
+        tensorflow.TensorInfo.encodingSet = tensorflow.TensorInfo.encodingSet || new Set([ "name", "coo_sparse", "composite_tensor"]);
+        return Object.keys(this).find((key) => tensorflow.TensorInfo.encodingSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorInfo();
+        const message = new tensorflow.TensorInfo();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -522,16 +523,16 @@ $root.tensorflow.TensorInfo = class TensorInfo {
                     message.name = reader.string();
                     break;
                 case 4:
-                    message.coo_sparse = $root.tensorflow.TensorInfo.CooSparse.decode(reader, reader.uint32());
+                    message.coo_sparse = tensorflow.TensorInfo.CooSparse.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.composite_tensor = $root.tensorflow.TensorInfo.CompositeTensor.decode(reader, reader.uint32());
+                    message.composite_tensor = tensorflow.TensorInfo.CompositeTensor.decode(reader, reader.uint32());
                     break;
                 case 2:
                     message.dtype = reader.int32();
                     break;
                 case 3:
-                    message.tensor_shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.tensor_shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -542,7 +543,7 @@ $root.tensorflow.TensorInfo = class TensorInfo {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorInfo();
+        const message = new tensorflow.TensorInfo();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -551,16 +552,16 @@ $root.tensorflow.TensorInfo = class TensorInfo {
                     message.name = reader.string();
                     break;
                 case "coo_sparse":
-                    message.coo_sparse = $root.tensorflow.TensorInfo.CooSparse.decodeText(reader);
+                    message.coo_sparse = tensorflow.TensorInfo.CooSparse.decodeText(reader);
                     break;
                 case "composite_tensor":
-                    message.composite_tensor = $root.tensorflow.TensorInfo.CompositeTensor.decodeText(reader);
+                    message.composite_tensor = tensorflow.TensorInfo.CompositeTensor.decodeText(reader);
                     break;
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 case "tensor_shape":
-                    message.tensor_shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.tensor_shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -571,16 +572,16 @@ $root.tensorflow.TensorInfo = class TensorInfo {
     }
 };
 
-$root.tensorflow.TensorInfo.prototype.dtype = 0;
-$root.tensorflow.TensorInfo.prototype.tensor_shape = null;
+tensorflow.TensorInfo.prototype.dtype = 0;
+tensorflow.TensorInfo.prototype.tensor_shape = null;
 
-$root.tensorflow.TensorInfo.CooSparse = class CooSparse {
+tensorflow.TensorInfo.CooSparse = class CooSparse {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorInfo.CooSparse();
+        const message = new tensorflow.TensorInfo.CooSparse();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -603,7 +604,7 @@ $root.tensorflow.TensorInfo.CooSparse = class CooSparse {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorInfo.CooSparse();
+        const message = new tensorflow.TensorInfo.CooSparse();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -626,27 +627,27 @@ $root.tensorflow.TensorInfo.CooSparse = class CooSparse {
     }
 };
 
-$root.tensorflow.TensorInfo.CooSparse.prototype.values_tensor_name = "";
-$root.tensorflow.TensorInfo.CooSparse.prototype.indices_tensor_name = "";
-$root.tensorflow.TensorInfo.CooSparse.prototype.dense_shape_tensor_name = "";
+tensorflow.TensorInfo.CooSparse.prototype.values_tensor_name = "";
+tensorflow.TensorInfo.CooSparse.prototype.indices_tensor_name = "";
+tensorflow.TensorInfo.CooSparse.prototype.dense_shape_tensor_name = "";
 
-$root.tensorflow.TensorInfo.CompositeTensor = class CompositeTensor {
+tensorflow.TensorInfo.CompositeTensor = class CompositeTensor {
 
     constructor() {
         this.components = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorInfo.CompositeTensor();
+        const message = new tensorflow.TensorInfo.CompositeTensor();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.type_spec = $root.tensorflow.TypeSpecProto.decode(reader, reader.uint32());
+                    message.type_spec = tensorflow.TypeSpecProto.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.components.push($root.tensorflow.TensorInfo.decode(reader, reader.uint32()));
+                    message.components.push(tensorflow.TensorInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -657,16 +658,16 @@ $root.tensorflow.TensorInfo.CompositeTensor = class CompositeTensor {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorInfo.CompositeTensor();
+        const message = new tensorflow.TensorInfo.CompositeTensor();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "type_spec":
-                    message.type_spec = $root.tensorflow.TypeSpecProto.decodeText(reader);
+                    message.type_spec = tensorflow.TypeSpecProto.decodeText(reader);
                     break;
                 case "components":
-                    message.components.push($root.tensorflow.TensorInfo.decodeText(reader));
+                    message.components.push(tensorflow.TensorInfo.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -677,9 +678,9 @@ $root.tensorflow.TensorInfo.CompositeTensor = class CompositeTensor {
     }
 };
 
-$root.tensorflow.TensorInfo.CompositeTensor.prototype.type_spec = null;
+tensorflow.TensorInfo.CompositeTensor.prototype.type_spec = null;
 
-$root.tensorflow.SignatureDef = class SignatureDef {
+tensorflow.SignatureDef = class SignatureDef {
 
     constructor() {
         this.inputs = {};
@@ -687,16 +688,16 @@ $root.tensorflow.SignatureDef = class SignatureDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SignatureDef();
+        const message = new tensorflow.SignatureDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    reader.entry(message.inputs, () => reader.string(), () => $root.tensorflow.TensorInfo.decode(reader, reader.uint32()));
+                    reader.entry(message.inputs, () => reader.string(), () => tensorflow.TensorInfo.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    reader.entry(message.outputs, () => reader.string(), () => $root.tensorflow.TensorInfo.decode(reader, reader.uint32()));
+                    reader.entry(message.outputs, () => reader.string(), () => tensorflow.TensorInfo.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.method_name = reader.string();
@@ -710,16 +711,16 @@ $root.tensorflow.SignatureDef = class SignatureDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SignatureDef();
+        const message = new tensorflow.SignatureDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "inputs":
-                    reader.entry(message.inputs, () => reader.string(), () => $root.tensorflow.TensorInfo.decodeText(reader));
+                    reader.entry(message.inputs, () => reader.string(), () => tensorflow.TensorInfo.decodeText(reader));
                     break;
                 case "outputs":
-                    reader.entry(message.outputs, () => reader.string(), () => $root.tensorflow.TensorInfo.decodeText(reader));
+                    reader.entry(message.outputs, () => reader.string(), () => tensorflow.TensorInfo.decodeText(reader));
                     break;
                 case "method_name":
                     message.method_name = reader.string();
@@ -733,21 +734,21 @@ $root.tensorflow.SignatureDef = class SignatureDef {
     }
 };
 
-$root.tensorflow.SignatureDef.prototype.method_name = "";
+tensorflow.SignatureDef.prototype.method_name = "";
 
-$root.tensorflow.AssetFileDef = class AssetFileDef {
+tensorflow.AssetFileDef = class AssetFileDef {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.AssetFileDef();
+        const message = new tensorflow.AssetFileDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.tensor_info = $root.tensorflow.TensorInfo.decode(reader, reader.uint32());
+                    message.tensor_info = tensorflow.TensorInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
                     message.filename = reader.string();
@@ -761,13 +762,13 @@ $root.tensorflow.AssetFileDef = class AssetFileDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.AssetFileDef();
+        const message = new tensorflow.AssetFileDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "tensor_info":
-                    message.tensor_info = $root.tensorflow.TensorInfo.decodeText(reader);
+                    message.tensor_info = tensorflow.TensorInfo.decodeText(reader);
                     break;
                 case "filename":
                     message.filename = reader.string();
@@ -781,32 +782,32 @@ $root.tensorflow.AssetFileDef = class AssetFileDef {
     }
 };
 
-$root.tensorflow.AssetFileDef.prototype.tensor_info = null;
-$root.tensorflow.AssetFileDef.prototype.filename = "";
+tensorflow.AssetFileDef.prototype.tensor_info = null;
+tensorflow.AssetFileDef.prototype.filename = "";
 
-$root.tensorflow.GraphDef = class GraphDef {
+tensorflow.GraphDef = class GraphDef {
 
     constructor() {
         this.node = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.GraphDef();
+        const message = new tensorflow.GraphDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.node.push($root.tensorflow.NodeDef.decode(reader, reader.uint32()));
+                    message.node.push(tensorflow.NodeDef.decode(reader, reader.uint32()));
                     break;
                 case 4:
-                    message.versions = $root.tensorflow.VersionDef.decode(reader, reader.uint32());
+                    message.versions = tensorflow.VersionDef.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.version = reader.int32();
                     break;
                 case 2:
-                    message.library = $root.tensorflow.FunctionDefLibrary.decode(reader, reader.uint32());
+                    message.library = tensorflow.FunctionDefLibrary.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -817,22 +818,22 @@ $root.tensorflow.GraphDef = class GraphDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.GraphDef();
+        const message = new tensorflow.GraphDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "node":
-                    message.node.push($root.tensorflow.NodeDef.decodeText(reader));
+                    message.node.push(tensorflow.NodeDef.decodeText(reader));
                     break;
                 case "versions":
-                    message.versions = $root.tensorflow.VersionDef.decodeText(reader);
+                    message.versions = tensorflow.VersionDef.decodeText(reader);
                     break;
                 case "version":
                     message.version = reader.int32();
                     break;
                 case "library":
-                    message.library = $root.tensorflow.FunctionDefLibrary.decodeText(reader);
+                    message.library = tensorflow.FunctionDefLibrary.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -843,11 +844,11 @@ $root.tensorflow.GraphDef = class GraphDef {
     }
 };
 
-$root.tensorflow.GraphDef.prototype.versions = null;
-$root.tensorflow.GraphDef.prototype.version = 0;
-$root.tensorflow.GraphDef.prototype.library = null;
+tensorflow.GraphDef.prototype.versions = null;
+tensorflow.GraphDef.prototype.version = 0;
+tensorflow.GraphDef.prototype.library = null;
 
-$root.tensorflow.FunctionDefLibrary = class FunctionDefLibrary {
+tensorflow.FunctionDefLibrary = class FunctionDefLibrary {
 
     constructor() {
         this["function"] = [];
@@ -856,19 +857,19 @@ $root.tensorflow.FunctionDefLibrary = class FunctionDefLibrary {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.FunctionDefLibrary();
+        const message = new tensorflow.FunctionDefLibrary();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message["function"].push($root.tensorflow.FunctionDef.decode(reader, reader.uint32()));
+                    message["function"].push(tensorflow.FunctionDef.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.gradient.push($root.tensorflow.GradientDef.decode(reader, reader.uint32()));
+                    message.gradient.push(tensorflow.GradientDef.decode(reader, reader.uint32()));
                     break;
                 case 3:
-                    message.registered_gradients.push($root.tensorflow.RegisteredGradient.decode(reader, reader.uint32()));
+                    message.registered_gradients.push(tensorflow.RegisteredGradient.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -879,19 +880,19 @@ $root.tensorflow.FunctionDefLibrary = class FunctionDefLibrary {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.FunctionDefLibrary();
+        const message = new tensorflow.FunctionDefLibrary();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "function":
-                    message["function"].push($root.tensorflow.FunctionDef.decodeText(reader));
+                    message["function"].push(tensorflow.FunctionDef.decodeText(reader));
                     break;
                 case "gradient":
-                    message.gradient.push($root.tensorflow.GradientDef.decodeText(reader));
+                    message.gradient.push(tensorflow.GradientDef.decodeText(reader));
                     break;
                 case "registered_gradients":
-                    message.registered_gradients.push($root.tensorflow.RegisteredGradient.decodeText(reader));
+                    message.registered_gradients.push(tensorflow.RegisteredGradient.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -902,7 +903,7 @@ $root.tensorflow.FunctionDefLibrary = class FunctionDefLibrary {
     }
 };
 
-$root.tensorflow.FunctionDef = class FunctionDef {
+tensorflow.FunctionDef = class FunctionDef {
 
     constructor() {
         this.attr = {};
@@ -914,25 +915,25 @@ $root.tensorflow.FunctionDef = class FunctionDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.FunctionDef();
+        const message = new tensorflow.FunctionDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.signature = $root.tensorflow.OpDef.decode(reader, reader.uint32());
+                    message.signature = tensorflow.OpDef.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decode(reader, reader.uint32()));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decode(reader, reader.uint32()));
                     break;
                 case 7:
-                    reader.entry(message.arg_attr, () => reader.uint32(), () => $root.tensorflow.FunctionDef.ArgAttrs.decode(reader, reader.uint32()));
+                    reader.entry(message.arg_attr, () => reader.uint32(), () => tensorflow.FunctionDef.ArgAttrs.decode(reader, reader.uint32()));
                     break;
                 case 8:
                     reader.entry(message.resource_arg_unique_id, () => reader.uint32(), () => reader.uint32());
                     break;
                 case 3:
-                    message.node_def.push($root.tensorflow.NodeDef.decode(reader, reader.uint32()));
+                    message.node_def.push(tensorflow.NodeDef.decode(reader, reader.uint32()));
                     break;
                 case 4:
                     reader.entry(message.ret, () => reader.string(), () => reader.string());
@@ -949,25 +950,25 @@ $root.tensorflow.FunctionDef = class FunctionDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.FunctionDef();
+        const message = new tensorflow.FunctionDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "signature":
-                    message.signature = $root.tensorflow.OpDef.decodeText(reader);
+                    message.signature = tensorflow.OpDef.decodeText(reader);
                     break;
                 case "attr":
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decodeText(reader));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decodeText(reader));
                     break;
                 case "arg_attr":
-                    reader.entry(message.arg_attr, () => reader.uint32(), () => $root.tensorflow.FunctionDef.ArgAttrs.decodeText(reader));
+                    reader.entry(message.arg_attr, () => reader.uint32(), () => tensorflow.FunctionDef.ArgAttrs.decodeText(reader));
                     break;
                 case "resource_arg_unique_id":
                     reader.entry(message.resource_arg_unique_id, () => reader.uint32(), () => reader.uint32());
                     break;
                 case "node_def":
-                    message.node_def.push($root.tensorflow.NodeDef.decodeText(reader));
+                    message.node_def.push(tensorflow.NodeDef.decodeText(reader));
                     break;
                 case "ret":
                     reader.entry(message.ret, () => reader.string(), () => reader.string());
@@ -984,22 +985,22 @@ $root.tensorflow.FunctionDef = class FunctionDef {
     }
 };
 
-$root.tensorflow.FunctionDef.prototype.signature = null;
+tensorflow.FunctionDef.prototype.signature = null;
 
-$root.tensorflow.FunctionDef.ArgAttrs = class ArgAttrs {
+tensorflow.FunctionDef.ArgAttrs = class ArgAttrs {
 
     constructor() {
         this.attr = {};
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.FunctionDef.ArgAttrs();
+        const message = new tensorflow.FunctionDef.ArgAttrs();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decode(reader, reader.uint32()));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1010,13 +1011,13 @@ $root.tensorflow.FunctionDef.ArgAttrs = class ArgAttrs {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.FunctionDef.ArgAttrs();
+        const message = new tensorflow.FunctionDef.ArgAttrs();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "attr":
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decodeText(reader));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -1027,13 +1028,13 @@ $root.tensorflow.FunctionDef.ArgAttrs = class ArgAttrs {
     }
 };
 
-$root.tensorflow.GradientDef = class GradientDef {
+tensorflow.GradientDef = class GradientDef {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.GradientDef();
+        const message = new tensorflow.GradientDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1053,7 +1054,7 @@ $root.tensorflow.GradientDef = class GradientDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.GradientDef();
+        const message = new tensorflow.GradientDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1073,16 +1074,16 @@ $root.tensorflow.GradientDef = class GradientDef {
     }
 };
 
-$root.tensorflow.GradientDef.prototype.function_name = "";
-$root.tensorflow.GradientDef.prototype.gradient_func = "";
+tensorflow.GradientDef.prototype.function_name = "";
+tensorflow.GradientDef.prototype.gradient_func = "";
 
-$root.tensorflow.RegisteredGradient = class RegisteredGradient {
+tensorflow.RegisteredGradient = class RegisteredGradient {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RegisteredGradient();
+        const message = new tensorflow.RegisteredGradient();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1102,7 +1103,7 @@ $root.tensorflow.RegisteredGradient = class RegisteredGradient {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RegisteredGradient();
+        const message = new tensorflow.RegisteredGradient();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1122,21 +1123,21 @@ $root.tensorflow.RegisteredGradient = class RegisteredGradient {
     }
 };
 
-$root.tensorflow.RegisteredGradient.prototype.gradient_func = "";
-$root.tensorflow.RegisteredGradient.prototype.registered_op_type = "";
+tensorflow.RegisteredGradient.prototype.gradient_func = "";
+tensorflow.RegisteredGradient.prototype.registered_op_type = "";
 
-$root.tensorflow.AttrValue = class AttrValue {
+tensorflow.AttrValue = class AttrValue {
 
     constructor() {
     }
 
     get value() {
-        $root.tensorflow.AttrValue.valueSet = $root.tensorflow.AttrValue.valueSet || new Set([ "s", "i", "f", "b", "type", "shape", "tensor", "list", "func", "placeholder"]);
-        return Object.keys(this).find((key) => $root.tensorflow.AttrValue.valueSet.has(key) && this[key] != null);
+        tensorflow.AttrValue.valueSet = tensorflow.AttrValue.valueSet || new Set([ "s", "i", "f", "b", "type", "shape", "tensor", "list", "func", "placeholder"]);
+        return Object.keys(this).find((key) => tensorflow.AttrValue.valueSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.AttrValue();
+        const message = new tensorflow.AttrValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1157,16 +1158,16 @@ $root.tensorflow.AttrValue = class AttrValue {
                     message.type = reader.int32();
                     break;
                 case 7:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 8:
-                    message.tensor = $root.tensorflow.TensorProto.decode(reader, reader.uint32());
+                    message.tensor = tensorflow.TensorProto.decode(reader, reader.uint32());
                     break;
                 case 1:
-                    message.list = $root.tensorflow.AttrValue.ListValue.decode(reader, reader.uint32());
+                    message.list = tensorflow.AttrValue.ListValue.decode(reader, reader.uint32());
                     break;
                 case 10:
-                    message.func = $root.tensorflow.NameAttrList.decode(reader, reader.uint32());
+                    message.func = tensorflow.NameAttrList.decode(reader, reader.uint32());
                     break;
                 case 9:
                     message.placeholder = reader.string();
@@ -1180,7 +1181,7 @@ $root.tensorflow.AttrValue = class AttrValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.AttrValue();
+        const message = new tensorflow.AttrValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1198,19 +1199,19 @@ $root.tensorflow.AttrValue = class AttrValue {
                     message.b = reader.bool();
                     break;
                 case "type":
-                    message.type = reader.enum($root.tensorflow.DataType);
+                    message.type = reader.enum(tensorflow.DataType);
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "tensor":
-                    message.tensor = $root.tensorflow.TensorProto.decodeText(reader);
+                    message.tensor = tensorflow.TensorProto.decodeText(reader);
                     break;
                 case "list":
-                    message.list = $root.tensorflow.AttrValue.ListValue.decodeText(reader);
+                    message.list = tensorflow.AttrValue.ListValue.decodeText(reader);
                     break;
                 case "func":
-                    message.func = $root.tensorflow.NameAttrList.decodeText(reader);
+                    message.func = tensorflow.NameAttrList.decodeText(reader);
                     break;
                 case "placeholder":
                     message.placeholder = reader.string();
@@ -1224,7 +1225,7 @@ $root.tensorflow.AttrValue = class AttrValue {
     }
 };
 
-$root.tensorflow.AttrValue.ListValue = class ListValue {
+tensorflow.AttrValue.ListValue = class ListValue {
 
     constructor() {
         this.s = [];
@@ -1238,7 +1239,7 @@ $root.tensorflow.AttrValue.ListValue = class ListValue {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.AttrValue.ListValue();
+        const message = new tensorflow.AttrValue.ListValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1259,13 +1260,13 @@ $root.tensorflow.AttrValue.ListValue = class ListValue {
                     message.type = reader.array(message.type, () => reader.int32(), tag);
                     break;
                 case 7:
-                    message.shape.push($root.tensorflow.TensorShapeProto.decode(reader, reader.uint32()));
+                    message.shape.push(tensorflow.TensorShapeProto.decode(reader, reader.uint32()));
                     break;
                 case 8:
-                    message.tensor.push($root.tensorflow.TensorProto.decode(reader, reader.uint32()));
+                    message.tensor.push(tensorflow.TensorProto.decode(reader, reader.uint32()));
                     break;
                 case 9:
-                    message.func.push($root.tensorflow.NameAttrList.decode(reader, reader.uint32()));
+                    message.func.push(tensorflow.NameAttrList.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1276,7 +1277,7 @@ $root.tensorflow.AttrValue.ListValue = class ListValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.AttrValue.ListValue();
+        const message = new tensorflow.AttrValue.ListValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1294,16 +1295,16 @@ $root.tensorflow.AttrValue.ListValue = class ListValue {
                     reader.array(message.b, () => reader.bool());
                     break;
                 case "type":
-                    reader.array(message.type, () => reader.enum($root.tensorflow.DataType));
+                    reader.array(message.type, () => reader.enum(tensorflow.DataType));
                     break;
                 case "shape":
-                    message.shape.push($root.tensorflow.TensorShapeProto.decodeText(reader));
+                    message.shape.push(tensorflow.TensorShapeProto.decodeText(reader));
                     break;
                 case "tensor":
-                    message.tensor.push($root.tensorflow.TensorProto.decodeText(reader));
+                    message.tensor.push(tensorflow.TensorProto.decodeText(reader));
                     break;
                 case "func":
-                    message.func.push($root.tensorflow.NameAttrList.decodeText(reader));
+                    message.func.push(tensorflow.NameAttrList.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -1314,14 +1315,14 @@ $root.tensorflow.AttrValue.ListValue = class ListValue {
     }
 };
 
-$root.tensorflow.NameAttrList = class NameAttrList {
+tensorflow.NameAttrList = class NameAttrList {
 
     constructor() {
         this.attr = {};
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.NameAttrList();
+        const message = new tensorflow.NameAttrList();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1330,7 +1331,7 @@ $root.tensorflow.NameAttrList = class NameAttrList {
                     message.name = reader.string();
                     break;
                 case 2:
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decode(reader, reader.uint32()));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1341,7 +1342,7 @@ $root.tensorflow.NameAttrList = class NameAttrList {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.NameAttrList();
+        const message = new tensorflow.NameAttrList();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1350,7 +1351,7 @@ $root.tensorflow.NameAttrList = class NameAttrList {
                     message.name = reader.string();
                     break;
                 case "attr":
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decodeText(reader));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -1361,9 +1362,9 @@ $root.tensorflow.NameAttrList = class NameAttrList {
     }
 };
 
-$root.tensorflow.NameAttrList.prototype.name = "";
+tensorflow.NameAttrList.prototype.name = "";
 
-$root.tensorflow.TensorProto = class TensorProto {
+tensorflow.TensorProto = class TensorProto {
 
     constructor() {
         this.half_val = [];
@@ -1382,7 +1383,7 @@ $root.tensorflow.TensorProto = class TensorProto {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorProto();
+        const message = new tensorflow.TensorProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1391,7 +1392,7 @@ $root.tensorflow.TensorProto = class TensorProto {
                     message.dtype = reader.int32();
                     break;
                 case 2:
-                    message.tensor_shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.tensor_shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.version_number = reader.int32();
@@ -1427,10 +1428,10 @@ $root.tensorflow.TensorProto = class TensorProto {
                     message.dcomplex_val = reader.doubles(message.dcomplex_val, tag);
                     break;
                 case 14:
-                    message.resource_handle_val.push($root.tensorflow.ResourceHandleProto.decode(reader, reader.uint32()));
+                    message.resource_handle_val.push(tensorflow.ResourceHandleProto.decode(reader, reader.uint32()));
                     break;
                 case 15:
-                    message.variant_val.push($root.tensorflow.VariantTensorDataProto.decode(reader, reader.uint32()));
+                    message.variant_val.push(tensorflow.VariantTensorDataProto.decode(reader, reader.uint32()));
                     break;
                 case 16:
                     message.uint32_val = reader.array(message.uint32_val, () => reader.uint32(), tag);
@@ -1447,16 +1448,16 @@ $root.tensorflow.TensorProto = class TensorProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorProto();
+        const message = new tensorflow.TensorProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 case "tensor_shape":
-                    message.tensor_shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.tensor_shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "version_number":
                     message.version_number = reader.int32();
@@ -1492,10 +1493,10 @@ $root.tensorflow.TensorProto = class TensorProto {
                     reader.array(message.dcomplex_val, () => reader.double());
                     break;
                 case "resource_handle_val":
-                    message.resource_handle_val.push($root.tensorflow.ResourceHandleProto.decodeText(reader));
+                    message.resource_handle_val.push(tensorflow.ResourceHandleProto.decodeText(reader));
                     break;
                 case "variant_val":
-                    message.variant_val.push($root.tensorflow.VariantTensorDataProto.decodeText(reader));
+                    message.variant_val.push(tensorflow.VariantTensorDataProto.decodeText(reader));
                     break;
                 case "uint32_val":
                     reader.array(message.uint32_val, () => reader.uint32());
@@ -1512,19 +1513,19 @@ $root.tensorflow.TensorProto = class TensorProto {
     }
 };
 
-$root.tensorflow.TensorProto.prototype.dtype = 0;
-$root.tensorflow.TensorProto.prototype.tensor_shape = null;
-$root.tensorflow.TensorProto.prototype.version_number = 0;
-$root.tensorflow.TensorProto.prototype.tensor_content = new Uint8Array([]);
+tensorflow.TensorProto.prototype.dtype = 0;
+tensorflow.TensorProto.prototype.tensor_shape = null;
+tensorflow.TensorProto.prototype.version_number = 0;
+tensorflow.TensorProto.prototype.tensor_content = new Uint8Array([]);
 
-$root.tensorflow.VariantTensorDataProto = class VariantTensorDataProto {
+tensorflow.VariantTensorDataProto = class VariantTensorDataProto {
 
     constructor() {
         this.tensors = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.VariantTensorDataProto();
+        const message = new tensorflow.VariantTensorDataProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1536,7 +1537,7 @@ $root.tensorflow.VariantTensorDataProto = class VariantTensorDataProto {
                     message.metadata = reader.bytes();
                     break;
                 case 3:
-                    message.tensors.push($root.tensorflow.TensorProto.decode(reader, reader.uint32()));
+                    message.tensors.push(tensorflow.TensorProto.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1547,7 +1548,7 @@ $root.tensorflow.VariantTensorDataProto = class VariantTensorDataProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.VariantTensorDataProto();
+        const message = new tensorflow.VariantTensorDataProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1559,7 +1560,7 @@ $root.tensorflow.VariantTensorDataProto = class VariantTensorDataProto {
                     message.metadata = reader.bytes();
                     break;
                 case "tensors":
-                    message.tensors.push($root.tensorflow.TensorProto.decodeText(reader));
+                    message.tensors.push(tensorflow.TensorProto.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -1570,17 +1571,17 @@ $root.tensorflow.VariantTensorDataProto = class VariantTensorDataProto {
     }
 };
 
-$root.tensorflow.VariantTensorDataProto.prototype.type_name = "";
-$root.tensorflow.VariantTensorDataProto.prototype.metadata = new Uint8Array([]);
+tensorflow.VariantTensorDataProto.prototype.type_name = "";
+tensorflow.VariantTensorDataProto.prototype.metadata = new Uint8Array([]);
 
-$root.tensorflow.ResourceHandleProto = class ResourceHandleProto {
+tensorflow.ResourceHandleProto = class ResourceHandleProto {
 
     constructor() {
         this.dtypes_and_shapes = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.ResourceHandleProto();
+        const message = new tensorflow.ResourceHandleProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1601,7 +1602,7 @@ $root.tensorflow.ResourceHandleProto = class ResourceHandleProto {
                     message.maybe_type_name = reader.string();
                     break;
                 case 6:
-                    message.dtypes_and_shapes.push($root.tensorflow.ResourceHandleProto.DtypeAndShape.decode(reader, reader.uint32()));
+                    message.dtypes_and_shapes.push(tensorflow.ResourceHandleProto.DtypeAndShape.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1612,7 +1613,7 @@ $root.tensorflow.ResourceHandleProto = class ResourceHandleProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.ResourceHandleProto();
+        const message = new tensorflow.ResourceHandleProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1633,7 +1634,7 @@ $root.tensorflow.ResourceHandleProto = class ResourceHandleProto {
                     message.maybe_type_name = reader.string();
                     break;
                 case "dtypes_and_shapes":
-                    message.dtypes_and_shapes.push($root.tensorflow.ResourceHandleProto.DtypeAndShape.decodeText(reader));
+                    message.dtypes_and_shapes.push(tensorflow.ResourceHandleProto.DtypeAndShape.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -1644,19 +1645,19 @@ $root.tensorflow.ResourceHandleProto = class ResourceHandleProto {
     }
 };
 
-$root.tensorflow.ResourceHandleProto.prototype.device = "";
-$root.tensorflow.ResourceHandleProto.prototype.container = "";
-$root.tensorflow.ResourceHandleProto.prototype.name = "";
-$root.tensorflow.ResourceHandleProto.prototype.hash_code = protobuf.Uint64.create(0);
-$root.tensorflow.ResourceHandleProto.prototype.maybe_type_name = "";
+tensorflow.ResourceHandleProto.prototype.device = "";
+tensorflow.ResourceHandleProto.prototype.container = "";
+tensorflow.ResourceHandleProto.prototype.name = "";
+tensorflow.ResourceHandleProto.prototype.hash_code = protobuf.Uint64.create(0);
+tensorflow.ResourceHandleProto.prototype.maybe_type_name = "";
 
-$root.tensorflow.ResourceHandleProto.DtypeAndShape = class DtypeAndShape {
+tensorflow.ResourceHandleProto.DtypeAndShape = class DtypeAndShape {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.ResourceHandleProto.DtypeAndShape();
+        const message = new tensorflow.ResourceHandleProto.DtypeAndShape();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1665,7 +1666,7 @@ $root.tensorflow.ResourceHandleProto.DtypeAndShape = class DtypeAndShape {
                     message.dtype = reader.int32();
                     break;
                 case 2:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1676,16 +1677,16 @@ $root.tensorflow.ResourceHandleProto.DtypeAndShape = class DtypeAndShape {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.ResourceHandleProto.DtypeAndShape();
+        const message = new tensorflow.ResourceHandleProto.DtypeAndShape();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -1696,23 +1697,23 @@ $root.tensorflow.ResourceHandleProto.DtypeAndShape = class DtypeAndShape {
     }
 };
 
-$root.tensorflow.ResourceHandleProto.DtypeAndShape.prototype.dtype = 0;
-$root.tensorflow.ResourceHandleProto.DtypeAndShape.prototype.shape = null;
+tensorflow.ResourceHandleProto.DtypeAndShape.prototype.dtype = 0;
+tensorflow.ResourceHandleProto.DtypeAndShape.prototype.shape = null;
 
-$root.tensorflow.TensorShapeProto = class TensorShapeProto {
+tensorflow.TensorShapeProto = class TensorShapeProto {
 
     constructor() {
         this.dim = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorShapeProto();
+        const message = new tensorflow.TensorShapeProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 2:
-                    message.dim.push($root.tensorflow.TensorShapeProto.Dim.decode(reader, reader.uint32()));
+                    message.dim.push(tensorflow.TensorShapeProto.Dim.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.unknown_rank = reader.bool();
@@ -1726,13 +1727,13 @@ $root.tensorflow.TensorShapeProto = class TensorShapeProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorShapeProto();
+        const message = new tensorflow.TensorShapeProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "dim":
-                    message.dim.push($root.tensorflow.TensorShapeProto.Dim.decodeText(reader));
+                    message.dim.push(tensorflow.TensorShapeProto.Dim.decodeText(reader));
                     break;
                 case "unknown_rank":
                     message.unknown_rank = reader.bool();
@@ -1746,15 +1747,15 @@ $root.tensorflow.TensorShapeProto = class TensorShapeProto {
     }
 };
 
-$root.tensorflow.TensorShapeProto.prototype.unknown_rank = false;
+tensorflow.TensorShapeProto.prototype.unknown_rank = false;
 
-$root.tensorflow.TensorShapeProto.Dim = class Dim {
+tensorflow.TensorShapeProto.Dim = class Dim {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorShapeProto.Dim();
+        const message = new tensorflow.TensorShapeProto.Dim();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1774,7 +1775,7 @@ $root.tensorflow.TensorShapeProto.Dim = class Dim {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorShapeProto.Dim();
+        const message = new tensorflow.TensorShapeProto.Dim();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1794,10 +1795,10 @@ $root.tensorflow.TensorShapeProto.Dim = class Dim {
     }
 };
 
-$root.tensorflow.TensorShapeProto.Dim.prototype.size = protobuf.Int64.create(0);
-$root.tensorflow.TensorShapeProto.Dim.prototype.name = "";
+tensorflow.TensorShapeProto.Dim.prototype.size = protobuf.Int64.create(0);
+tensorflow.TensorShapeProto.Dim.prototype.name = "";
 
-$root.tensorflow.DataType = {
+tensorflow.DataType = {
     "DT_INVALID": 0,
     "DT_FLOAT": 1,
     "DT_DOUBLE": 2,
@@ -1847,7 +1848,7 @@ $root.tensorflow.DataType = {
     "DT_UINT64_REF": 123
 };
 
-$root.tensorflow.NodeDef = class NodeDef {
+tensorflow.NodeDef = class NodeDef {
 
     constructor() {
         this.input = [];
@@ -1855,7 +1856,7 @@ $root.tensorflow.NodeDef = class NodeDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.NodeDef();
+        const message = new tensorflow.NodeDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1873,13 +1874,13 @@ $root.tensorflow.NodeDef = class NodeDef {
                     message.device = reader.string();
                     break;
                 case 5:
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decode(reader, reader.uint32()));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decode(reader, reader.uint32()));
                     break;
                 case 6:
-                    message.experimental_debug_info = $root.tensorflow.NodeDef.ExperimentalDebugInfo.decode(reader, reader.uint32());
+                    message.experimental_debug_info = tensorflow.NodeDef.ExperimentalDebugInfo.decode(reader, reader.uint32());
                     break;
                 case 7:
-                    message.experimental_type = $root.tensorflow.FullTypeDef.decode(reader, reader.uint32());
+                    message.experimental_type = tensorflow.FullTypeDef.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1890,7 +1891,7 @@ $root.tensorflow.NodeDef = class NodeDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.NodeDef();
+        const message = new tensorflow.NodeDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1908,13 +1909,13 @@ $root.tensorflow.NodeDef = class NodeDef {
                     message.device = reader.string();
                     break;
                 case "attr":
-                    reader.entry(message.attr, () => reader.string(), () => $root.tensorflow.AttrValue.decodeText(reader));
+                    reader.entry(message.attr, () => reader.string(), () => tensorflow.AttrValue.decodeText(reader));
                     break;
                 case "experimental_debug_info":
-                    message.experimental_debug_info = $root.tensorflow.NodeDef.ExperimentalDebugInfo.decodeText(reader);
+                    message.experimental_debug_info = tensorflow.NodeDef.ExperimentalDebugInfo.decodeText(reader);
                     break;
                 case "experimental_type":
-                    message.experimental_type = $root.tensorflow.FullTypeDef.decodeText(reader);
+                    message.experimental_type = tensorflow.FullTypeDef.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -1925,13 +1926,13 @@ $root.tensorflow.NodeDef = class NodeDef {
     }
 };
 
-$root.tensorflow.NodeDef.prototype.name = "";
-$root.tensorflow.NodeDef.prototype.op = "";
-$root.tensorflow.NodeDef.prototype.device = "";
-$root.tensorflow.NodeDef.prototype.experimental_debug_info = null;
-$root.tensorflow.NodeDef.prototype.experimental_type = null;
+tensorflow.NodeDef.prototype.name = "";
+tensorflow.NodeDef.prototype.op = "";
+tensorflow.NodeDef.prototype.device = "";
+tensorflow.NodeDef.prototype.experimental_debug_info = null;
+tensorflow.NodeDef.prototype.experimental_type = null;
 
-$root.tensorflow.NodeDef.ExperimentalDebugInfo = class ExperimentalDebugInfo {
+tensorflow.NodeDef.ExperimentalDebugInfo = class ExperimentalDebugInfo {
 
     constructor() {
         this.original_node_names = [];
@@ -1939,7 +1940,7 @@ $root.tensorflow.NodeDef.ExperimentalDebugInfo = class ExperimentalDebugInfo {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.NodeDef.ExperimentalDebugInfo();
+        const message = new tensorflow.NodeDef.ExperimentalDebugInfo();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -1959,7 +1960,7 @@ $root.tensorflow.NodeDef.ExperimentalDebugInfo = class ExperimentalDebugInfo {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.NodeDef.ExperimentalDebugInfo();
+        const message = new tensorflow.NodeDef.ExperimentalDebugInfo();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -1979,7 +1980,7 @@ $root.tensorflow.NodeDef.ExperimentalDebugInfo = class ExperimentalDebugInfo {
     }
 };
 
-$root.tensorflow.FullTypeId = {
+tensorflow.FullTypeId = {
     "TFT_UNSET": 0,
     "TFT_VAR": 1,
     "TFT_ANY": 2,
@@ -2013,19 +2014,19 @@ $root.tensorflow.FullTypeId = {
     "TFT_LEGACY_VARIANT": 10203
 };
 
-$root.tensorflow.FullTypeDef = class FullTypeDef {
+tensorflow.FullTypeDef = class FullTypeDef {
 
     constructor() {
         this.args = [];
     }
 
     get attr() {
-        $root.tensorflow.FullTypeDef.attrSet = $root.tensorflow.FullTypeDef.attrSet || new Set([ "s", "i"]);
-        return Object.keys(this).find((key) => $root.tensorflow.FullTypeDef.attrSet.has(key) && this[key] != null);
+        tensorflow.FullTypeDef.attrSet = tensorflow.FullTypeDef.attrSet || new Set([ "s", "i"]);
+        return Object.keys(this).find((key) => tensorflow.FullTypeDef.attrSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.FullTypeDef();
+        const message = new tensorflow.FullTypeDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2034,7 +2035,7 @@ $root.tensorflow.FullTypeDef = class FullTypeDef {
                     message.type_id = reader.int32();
                     break;
                 case 2:
-                    message.args.push($root.tensorflow.FullTypeDef.decode(reader, reader.uint32()));
+                    message.args.push(tensorflow.FullTypeDef.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.s = reader.string();
@@ -2051,16 +2052,16 @@ $root.tensorflow.FullTypeDef = class FullTypeDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.FullTypeDef();
+        const message = new tensorflow.FullTypeDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "type_id":
-                    message.type_id = reader.enum($root.tensorflow.FullTypeId);
+                    message.type_id = reader.enum(tensorflow.FullTypeId);
                     break;
                 case "args":
-                    message.args.push($root.tensorflow.FullTypeDef.decodeText(reader));
+                    message.args.push(tensorflow.FullTypeDef.decodeText(reader));
                     break;
                 case "s":
                     message.s = reader.string();
@@ -2077,9 +2078,9 @@ $root.tensorflow.FullTypeDef = class FullTypeDef {
     }
 };
 
-$root.tensorflow.FullTypeDef.prototype.type_id = 0;
+tensorflow.FullTypeDef.prototype.type_id = 0;
 
-$root.tensorflow.OpDef = class OpDef {
+tensorflow.OpDef = class OpDef {
 
     constructor() {
         this.input_arg = [];
@@ -2089,7 +2090,7 @@ $root.tensorflow.OpDef = class OpDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.OpDef();
+        const message = new tensorflow.OpDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2098,19 +2099,19 @@ $root.tensorflow.OpDef = class OpDef {
                     message.name = reader.string();
                     break;
                 case 2:
-                    message.input_arg.push($root.tensorflow.OpDef.ArgDef.decode(reader, reader.uint32()));
+                    message.input_arg.push(tensorflow.OpDef.ArgDef.decode(reader, reader.uint32()));
                     break;
                 case 3:
-                    message.output_arg.push($root.tensorflow.OpDef.ArgDef.decode(reader, reader.uint32()));
+                    message.output_arg.push(tensorflow.OpDef.ArgDef.decode(reader, reader.uint32()));
                     break;
                 case 20:
                     message.control_output.push(reader.string());
                     break;
                 case 4:
-                    message.attr.push($root.tensorflow.OpDef.AttrDef.decode(reader, reader.uint32()));
+                    message.attr.push(tensorflow.OpDef.AttrDef.decode(reader, reader.uint32()));
                     break;
                 case 8:
-                    message.deprecation = $root.tensorflow.OpDeprecation.decode(reader, reader.uint32());
+                    message.deprecation = tensorflow.OpDeprecation.decode(reader, reader.uint32());
                     break;
                 case 5:
                     message.summary = reader.string();
@@ -2142,7 +2143,7 @@ $root.tensorflow.OpDef = class OpDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.OpDef();
+        const message = new tensorflow.OpDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2151,19 +2152,19 @@ $root.tensorflow.OpDef = class OpDef {
                     message.name = reader.string();
                     break;
                 case "input_arg":
-                    message.input_arg.push($root.tensorflow.OpDef.ArgDef.decodeText(reader));
+                    message.input_arg.push(tensorflow.OpDef.ArgDef.decodeText(reader));
                     break;
                 case "output_arg":
-                    message.output_arg.push($root.tensorflow.OpDef.ArgDef.decodeText(reader));
+                    message.output_arg.push(tensorflow.OpDef.ArgDef.decodeText(reader));
                     break;
                 case "control_output":
                     reader.array(message.control_output, () => reader.string());
                     break;
                 case "attr":
-                    message.attr.push($root.tensorflow.OpDef.AttrDef.decodeText(reader));
+                    message.attr.push(tensorflow.OpDef.AttrDef.decodeText(reader));
                     break;
                 case "deprecation":
-                    message.deprecation = $root.tensorflow.OpDeprecation.decodeText(reader);
+                    message.deprecation = tensorflow.OpDeprecation.decodeText(reader);
                     break;
                 case "summary":
                     message.summary = reader.string();
@@ -2195,24 +2196,24 @@ $root.tensorflow.OpDef = class OpDef {
     }
 };
 
-$root.tensorflow.OpDef.prototype.name = "";
-$root.tensorflow.OpDef.prototype.deprecation = null;
-$root.tensorflow.OpDef.prototype.summary = "";
-$root.tensorflow.OpDef.prototype.description = "";
-$root.tensorflow.OpDef.prototype.is_commutative = false;
-$root.tensorflow.OpDef.prototype.is_aggregate = false;
-$root.tensorflow.OpDef.prototype.is_stateful = false;
-$root.tensorflow.OpDef.prototype.allows_uninitialized_input = false;
-$root.tensorflow.OpDef.prototype.is_distributed_communication = false;
+tensorflow.OpDef.prototype.name = "";
+tensorflow.OpDef.prototype.deprecation = null;
+tensorflow.OpDef.prototype.summary = "";
+tensorflow.OpDef.prototype.description = "";
+tensorflow.OpDef.prototype.is_commutative = false;
+tensorflow.OpDef.prototype.is_aggregate = false;
+tensorflow.OpDef.prototype.is_stateful = false;
+tensorflow.OpDef.prototype.allows_uninitialized_input = false;
+tensorflow.OpDef.prototype.is_distributed_communication = false;
 
-$root.tensorflow.OpDef.ArgDef = class ArgDef {
+tensorflow.OpDef.ArgDef = class ArgDef {
 
     constructor() {
         this.handle_data = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.OpDef.ArgDef();
+        const message = new tensorflow.OpDef.ArgDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2236,13 +2237,13 @@ $root.tensorflow.OpDef.ArgDef = class ArgDef {
                     message.type_list_attr = reader.string();
                     break;
                 case 7:
-                    message.handle_data.push($root.tensorflow.ResourceHandleProto.DtypeAndShape.decode(reader, reader.uint32()));
+                    message.handle_data.push(tensorflow.ResourceHandleProto.DtypeAndShape.decode(reader, reader.uint32()));
                     break;
                 case 16:
                     message.is_ref = reader.bool();
                     break;
                 case 17:
-                    message.experimental_full_type = $root.tensorflow.FullTypeDef.decode(reader, reader.uint32());
+                    message.experimental_full_type = tensorflow.FullTypeDef.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2253,7 +2254,7 @@ $root.tensorflow.OpDef.ArgDef = class ArgDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.OpDef.ArgDef();
+        const message = new tensorflow.OpDef.ArgDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2265,7 +2266,7 @@ $root.tensorflow.OpDef.ArgDef = class ArgDef {
                     message.description = reader.string();
                     break;
                 case "type":
-                    message.type = reader.enum($root.tensorflow.DataType);
+                    message.type = reader.enum(tensorflow.DataType);
                     break;
                 case "type_attr":
                     message.type_attr = reader.string();
@@ -2277,13 +2278,13 @@ $root.tensorflow.OpDef.ArgDef = class ArgDef {
                     message.type_list_attr = reader.string();
                     break;
                 case "handle_data":
-                    message.handle_data.push($root.tensorflow.ResourceHandleProto.DtypeAndShape.decodeText(reader));
+                    message.handle_data.push(tensorflow.ResourceHandleProto.DtypeAndShape.decodeText(reader));
                     break;
                 case "is_ref":
                     message.is_ref = reader.bool();
                     break;
                 case "experimental_full_type":
-                    message.experimental_full_type = $root.tensorflow.FullTypeDef.decodeText(reader);
+                    message.experimental_full_type = tensorflow.FullTypeDef.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -2294,22 +2295,22 @@ $root.tensorflow.OpDef.ArgDef = class ArgDef {
     }
 };
 
-$root.tensorflow.OpDef.ArgDef.prototype.name = "";
-$root.tensorflow.OpDef.ArgDef.prototype.description = "";
-$root.tensorflow.OpDef.ArgDef.prototype.type = 0;
-$root.tensorflow.OpDef.ArgDef.prototype.type_attr = "";
-$root.tensorflow.OpDef.ArgDef.prototype.number_attr = "";
-$root.tensorflow.OpDef.ArgDef.prototype.type_list_attr = "";
-$root.tensorflow.OpDef.ArgDef.prototype.is_ref = false;
-$root.tensorflow.OpDef.ArgDef.prototype.experimental_full_type = null;
+tensorflow.OpDef.ArgDef.prototype.name = "";
+tensorflow.OpDef.ArgDef.prototype.description = "";
+tensorflow.OpDef.ArgDef.prototype.type = 0;
+tensorflow.OpDef.ArgDef.prototype.type_attr = "";
+tensorflow.OpDef.ArgDef.prototype.number_attr = "";
+tensorflow.OpDef.ArgDef.prototype.type_list_attr = "";
+tensorflow.OpDef.ArgDef.prototype.is_ref = false;
+tensorflow.OpDef.ArgDef.prototype.experimental_full_type = null;
 
-$root.tensorflow.OpDef.AttrDef = class AttrDef {
+tensorflow.OpDef.AttrDef = class AttrDef {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.OpDef.AttrDef();
+        const message = new tensorflow.OpDef.AttrDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2321,7 +2322,7 @@ $root.tensorflow.OpDef.AttrDef = class AttrDef {
                     message.type = reader.string();
                     break;
                 case 3:
-                    message.default_value = $root.tensorflow.AttrValue.decode(reader, reader.uint32());
+                    message.default_value = tensorflow.AttrValue.decode(reader, reader.uint32());
                     break;
                 case 4:
                     message.description = reader.string();
@@ -2333,7 +2334,7 @@ $root.tensorflow.OpDef.AttrDef = class AttrDef {
                     message.minimum = reader.int64();
                     break;
                 case 7:
-                    message.allowed_values = $root.tensorflow.AttrValue.decode(reader, reader.uint32());
+                    message.allowed_values = tensorflow.AttrValue.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2344,7 +2345,7 @@ $root.tensorflow.OpDef.AttrDef = class AttrDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.OpDef.AttrDef();
+        const message = new tensorflow.OpDef.AttrDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2356,7 +2357,7 @@ $root.tensorflow.OpDef.AttrDef = class AttrDef {
                     message.type = reader.string();
                     break;
                 case "default_value":
-                    message.default_value = $root.tensorflow.AttrValue.decodeText(reader);
+                    message.default_value = tensorflow.AttrValue.decodeText(reader);
                     break;
                 case "description":
                     message.description = reader.string();
@@ -2368,7 +2369,7 @@ $root.tensorflow.OpDef.AttrDef = class AttrDef {
                     message.minimum = reader.int64();
                     break;
                 case "allowed_values":
-                    message.allowed_values = $root.tensorflow.AttrValue.decodeText(reader);
+                    message.allowed_values = tensorflow.AttrValue.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -2379,21 +2380,21 @@ $root.tensorflow.OpDef.AttrDef = class AttrDef {
     }
 };
 
-$root.tensorflow.OpDef.AttrDef.prototype.name = "";
-$root.tensorflow.OpDef.AttrDef.prototype.type = "";
-$root.tensorflow.OpDef.AttrDef.prototype.default_value = null;
-$root.tensorflow.OpDef.AttrDef.prototype.description = "";
-$root.tensorflow.OpDef.AttrDef.prototype.has_minimum = false;
-$root.tensorflow.OpDef.AttrDef.prototype.minimum = protobuf.Int64.create(0);
-$root.tensorflow.OpDef.AttrDef.prototype.allowed_values = null;
+tensorflow.OpDef.AttrDef.prototype.name = "";
+tensorflow.OpDef.AttrDef.prototype.type = "";
+tensorflow.OpDef.AttrDef.prototype.default_value = null;
+tensorflow.OpDef.AttrDef.prototype.description = "";
+tensorflow.OpDef.AttrDef.prototype.has_minimum = false;
+tensorflow.OpDef.AttrDef.prototype.minimum = protobuf.Int64.create(0);
+tensorflow.OpDef.AttrDef.prototype.allowed_values = null;
 
-$root.tensorflow.OpDeprecation = class OpDeprecation {
+tensorflow.OpDeprecation = class OpDeprecation {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.OpDeprecation();
+        const message = new tensorflow.OpDeprecation();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2413,7 +2414,7 @@ $root.tensorflow.OpDeprecation = class OpDeprecation {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.OpDeprecation();
+        const message = new tensorflow.OpDeprecation();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2433,23 +2434,23 @@ $root.tensorflow.OpDeprecation = class OpDeprecation {
     }
 };
 
-$root.tensorflow.OpDeprecation.prototype.version = 0;
-$root.tensorflow.OpDeprecation.prototype.explanation = "";
+tensorflow.OpDeprecation.prototype.version = 0;
+tensorflow.OpDeprecation.prototype.explanation = "";
 
-$root.tensorflow.OpList = class OpList {
+tensorflow.OpList = class OpList {
 
     constructor() {
         this.op = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.OpList();
+        const message = new tensorflow.OpList();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.op.push($root.tensorflow.OpDef.decode(reader, reader.uint32()));
+                    message.op.push(tensorflow.OpDef.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2460,13 +2461,13 @@ $root.tensorflow.OpList = class OpList {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.OpList();
+        const message = new tensorflow.OpList();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "op":
-                    message.op.push($root.tensorflow.OpDef.decodeText(reader));
+                    message.op.push(tensorflow.OpDef.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -2477,14 +2478,14 @@ $root.tensorflow.OpList = class OpList {
     }
 };
 
-$root.tensorflow.VersionDef = class VersionDef {
+tensorflow.VersionDef = class VersionDef {
 
     constructor() {
         this.bad_consumers = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.VersionDef();
+        const message = new tensorflow.VersionDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2507,7 +2508,7 @@ $root.tensorflow.VersionDef = class VersionDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.VersionDef();
+        const message = new tensorflow.VersionDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2530,10 +2531,10 @@ $root.tensorflow.VersionDef = class VersionDef {
     }
 };
 
-$root.tensorflow.VersionDef.prototype.producer = 0;
-$root.tensorflow.VersionDef.prototype.min_consumer = 0;
+tensorflow.VersionDef.prototype.producer = 0;
+tensorflow.VersionDef.prototype.min_consumer = 0;
 
-$root.tensorflow.SavedObjectGraph = class SavedObjectGraph {
+tensorflow.SavedObjectGraph = class SavedObjectGraph {
 
     constructor() {
         this.nodes = [];
@@ -2541,16 +2542,16 @@ $root.tensorflow.SavedObjectGraph = class SavedObjectGraph {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedObjectGraph();
+        const message = new tensorflow.SavedObjectGraph();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.nodes.push($root.tensorflow.SavedObject.decode(reader, reader.uint32()));
+                    message.nodes.push(tensorflow.SavedObject.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    reader.entry(message.concrete_functions, () => reader.string(), () => $root.tensorflow.SavedConcreteFunction.decode(reader, reader.uint32()));
+                    reader.entry(message.concrete_functions, () => reader.string(), () => tensorflow.SavedConcreteFunction.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2561,16 +2562,16 @@ $root.tensorflow.SavedObjectGraph = class SavedObjectGraph {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedObjectGraph();
+        const message = new tensorflow.SavedObjectGraph();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "nodes":
-                    message.nodes.push($root.tensorflow.SavedObject.decodeText(reader));
+                    message.nodes.push(tensorflow.SavedObject.decodeText(reader));
                     break;
                 case "concrete_functions":
-                    reader.entry(message.concrete_functions, () => reader.string(), () => $root.tensorflow.SavedConcreteFunction.decodeText(reader));
+                    reader.entry(message.concrete_functions, () => reader.string(), () => tensorflow.SavedConcreteFunction.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -2581,7 +2582,7 @@ $root.tensorflow.SavedObjectGraph = class SavedObjectGraph {
     }
 };
 
-$root.tensorflow.SavedObject = class SavedObject {
+tensorflow.SavedObject = class SavedObject {
 
     constructor() {
         this.children = [];
@@ -2591,57 +2592,57 @@ $root.tensorflow.SavedObject = class SavedObject {
     }
 
     get kind() {
-        $root.tensorflow.SavedObject.kindSet = $root.tensorflow.SavedObject.kindSet || new Set([ "user_object", "asset", "function", "variable", "bare_concrete_function", "constant", "resource", "captured_tensor"]);
-        return Object.keys(this).find((key) => $root.tensorflow.SavedObject.kindSet.has(key) && this[key] != null);
+        tensorflow.SavedObject.kindSet = tensorflow.SavedObject.kindSet || new Set([ "user_object", "asset", "function", "variable", "bare_concrete_function", "constant", "resource", "captured_tensor"]);
+        return Object.keys(this).find((key) => tensorflow.SavedObject.kindSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedObject();
+        const message = new tensorflow.SavedObject();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.children.push($root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decode(reader, reader.uint32()));
+                    message.children.push(tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decode(reader, reader.uint32()));
                     break;
                 case 15:
-                    message.dependencies.push($root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decode(reader, reader.uint32()));
+                    message.dependencies.push(tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decode(reader, reader.uint32()));
                     break;
                 case 3:
-                    message.slot_variables.push($root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decode(reader, reader.uint32()));
+                    message.slot_variables.push(tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decode(reader, reader.uint32()));
                     break;
                 case 4:
-                    message.user_object = $root.tensorflow.SavedUserObject.decode(reader, reader.uint32());
+                    message.user_object = tensorflow.SavedUserObject.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.asset = $root.tensorflow.SavedAsset.decode(reader, reader.uint32());
+                    message.asset = tensorflow.SavedAsset.decode(reader, reader.uint32());
                     break;
                 case 6:
-                    message["function"] = $root.tensorflow.SavedFunction.decode(reader, reader.uint32());
+                    message["function"] = tensorflow.SavedFunction.decode(reader, reader.uint32());
                     break;
                 case 7:
-                    message.variable = $root.tensorflow.SavedVariable.decode(reader, reader.uint32());
+                    message.variable = tensorflow.SavedVariable.decode(reader, reader.uint32());
                     break;
                 case 8:
-                    message.bare_concrete_function = $root.tensorflow.SavedBareConcreteFunction.decode(reader, reader.uint32());
+                    message.bare_concrete_function = tensorflow.SavedBareConcreteFunction.decode(reader, reader.uint32());
                     break;
                 case 9:
-                    message.constant = $root.tensorflow.SavedConstant.decode(reader, reader.uint32());
+                    message.constant = tensorflow.SavedConstant.decode(reader, reader.uint32());
                     break;
                 case 10:
-                    message.resource = $root.tensorflow.SavedResource.decode(reader, reader.uint32());
+                    message.resource = tensorflow.SavedResource.decode(reader, reader.uint32());
                     break;
                 case 12:
-                    message.captured_tensor = $root.tensorflow.CapturedTensor.decode(reader, reader.uint32());
+                    message.captured_tensor = tensorflow.CapturedTensor.decode(reader, reader.uint32());
                     break;
                 case 11:
-                    reader.entry(message.saveable_objects, () => reader.string(), () => $root.tensorflow.SaveableObject.decode(reader, reader.uint32()));
+                    reader.entry(message.saveable_objects, () => reader.string(), () => tensorflow.SaveableObject.decode(reader, reader.uint32()));
                     break;
                 case 13:
                     message.registered_name = reader.string();
                     break;
                 case 14:
-                    message.serialized_user_proto = $root.google.protobuf.Any.decode(reader, reader.uint32());
+                    message.serialized_user_proto = google.protobuf.Any.decode(reader, reader.uint32());
                     break;
                 case 16:
                     message.registered_saver = reader.string();
@@ -2655,52 +2656,52 @@ $root.tensorflow.SavedObject = class SavedObject {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedObject();
+        const message = new tensorflow.SavedObject();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "children":
-                    message.children.push($root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decodeText(reader));
+                    message.children.push(tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decodeText(reader));
                     break;
                 case "dependencies":
-                    message.dependencies.push($root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decodeText(reader));
+                    message.dependencies.push(tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decodeText(reader));
                     break;
                 case "slot_variables":
-                    message.slot_variables.push($root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decodeText(reader));
+                    message.slot_variables.push(tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decodeText(reader));
                     break;
                 case "user_object":
-                    message.user_object = $root.tensorflow.SavedUserObject.decodeText(reader);
+                    message.user_object = tensorflow.SavedUserObject.decodeText(reader);
                     break;
                 case "asset":
-                    message.asset = $root.tensorflow.SavedAsset.decodeText(reader);
+                    message.asset = tensorflow.SavedAsset.decodeText(reader);
                     break;
                 case "function":
-                    message["function"] = $root.tensorflow.SavedFunction.decodeText(reader);
+                    message["function"] = tensorflow.SavedFunction.decodeText(reader);
                     break;
                 case "variable":
-                    message.variable = $root.tensorflow.SavedVariable.decodeText(reader);
+                    message.variable = tensorflow.SavedVariable.decodeText(reader);
                     break;
                 case "bare_concrete_function":
-                    message.bare_concrete_function = $root.tensorflow.SavedBareConcreteFunction.decodeText(reader);
+                    message.bare_concrete_function = tensorflow.SavedBareConcreteFunction.decodeText(reader);
                     break;
                 case "constant":
-                    message.constant = $root.tensorflow.SavedConstant.decodeText(reader);
+                    message.constant = tensorflow.SavedConstant.decodeText(reader);
                     break;
                 case "resource":
-                    message.resource = $root.tensorflow.SavedResource.decodeText(reader);
+                    message.resource = tensorflow.SavedResource.decodeText(reader);
                     break;
                 case "captured_tensor":
-                    message.captured_tensor = $root.tensorflow.CapturedTensor.decodeText(reader);
+                    message.captured_tensor = tensorflow.CapturedTensor.decodeText(reader);
                     break;
                 case "saveable_objects":
-                    reader.entry(message.saveable_objects, () => reader.string(), () => $root.tensorflow.SaveableObject.decodeText(reader));
+                    reader.entry(message.saveable_objects, () => reader.string(), () => tensorflow.SaveableObject.decodeText(reader));
                     break;
                 case "registered_name":
                     message.registered_name = reader.string();
                     break;
                 case "serialized_user_proto":
-                    message.serialized_user_proto = $root.google.protobuf.Any.decodeText(reader);
+                    message.serialized_user_proto = google.protobuf.Any.decodeText(reader);
                     break;
                 case "registered_saver":
                     message.registered_saver = reader.string();
@@ -2714,17 +2715,17 @@ $root.tensorflow.SavedObject = class SavedObject {
     }
 };
 
-$root.tensorflow.SavedObject.prototype.registered_name = "";
-$root.tensorflow.SavedObject.prototype.serialized_user_proto = null;
-$root.tensorflow.SavedObject.prototype.registered_saver = "";
+tensorflow.SavedObject.prototype.registered_name = "";
+tensorflow.SavedObject.prototype.serialized_user_proto = null;
+tensorflow.SavedObject.prototype.registered_saver = "";
 
-$root.tensorflow.SavedUserObject = class SavedUserObject {
+tensorflow.SavedUserObject = class SavedUserObject {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedUserObject();
+        const message = new tensorflow.SavedUserObject();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2733,7 +2734,7 @@ $root.tensorflow.SavedUserObject = class SavedUserObject {
                     message.identifier = reader.string();
                     break;
                 case 2:
-                    message.version = $root.tensorflow.VersionDef.decode(reader, reader.uint32());
+                    message.version = tensorflow.VersionDef.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.metadata = reader.string();
@@ -2747,7 +2748,7 @@ $root.tensorflow.SavedUserObject = class SavedUserObject {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedUserObject();
+        const message = new tensorflow.SavedUserObject();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2756,7 +2757,7 @@ $root.tensorflow.SavedUserObject = class SavedUserObject {
                     message.identifier = reader.string();
                     break;
                 case "version":
-                    message.version = $root.tensorflow.VersionDef.decodeText(reader);
+                    message.version = tensorflow.VersionDef.decodeText(reader);
                     break;
                 case "metadata":
                     message.metadata = reader.string();
@@ -2770,17 +2771,17 @@ $root.tensorflow.SavedUserObject = class SavedUserObject {
     }
 };
 
-$root.tensorflow.SavedUserObject.prototype.identifier = "";
-$root.tensorflow.SavedUserObject.prototype.version = null;
-$root.tensorflow.SavedUserObject.prototype.metadata = "";
+tensorflow.SavedUserObject.prototype.identifier = "";
+tensorflow.SavedUserObject.prototype.version = null;
+tensorflow.SavedUserObject.prototype.metadata = "";
 
-$root.tensorflow.SavedAsset = class SavedAsset {
+tensorflow.SavedAsset = class SavedAsset {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedAsset();
+        const message = new tensorflow.SavedAsset();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2797,7 +2798,7 @@ $root.tensorflow.SavedAsset = class SavedAsset {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedAsset();
+        const message = new tensorflow.SavedAsset();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2814,16 +2815,16 @@ $root.tensorflow.SavedAsset = class SavedAsset {
     }
 };
 
-$root.tensorflow.SavedAsset.prototype.asset_file_def_index = 0;
+tensorflow.SavedAsset.prototype.asset_file_def_index = 0;
 
-$root.tensorflow.SavedFunction = class SavedFunction {
+tensorflow.SavedFunction = class SavedFunction {
 
     constructor() {
         this.concrete_functions = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedFunction();
+        const message = new tensorflow.SavedFunction();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2832,7 +2833,7 @@ $root.tensorflow.SavedFunction = class SavedFunction {
                     message.concrete_functions.push(reader.string());
                     break;
                 case 2:
-                    message.function_spec = $root.tensorflow.FunctionSpec.decode(reader, reader.uint32());
+                    message.function_spec = tensorflow.FunctionSpec.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2843,7 +2844,7 @@ $root.tensorflow.SavedFunction = class SavedFunction {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedFunction();
+        const message = new tensorflow.SavedFunction();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2852,7 +2853,7 @@ $root.tensorflow.SavedFunction = class SavedFunction {
                     reader.array(message.concrete_functions, () => reader.string());
                     break;
                 case "function_spec":
-                    message.function_spec = $root.tensorflow.FunctionSpec.decodeText(reader);
+                    message.function_spec = tensorflow.FunctionSpec.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -2863,15 +2864,15 @@ $root.tensorflow.SavedFunction = class SavedFunction {
     }
 };
 
-$root.tensorflow.SavedFunction.prototype.function_spec = null;
+tensorflow.SavedFunction.prototype.function_spec = null;
 
-$root.tensorflow.CapturedTensor = class CapturedTensor {
+tensorflow.CapturedTensor = class CapturedTensor {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CapturedTensor();
+        const message = new tensorflow.CapturedTensor();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2891,7 +2892,7 @@ $root.tensorflow.CapturedTensor = class CapturedTensor {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CapturedTensor();
+        const message = new tensorflow.CapturedTensor();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2911,17 +2912,17 @@ $root.tensorflow.CapturedTensor = class CapturedTensor {
     }
 };
 
-$root.tensorflow.CapturedTensor.prototype.name = "";
-$root.tensorflow.CapturedTensor.prototype.concrete_function = "";
+tensorflow.CapturedTensor.prototype.name = "";
+tensorflow.CapturedTensor.prototype.concrete_function = "";
 
-$root.tensorflow.SavedConcreteFunction = class SavedConcreteFunction {
+tensorflow.SavedConcreteFunction = class SavedConcreteFunction {
 
     constructor() {
         this.bound_inputs = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedConcreteFunction();
+        const message = new tensorflow.SavedConcreteFunction();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2930,10 +2931,10 @@ $root.tensorflow.SavedConcreteFunction = class SavedConcreteFunction {
                     message.bound_inputs = reader.array(message.bound_inputs, () => reader.int32(), tag);
                     break;
                 case 3:
-                    message.canonicalized_input_signature = $root.tensorflow.StructuredValue.decode(reader, reader.uint32());
+                    message.canonicalized_input_signature = tensorflow.StructuredValue.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.output_signature = $root.tensorflow.StructuredValue.decode(reader, reader.uint32());
+                    message.output_signature = tensorflow.StructuredValue.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2944,7 +2945,7 @@ $root.tensorflow.SavedConcreteFunction = class SavedConcreteFunction {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedConcreteFunction();
+        const message = new tensorflow.SavedConcreteFunction();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -2953,10 +2954,10 @@ $root.tensorflow.SavedConcreteFunction = class SavedConcreteFunction {
                     reader.array(message.bound_inputs, () => reader.int32());
                     break;
                 case "canonicalized_input_signature":
-                    message.canonicalized_input_signature = $root.tensorflow.StructuredValue.decodeText(reader);
+                    message.canonicalized_input_signature = tensorflow.StructuredValue.decodeText(reader);
                     break;
                 case "output_signature":
-                    message.output_signature = $root.tensorflow.StructuredValue.decodeText(reader);
+                    message.output_signature = tensorflow.StructuredValue.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -2967,17 +2968,17 @@ $root.tensorflow.SavedConcreteFunction = class SavedConcreteFunction {
     }
 };
 
-$root.tensorflow.SavedConcreteFunction.prototype.canonicalized_input_signature = null;
-$root.tensorflow.SavedConcreteFunction.prototype.output_signature = null;
+tensorflow.SavedConcreteFunction.prototype.canonicalized_input_signature = null;
+tensorflow.SavedConcreteFunction.prototype.output_signature = null;
 
-$root.tensorflow.SavedBareConcreteFunction = class SavedBareConcreteFunction {
+tensorflow.SavedBareConcreteFunction = class SavedBareConcreteFunction {
 
     constructor() {
         this.argument_keywords = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedBareConcreteFunction();
+        const message = new tensorflow.SavedBareConcreteFunction();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -2992,7 +2993,7 @@ $root.tensorflow.SavedBareConcreteFunction = class SavedBareConcreteFunction {
                     message.allowed_positional_arguments = reader.int64();
                     break;
                 case 4:
-                    message.function_spec = $root.tensorflow.FunctionSpec.decode(reader, reader.uint32());
+                    message.function_spec = tensorflow.FunctionSpec.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3003,7 +3004,7 @@ $root.tensorflow.SavedBareConcreteFunction = class SavedBareConcreteFunction {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedBareConcreteFunction();
+        const message = new tensorflow.SavedBareConcreteFunction();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3018,7 +3019,7 @@ $root.tensorflow.SavedBareConcreteFunction = class SavedBareConcreteFunction {
                     message.allowed_positional_arguments = reader.int64();
                     break;
                 case "function_spec":
-                    message.function_spec = $root.tensorflow.FunctionSpec.decodeText(reader);
+                    message.function_spec = tensorflow.FunctionSpec.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -3029,17 +3030,17 @@ $root.tensorflow.SavedBareConcreteFunction = class SavedBareConcreteFunction {
     }
 };
 
-$root.tensorflow.SavedBareConcreteFunction.prototype.concrete_function_name = "";
-$root.tensorflow.SavedBareConcreteFunction.prototype.allowed_positional_arguments = protobuf.Int64.create(0);
-$root.tensorflow.SavedBareConcreteFunction.prototype.function_spec = null;
+tensorflow.SavedBareConcreteFunction.prototype.concrete_function_name = "";
+tensorflow.SavedBareConcreteFunction.prototype.allowed_positional_arguments = protobuf.Int64.create(0);
+tensorflow.SavedBareConcreteFunction.prototype.function_spec = null;
 
-$root.tensorflow.SavedConstant = class SavedConstant {
+tensorflow.SavedConstant = class SavedConstant {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedConstant();
+        const message = new tensorflow.SavedConstant();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3056,7 +3057,7 @@ $root.tensorflow.SavedConstant = class SavedConstant {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedConstant();
+        const message = new tensorflow.SavedConstant();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3073,16 +3074,16 @@ $root.tensorflow.SavedConstant = class SavedConstant {
     }
 };
 
-$root.tensorflow.SavedConstant.prototype.operation = "";
+tensorflow.SavedConstant.prototype.operation = "";
 
-$root.tensorflow.SavedVariable = class SavedVariable {
+tensorflow.SavedVariable = class SavedVariable {
 
     constructor() {
         this.experimental_distributed_variable_components = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedVariable();
+        const message = new tensorflow.SavedVariable();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3091,7 +3092,7 @@ $root.tensorflow.SavedVariable = class SavedVariable {
                     message.dtype = reader.int32();
                     break;
                 case 2:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.trainable = reader.bool();
@@ -3109,7 +3110,7 @@ $root.tensorflow.SavedVariable = class SavedVariable {
                     message.device = reader.string();
                     break;
                 case 8:
-                    message.experimental_distributed_variable_components.push($root.tensorflow.SavedVariable.decode(reader, reader.uint32()));
+                    message.experimental_distributed_variable_components.push(tensorflow.SavedVariable.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3120,25 +3121,25 @@ $root.tensorflow.SavedVariable = class SavedVariable {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedVariable();
+        const message = new tensorflow.SavedVariable();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "trainable":
                     message.trainable = reader.bool();
                     break;
                 case "synchronization":
-                    message.synchronization = reader.enum($root.tensorflow.VariableSynchronization);
+                    message.synchronization = reader.enum(tensorflow.VariableSynchronization);
                     break;
                 case "aggregation":
-                    message.aggregation = reader.enum($root.tensorflow.VariableAggregation);
+                    message.aggregation = reader.enum(tensorflow.VariableAggregation);
                     break;
                 case "name":
                     message.name = reader.string();
@@ -3147,7 +3148,7 @@ $root.tensorflow.SavedVariable = class SavedVariable {
                     message.device = reader.string();
                     break;
                 case "experimental_distributed_variable_components":
-                    message.experimental_distributed_variable_components.push($root.tensorflow.SavedVariable.decodeText(reader));
+                    message.experimental_distributed_variable_components.push(tensorflow.SavedVariable.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -3158,33 +3159,33 @@ $root.tensorflow.SavedVariable = class SavedVariable {
     }
 };
 
-$root.tensorflow.SavedVariable.prototype.dtype = 0;
-$root.tensorflow.SavedVariable.prototype.shape = null;
-$root.tensorflow.SavedVariable.prototype.trainable = false;
-$root.tensorflow.SavedVariable.prototype.synchronization = 0;
-$root.tensorflow.SavedVariable.prototype.aggregation = 0;
-$root.tensorflow.SavedVariable.prototype.name = "";
-$root.tensorflow.SavedVariable.prototype.device = "";
+tensorflow.SavedVariable.prototype.dtype = 0;
+tensorflow.SavedVariable.prototype.shape = null;
+tensorflow.SavedVariable.prototype.trainable = false;
+tensorflow.SavedVariable.prototype.synchronization = 0;
+tensorflow.SavedVariable.prototype.aggregation = 0;
+tensorflow.SavedVariable.prototype.name = "";
+tensorflow.SavedVariable.prototype.device = "";
 
-$root.tensorflow.FunctionSpec = class FunctionSpec {
+tensorflow.FunctionSpec = class FunctionSpec {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.FunctionSpec();
+        const message = new tensorflow.FunctionSpec();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.fullargspec = $root.tensorflow.StructuredValue.decode(reader, reader.uint32());
+                    message.fullargspec = tensorflow.StructuredValue.decode(reader, reader.uint32());
                     break;
                 case 2:
                     message.is_method = reader.bool();
                     break;
                 case 5:
-                    message.input_signature = $root.tensorflow.StructuredValue.decode(reader, reader.uint32());
+                    message.input_signature = tensorflow.StructuredValue.decode(reader, reader.uint32());
                     break;
                 case 6:
                     message.jit_compile = reader.int32();
@@ -3198,22 +3199,22 @@ $root.tensorflow.FunctionSpec = class FunctionSpec {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.FunctionSpec();
+        const message = new tensorflow.FunctionSpec();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "fullargspec":
-                    message.fullargspec = $root.tensorflow.StructuredValue.decodeText(reader);
+                    message.fullargspec = tensorflow.StructuredValue.decodeText(reader);
                     break;
                 case "is_method":
                     message.is_method = reader.bool();
                     break;
                 case "input_signature":
-                    message.input_signature = $root.tensorflow.StructuredValue.decodeText(reader);
+                    message.input_signature = tensorflow.StructuredValue.decodeText(reader);
                     break;
                 case "jit_compile":
-                    message.jit_compile = reader.enum($root.tensorflow.FunctionSpec.JitCompile);
+                    message.jit_compile = reader.enum(tensorflow.FunctionSpec.JitCompile);
                     break;
                 default:
                     reader.field(tag, message);
@@ -3224,24 +3225,24 @@ $root.tensorflow.FunctionSpec = class FunctionSpec {
     }
 };
 
-$root.tensorflow.FunctionSpec.prototype.fullargspec = null;
-$root.tensorflow.FunctionSpec.prototype.is_method = false;
-$root.tensorflow.FunctionSpec.prototype.input_signature = null;
-$root.tensorflow.FunctionSpec.prototype.jit_compile = 0;
+tensorflow.FunctionSpec.prototype.fullargspec = null;
+tensorflow.FunctionSpec.prototype.is_method = false;
+tensorflow.FunctionSpec.prototype.input_signature = null;
+tensorflow.FunctionSpec.prototype.jit_compile = 0;
 
-$root.tensorflow.FunctionSpec.JitCompile = {
+tensorflow.FunctionSpec.JitCompile = {
     "DEFAULT": 0,
     "ON": 1,
     "OFF": 2
 };
 
-$root.tensorflow.SavedResource = class SavedResource {
+tensorflow.SavedResource = class SavedResource {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedResource();
+        const message = new tensorflow.SavedResource();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3258,7 +3259,7 @@ $root.tensorflow.SavedResource = class SavedResource {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedResource();
+        const message = new tensorflow.SavedResource();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3275,15 +3276,15 @@ $root.tensorflow.SavedResource = class SavedResource {
     }
 };
 
-$root.tensorflow.SavedResource.prototype.device = "";
+tensorflow.SavedResource.prototype.device = "";
 
-$root.tensorflow.SaveableObject = class SaveableObject {
+tensorflow.SaveableObject = class SaveableObject {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SaveableObject();
+        const message = new tensorflow.SaveableObject();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3303,7 +3304,7 @@ $root.tensorflow.SaveableObject = class SaveableObject {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SaveableObject();
+        const message = new tensorflow.SaveableObject();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3323,30 +3324,30 @@ $root.tensorflow.SaveableObject = class SaveableObject {
     }
 };
 
-$root.tensorflow.SaveableObject.prototype.save_function = 0;
-$root.tensorflow.SaveableObject.prototype.restore_function = 0;
+tensorflow.SaveableObject.prototype.save_function = 0;
+tensorflow.SaveableObject.prototype.restore_function = 0;
 
-$root.tensorflow.VariableSynchronization = {
+tensorflow.VariableSynchronization = {
     "VARIABLE_SYNCHRONIZATION_AUTO": 0,
     "VARIABLE_SYNCHRONIZATION_NONE": 1,
     "VARIABLE_SYNCHRONIZATION_ON_WRITE": 2,
     "VARIABLE_SYNCHRONIZATION_ON_READ": 3
 };
 
-$root.tensorflow.VariableAggregation = {
+tensorflow.VariableAggregation = {
     "VARIABLE_AGGREGATION_NONE": 0,
     "VARIABLE_AGGREGATION_SUM": 1,
     "VARIABLE_AGGREGATION_MEAN": 2,
     "VARIABLE_AGGREGATION_ONLY_FIRST_REPLICA": 3
 };
 
-$root.tensorflow.VariableDef = class VariableDef {
+tensorflow.VariableDef = class VariableDef {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.VariableDef();
+        const message = new tensorflow.VariableDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3364,7 +3365,7 @@ $root.tensorflow.VariableDef = class VariableDef {
                     message.snapshot_name = reader.string();
                     break;
                 case 4:
-                    message.save_slice_info_def = $root.tensorflow.SaveSliceInfoDef.decode(reader, reader.uint32());
+                    message.save_slice_info_def = tensorflow.SaveSliceInfoDef.decode(reader, reader.uint32());
                     break;
                 case 5:
                     message.is_resource = reader.bool();
@@ -3387,7 +3388,7 @@ $root.tensorflow.VariableDef = class VariableDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.VariableDef();
+        const message = new tensorflow.VariableDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3405,7 +3406,7 @@ $root.tensorflow.VariableDef = class VariableDef {
                     message.snapshot_name = reader.string();
                     break;
                 case "save_slice_info_def":
-                    message.save_slice_info_def = $root.tensorflow.SaveSliceInfoDef.decodeText(reader);
+                    message.save_slice_info_def = tensorflow.SaveSliceInfoDef.decodeText(reader);
                     break;
                 case "is_resource":
                     message.is_resource = reader.bool();
@@ -3414,10 +3415,10 @@ $root.tensorflow.VariableDef = class VariableDef {
                     message.trainable = reader.bool();
                     break;
                 case "synchronization":
-                    message.synchronization = reader.enum($root.tensorflow.VariableSynchronization);
+                    message.synchronization = reader.enum(tensorflow.VariableSynchronization);
                     break;
                 case "aggregation":
-                    message.aggregation = reader.enum($root.tensorflow.VariableAggregation);
+                    message.aggregation = reader.enum(tensorflow.VariableAggregation);
                     break;
                 default:
                     reader.field(tag, message);
@@ -3428,17 +3429,17 @@ $root.tensorflow.VariableDef = class VariableDef {
     }
 };
 
-$root.tensorflow.VariableDef.prototype.variable_name = "";
-$root.tensorflow.VariableDef.prototype.initial_value_name = "";
-$root.tensorflow.VariableDef.prototype.initializer_name = "";
-$root.tensorflow.VariableDef.prototype.snapshot_name = "";
-$root.tensorflow.VariableDef.prototype.save_slice_info_def = null;
-$root.tensorflow.VariableDef.prototype.is_resource = false;
-$root.tensorflow.VariableDef.prototype.trainable = false;
-$root.tensorflow.VariableDef.prototype.synchronization = 0;
-$root.tensorflow.VariableDef.prototype.aggregation = 0;
+tensorflow.VariableDef.prototype.variable_name = "";
+tensorflow.VariableDef.prototype.initial_value_name = "";
+tensorflow.VariableDef.prototype.initializer_name = "";
+tensorflow.VariableDef.prototype.snapshot_name = "";
+tensorflow.VariableDef.prototype.save_slice_info_def = null;
+tensorflow.VariableDef.prototype.is_resource = false;
+tensorflow.VariableDef.prototype.trainable = false;
+tensorflow.VariableDef.prototype.synchronization = 0;
+tensorflow.VariableDef.prototype.aggregation = 0;
 
-$root.tensorflow.SaveSliceInfoDef = class SaveSliceInfoDef {
+tensorflow.SaveSliceInfoDef = class SaveSliceInfoDef {
 
     constructor() {
         this.full_shape = [];
@@ -3447,7 +3448,7 @@ $root.tensorflow.SaveSliceInfoDef = class SaveSliceInfoDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SaveSliceInfoDef();
+        const message = new tensorflow.SaveSliceInfoDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3473,7 +3474,7 @@ $root.tensorflow.SaveSliceInfoDef = class SaveSliceInfoDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SaveSliceInfoDef();
+        const message = new tensorflow.SaveSliceInfoDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3499,26 +3500,26 @@ $root.tensorflow.SaveSliceInfoDef = class SaveSliceInfoDef {
     }
 };
 
-$root.tensorflow.SaveSliceInfoDef.prototype.full_name = "";
+tensorflow.SaveSliceInfoDef.prototype.full_name = "";
 
-$root.tensorflow.StructuredValue = class StructuredValue {
+tensorflow.StructuredValue = class StructuredValue {
 
     constructor() {
     }
 
     get kind() {
-        $root.tensorflow.StructuredValue.kindSet = $root.tensorflow.StructuredValue.kindSet || new Set([ "none_value", "float64_value", "int64_value", "string_value", "bool_value", "tensor_shape_value", "tensor_dtype_value", "tensor_spec_value", "type_spec_value", "bounded_tensor_spec_value", "list_value", "tuple_value", "dict_value", "named_tuple_value"]);
-        return Object.keys(this).find((key) => $root.tensorflow.StructuredValue.kindSet.has(key) && this[key] != null);
+        tensorflow.StructuredValue.kindSet = tensorflow.StructuredValue.kindSet || new Set([ "none_value", "float64_value", "int64_value", "string_value", "bool_value", "tensor_shape_value", "tensor_dtype_value", "tensor_spec_value", "type_spec_value", "bounded_tensor_spec_value", "list_value", "tuple_value", "dict_value", "named_tuple_value"]);
+        return Object.keys(this).find((key) => tensorflow.StructuredValue.kindSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.StructuredValue();
+        const message = new tensorflow.StructuredValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.none_value = $root.tensorflow.NoneValue.decode(reader, reader.uint32());
+                    message.none_value = tensorflow.NoneValue.decode(reader, reader.uint32());
                     break;
                 case 11:
                     message.float64_value = reader.double();
@@ -3533,31 +3534,31 @@ $root.tensorflow.StructuredValue = class StructuredValue {
                     message.bool_value = reader.bool();
                     break;
                 case 31:
-                    message.tensor_shape_value = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.tensor_shape_value = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 32:
                     message.tensor_dtype_value = reader.int32();
                     break;
                 case 33:
-                    message.tensor_spec_value = $root.tensorflow.TensorSpecProto.decode(reader, reader.uint32());
+                    message.tensor_spec_value = tensorflow.TensorSpecProto.decode(reader, reader.uint32());
                     break;
                 case 34:
-                    message.type_spec_value = $root.tensorflow.TypeSpecProto.decode(reader, reader.uint32());
+                    message.type_spec_value = tensorflow.TypeSpecProto.decode(reader, reader.uint32());
                     break;
                 case 35:
-                    message.bounded_tensor_spec_value = $root.tensorflow.BoundedTensorSpecProto.decode(reader, reader.uint32());
+                    message.bounded_tensor_spec_value = tensorflow.BoundedTensorSpecProto.decode(reader, reader.uint32());
                     break;
                 case 51:
-                    message.list_value = $root.tensorflow.ListValue.decode(reader, reader.uint32());
+                    message.list_value = tensorflow.ListValue.decode(reader, reader.uint32());
                     break;
                 case 52:
-                    message.tuple_value = $root.tensorflow.TupleValue.decode(reader, reader.uint32());
+                    message.tuple_value = tensorflow.TupleValue.decode(reader, reader.uint32());
                     break;
                 case 53:
-                    message.dict_value = $root.tensorflow.DictValue.decode(reader, reader.uint32());
+                    message.dict_value = tensorflow.DictValue.decode(reader, reader.uint32());
                     break;
                 case 54:
-                    message.named_tuple_value = $root.tensorflow.NamedTupleValue.decode(reader, reader.uint32());
+                    message.named_tuple_value = tensorflow.NamedTupleValue.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3568,13 +3569,13 @@ $root.tensorflow.StructuredValue = class StructuredValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.StructuredValue();
+        const message = new tensorflow.StructuredValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "none_value":
-                    message.none_value = $root.tensorflow.NoneValue.decodeText(reader);
+                    message.none_value = tensorflow.NoneValue.decodeText(reader);
                     break;
                 case "float64_value":
                     message.float64_value = reader.double();
@@ -3589,31 +3590,31 @@ $root.tensorflow.StructuredValue = class StructuredValue {
                     message.bool_value = reader.bool();
                     break;
                 case "tensor_shape_value":
-                    message.tensor_shape_value = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.tensor_shape_value = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "tensor_dtype_value":
-                    message.tensor_dtype_value = reader.enum($root.tensorflow.DataType);
+                    message.tensor_dtype_value = reader.enum(tensorflow.DataType);
                     break;
                 case "tensor_spec_value":
-                    message.tensor_spec_value = $root.tensorflow.TensorSpecProto.decodeText(reader);
+                    message.tensor_spec_value = tensorflow.TensorSpecProto.decodeText(reader);
                     break;
                 case "type_spec_value":
-                    message.type_spec_value = $root.tensorflow.TypeSpecProto.decodeText(reader);
+                    message.type_spec_value = tensorflow.TypeSpecProto.decodeText(reader);
                     break;
                 case "bounded_tensor_spec_value":
-                    message.bounded_tensor_spec_value = $root.tensorflow.BoundedTensorSpecProto.decodeText(reader);
+                    message.bounded_tensor_spec_value = tensorflow.BoundedTensorSpecProto.decodeText(reader);
                     break;
                 case "list_value":
-                    message.list_value = $root.tensorflow.ListValue.decodeText(reader);
+                    message.list_value = tensorflow.ListValue.decodeText(reader);
                     break;
                 case "tuple_value":
-                    message.tuple_value = $root.tensorflow.TupleValue.decodeText(reader);
+                    message.tuple_value = tensorflow.TupleValue.decodeText(reader);
                     break;
                 case "dict_value":
-                    message.dict_value = $root.tensorflow.DictValue.decodeText(reader);
+                    message.dict_value = tensorflow.DictValue.decodeText(reader);
                     break;
                 case "named_tuple_value":
-                    message.named_tuple_value = $root.tensorflow.NamedTupleValue.decodeText(reader);
+                    message.named_tuple_value = tensorflow.NamedTupleValue.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -3624,13 +3625,13 @@ $root.tensorflow.StructuredValue = class StructuredValue {
     }
 };
 
-$root.tensorflow.NoneValue = class NoneValue {
+tensorflow.NoneValue = class NoneValue {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.NoneValue();
+        const message = new tensorflow.NoneValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3644,7 +3645,7 @@ $root.tensorflow.NoneValue = class NoneValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.NoneValue();
+        const message = new tensorflow.NoneValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3658,61 +3659,20 @@ $root.tensorflow.NoneValue = class NoneValue {
     }
 };
 
-$root.tensorflow.ListValue = class ListValue {
-
-    constructor() {
-        this.values = [];
-    }
-
-    static decode(reader, length) {
-        const message = new $root.tensorflow.ListValue();
-        const end = length !== undefined ? reader.position + length : reader.length;
-        while (reader.position < end) {
-            const tag = reader.uint32();
-            switch (tag >>> 3) {
-                case 1:
-                    message.values.push($root.tensorflow.StructuredValue.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-            }
-        }
-        return message;
-    }
-
-    static decodeText(reader) {
-        const message = new $root.tensorflow.ListValue();
-        reader.start();
-        while (!reader.end()) {
-            const tag = reader.tag();
-            switch (tag) {
-                case "values":
-                    message.values.push($root.tensorflow.StructuredValue.decodeText(reader));
-                    break;
-                default:
-                    reader.field(tag, message);
-                    break;
-            }
-        }
-        return message;
-    }
-};
-
-$root.tensorflow.TupleValue = class TupleValue {
+tensorflow.ListValue = class ListValue {
 
     constructor() {
         this.values = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TupleValue();
+        const message = new tensorflow.ListValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.values.push($root.tensorflow.StructuredValue.decode(reader, reader.uint32()));
+                    message.values.push(tensorflow.StructuredValue.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3723,13 +3683,13 @@ $root.tensorflow.TupleValue = class TupleValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TupleValue();
+        const message = new tensorflow.ListValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "values":
-                    message.values.push($root.tensorflow.StructuredValue.decodeText(reader));
+                    message.values.push(tensorflow.StructuredValue.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -3740,20 +3700,61 @@ $root.tensorflow.TupleValue = class TupleValue {
     }
 };
 
-$root.tensorflow.DictValue = class DictValue {
+tensorflow.TupleValue = class TupleValue {
+
+    constructor() {
+        this.values = [];
+    }
+
+    static decode(reader, length) {
+        const message = new tensorflow.TupleValue();
+        const end = length !== undefined ? reader.position + length : reader.length;
+        while (reader.position < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.values.push(tensorflow.StructuredValue.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    }
+
+    static decodeText(reader) {
+        const message = new tensorflow.TupleValue();
+        reader.start();
+        while (!reader.end()) {
+            const tag = reader.tag();
+            switch (tag) {
+                case "values":
+                    message.values.push(tensorflow.StructuredValue.decodeText(reader));
+                    break;
+                default:
+                    reader.field(tag, message);
+                    break;
+            }
+        }
+        return message;
+    }
+};
+
+tensorflow.DictValue = class DictValue {
 
     constructor() {
         this.fields = {};
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.DictValue();
+        const message = new tensorflow.DictValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    reader.entry(message.fields, () => reader.string(), () => $root.tensorflow.StructuredValue.decode(reader, reader.uint32()));
+                    reader.entry(message.fields, () => reader.string(), () => tensorflow.StructuredValue.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3764,13 +3765,13 @@ $root.tensorflow.DictValue = class DictValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.DictValue();
+        const message = new tensorflow.DictValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "fields":
-                    reader.entry(message.fields, () => reader.string(), () => $root.tensorflow.StructuredValue.decodeText(reader));
+                    reader.entry(message.fields, () => reader.string(), () => tensorflow.StructuredValue.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -3781,13 +3782,13 @@ $root.tensorflow.DictValue = class DictValue {
     }
 };
 
-$root.tensorflow.PairValue = class PairValue {
+tensorflow.PairValue = class PairValue {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.PairValue();
+        const message = new tensorflow.PairValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3796,7 +3797,7 @@ $root.tensorflow.PairValue = class PairValue {
                     message.key = reader.string();
                     break;
                 case 2:
-                    message.value = $root.tensorflow.StructuredValue.decode(reader, reader.uint32());
+                    message.value = tensorflow.StructuredValue.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3807,7 +3808,7 @@ $root.tensorflow.PairValue = class PairValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.PairValue();
+        const message = new tensorflow.PairValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3816,7 +3817,7 @@ $root.tensorflow.PairValue = class PairValue {
                     message.key = reader.string();
                     break;
                 case "value":
-                    message.value = $root.tensorflow.StructuredValue.decodeText(reader);
+                    message.value = tensorflow.StructuredValue.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -3827,17 +3828,17 @@ $root.tensorflow.PairValue = class PairValue {
     }
 };
 
-$root.tensorflow.PairValue.prototype.key = "";
-$root.tensorflow.PairValue.prototype.value = null;
+tensorflow.PairValue.prototype.key = "";
+tensorflow.PairValue.prototype.value = null;
 
-$root.tensorflow.NamedTupleValue = class NamedTupleValue {
+tensorflow.NamedTupleValue = class NamedTupleValue {
 
     constructor() {
         this.values = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.NamedTupleValue();
+        const message = new tensorflow.NamedTupleValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3846,7 +3847,7 @@ $root.tensorflow.NamedTupleValue = class NamedTupleValue {
                     message.name = reader.string();
                     break;
                 case 2:
-                    message.values.push($root.tensorflow.PairValue.decode(reader, reader.uint32()));
+                    message.values.push(tensorflow.PairValue.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3857,7 +3858,7 @@ $root.tensorflow.NamedTupleValue = class NamedTupleValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.NamedTupleValue();
+        const message = new tensorflow.NamedTupleValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3866,7 +3867,7 @@ $root.tensorflow.NamedTupleValue = class NamedTupleValue {
                     message.name = reader.string();
                     break;
                 case "values":
-                    message.values.push($root.tensorflow.PairValue.decodeText(reader));
+                    message.values.push(tensorflow.PairValue.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -3877,15 +3878,15 @@ $root.tensorflow.NamedTupleValue = class NamedTupleValue {
     }
 };
 
-$root.tensorflow.NamedTupleValue.prototype.name = "";
+tensorflow.NamedTupleValue.prototype.name = "";
 
-$root.tensorflow.TensorSpecProto = class TensorSpecProto {
+tensorflow.TensorSpecProto = class TensorSpecProto {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorSpecProto();
+        const message = new tensorflow.TensorSpecProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3894,7 +3895,7 @@ $root.tensorflow.TensorSpecProto = class TensorSpecProto {
                     message.name = reader.string();
                     break;
                 case 2:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.dtype = reader.int32();
@@ -3908,7 +3909,7 @@ $root.tensorflow.TensorSpecProto = class TensorSpecProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorSpecProto();
+        const message = new tensorflow.TensorSpecProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3917,10 +3918,10 @@ $root.tensorflow.TensorSpecProto = class TensorSpecProto {
                     message.name = reader.string();
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 default:
                     reader.field(tag, message);
@@ -3931,17 +3932,17 @@ $root.tensorflow.TensorSpecProto = class TensorSpecProto {
     }
 };
 
-$root.tensorflow.TensorSpecProto.prototype.name = "";
-$root.tensorflow.TensorSpecProto.prototype.shape = null;
-$root.tensorflow.TensorSpecProto.prototype.dtype = 0;
+tensorflow.TensorSpecProto.prototype.name = "";
+tensorflow.TensorSpecProto.prototype.shape = null;
+tensorflow.TensorSpecProto.prototype.dtype = 0;
 
-$root.tensorflow.BoundedTensorSpecProto = class BoundedTensorSpecProto {
+tensorflow.BoundedTensorSpecProto = class BoundedTensorSpecProto {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.BoundedTensorSpecProto();
+        const message = new tensorflow.BoundedTensorSpecProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -3950,16 +3951,16 @@ $root.tensorflow.BoundedTensorSpecProto = class BoundedTensorSpecProto {
                     message.name = reader.string();
                     break;
                 case 2:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.dtype = reader.int32();
                     break;
                 case 4:
-                    message.minimum = $root.tensorflow.TensorProto.decode(reader, reader.uint32());
+                    message.minimum = tensorflow.TensorProto.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.maximum = $root.tensorflow.TensorProto.decode(reader, reader.uint32());
+                    message.maximum = tensorflow.TensorProto.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3970,7 +3971,7 @@ $root.tensorflow.BoundedTensorSpecProto = class BoundedTensorSpecProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.BoundedTensorSpecProto();
+        const message = new tensorflow.BoundedTensorSpecProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -3979,16 +3980,16 @@ $root.tensorflow.BoundedTensorSpecProto = class BoundedTensorSpecProto {
                     message.name = reader.string();
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 case "minimum":
-                    message.minimum = $root.tensorflow.TensorProto.decodeText(reader);
+                    message.minimum = tensorflow.TensorProto.decodeText(reader);
                     break;
                 case "maximum":
-                    message.maximum = $root.tensorflow.TensorProto.decodeText(reader);
+                    message.maximum = tensorflow.TensorProto.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -3999,19 +4000,19 @@ $root.tensorflow.BoundedTensorSpecProto = class BoundedTensorSpecProto {
     }
 };
 
-$root.tensorflow.BoundedTensorSpecProto.prototype.name = "";
-$root.tensorflow.BoundedTensorSpecProto.prototype.shape = null;
-$root.tensorflow.BoundedTensorSpecProto.prototype.dtype = 0;
-$root.tensorflow.BoundedTensorSpecProto.prototype.minimum = null;
-$root.tensorflow.BoundedTensorSpecProto.prototype.maximum = null;
+tensorflow.BoundedTensorSpecProto.prototype.name = "";
+tensorflow.BoundedTensorSpecProto.prototype.shape = null;
+tensorflow.BoundedTensorSpecProto.prototype.dtype = 0;
+tensorflow.BoundedTensorSpecProto.prototype.minimum = null;
+tensorflow.BoundedTensorSpecProto.prototype.maximum = null;
 
-$root.tensorflow.TypeSpecProto = class TypeSpecProto {
+tensorflow.TypeSpecProto = class TypeSpecProto {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TypeSpecProto();
+        const message = new tensorflow.TypeSpecProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4020,7 +4021,7 @@ $root.tensorflow.TypeSpecProto = class TypeSpecProto {
                     message.type_spec_class = reader.int32();
                     break;
                 case 2:
-                    message.type_state = $root.tensorflow.StructuredValue.decode(reader, reader.uint32());
+                    message.type_state = tensorflow.StructuredValue.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.type_spec_class_name = reader.string();
@@ -4037,16 +4038,16 @@ $root.tensorflow.TypeSpecProto = class TypeSpecProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TypeSpecProto();
+        const message = new tensorflow.TypeSpecProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "type_spec_class":
-                    message.type_spec_class = reader.enum($root.tensorflow.TypeSpecProto.TypeSpecClass);
+                    message.type_spec_class = reader.enum(tensorflow.TypeSpecProto.TypeSpecClass);
                     break;
                 case "type_state":
-                    message.type_state = $root.tensorflow.StructuredValue.decodeText(reader);
+                    message.type_state = tensorflow.StructuredValue.decodeText(reader);
                     break;
                 case "type_spec_class_name":
                     message.type_spec_class_name = reader.string();
@@ -4063,12 +4064,12 @@ $root.tensorflow.TypeSpecProto = class TypeSpecProto {
     }
 };
 
-$root.tensorflow.TypeSpecProto.prototype.type_spec_class = 0;
-$root.tensorflow.TypeSpecProto.prototype.type_state = null;
-$root.tensorflow.TypeSpecProto.prototype.type_spec_class_name = "";
-$root.tensorflow.TypeSpecProto.prototype.num_flat_components = 0;
+tensorflow.TypeSpecProto.prototype.type_spec_class = 0;
+tensorflow.TypeSpecProto.prototype.type_state = null;
+tensorflow.TypeSpecProto.prototype.type_spec_class_name = "";
+tensorflow.TypeSpecProto.prototype.num_flat_components = 0;
 
-$root.tensorflow.TypeSpecProto.TypeSpecClass = {
+tensorflow.TypeSpecProto.TypeSpecClass = {
     "UNKNOWN": 0,
     "SPARSE_TENSOR_SPEC": 1,
     "INDEXED_SLICES_SPEC": 2,
@@ -4084,20 +4085,20 @@ $root.tensorflow.TypeSpecProto.TypeSpecClass = {
     "EXTENSION_TYPE_SPEC": 13
 };
 
-$root.tensorflow.TrackableObjectGraph = class TrackableObjectGraph {
+tensorflow.TrackableObjectGraph = class TrackableObjectGraph {
 
     constructor() {
         this.nodes = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TrackableObjectGraph();
+        const message = new tensorflow.TrackableObjectGraph();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.nodes.push($root.tensorflow.TrackableObjectGraph.TrackableObject.decode(reader, reader.uint32()));
+                    message.nodes.push(tensorflow.TrackableObjectGraph.TrackableObject.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4108,13 +4109,13 @@ $root.tensorflow.TrackableObjectGraph = class TrackableObjectGraph {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TrackableObjectGraph();
+        const message = new tensorflow.TrackableObjectGraph();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "nodes":
-                    message.nodes.push($root.tensorflow.TrackableObjectGraph.TrackableObject.decodeText(reader));
+                    message.nodes.push(tensorflow.TrackableObjectGraph.TrackableObject.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -4125,7 +4126,7 @@ $root.tensorflow.TrackableObjectGraph = class TrackableObjectGraph {
     }
 };
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject = class TrackableObject {
+tensorflow.TrackableObjectGraph.TrackableObject = class TrackableObject {
 
     constructor() {
         this.children = [];
@@ -4134,25 +4135,25 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject = class TrackableObject {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.children.push($root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decode(reader, reader.uint32()));
+                    message.children.push(tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.attributes.push($root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.decode(reader, reader.uint32()));
+                    message.attributes.push(tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.decode(reader, reader.uint32()));
                     break;
                 case 3:
-                    message.slot_variables.push($root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decode(reader, reader.uint32()));
+                    message.slot_variables.push(tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decode(reader, reader.uint32()));
                     break;
                 case 4:
-                    message.registered_saver = $root.tensorflow.RegisteredSaver.decode(reader, reader.uint32());
+                    message.registered_saver = tensorflow.RegisteredSaver.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.has_checkpoint_values = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                    message.has_checkpoint_values = google.protobuf.BoolValue.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4163,25 +4164,25 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject = class TrackableObject {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "children":
-                    message.children.push($root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decodeText(reader));
+                    message.children.push(tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.decodeText(reader));
                     break;
                 case "attributes":
-                    message.attributes.push($root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.decodeText(reader));
+                    message.attributes.push(tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.decodeText(reader));
                     break;
                 case "slot_variables":
-                    message.slot_variables.push($root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decodeText(reader));
+                    message.slot_variables.push(tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.decodeText(reader));
                     break;
                 case "registered_saver":
-                    message.registered_saver = $root.tensorflow.RegisteredSaver.decodeText(reader);
+                    message.registered_saver = tensorflow.RegisteredSaver.decodeText(reader);
                     break;
                 case "has_checkpoint_values":
-                    message.has_checkpoint_values = $root.google.protobuf.BoolValue.decodeText(reader);
+                    message.has_checkpoint_values = google.protobuf.BoolValue.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -4192,16 +4193,16 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject = class TrackableObject {
     }
 };
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject.prototype.registered_saver = null;
-$root.tensorflow.TrackableObjectGraph.TrackableObject.prototype.has_checkpoint_values = null;
+tensorflow.TrackableObjectGraph.TrackableObject.prototype.registered_saver = null;
+tensorflow.TrackableObjectGraph.TrackableObject.prototype.has_checkpoint_values = null;
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference = class ObjectReference {
+tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference = class ObjectReference {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4221,7 +4222,7 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference = class Ob
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4241,16 +4242,16 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference = class Ob
     }
 };
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.prototype.node_id = 0;
-$root.tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.prototype.local_name = "";
+tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.prototype.node_id = 0;
+tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference.prototype.local_name = "";
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor = class SerializedTensor {
+tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor = class SerializedTensor {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4273,7 +4274,7 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor = class S
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4296,17 +4297,17 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor = class S
     }
 };
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.prototype.name = "";
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.prototype.full_name = "";
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.prototype.checkpoint_key = "";
+tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.prototype.name = "";
+tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.prototype.full_name = "";
+tensorflow.TrackableObjectGraph.TrackableObject.SerializedTensor.prototype.checkpoint_key = "";
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference = class SlotVariableReference {
+tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference = class SlotVariableReference {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4329,7 +4330,7 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference = cl
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference();
+        const message = new tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4352,17 +4353,17 @@ $root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference = cl
     }
 };
 
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.prototype.original_variable_node_id = 0;
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.prototype.slot_name = "";
-$root.tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.prototype.slot_variable_node_id = 0;
+tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.prototype.original_variable_node_id = 0;
+tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.prototype.slot_name = "";
+tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference.prototype.slot_variable_node_id = 0;
 
-$root.tensorflow.RegisteredSaver = class RegisteredSaver {
+tensorflow.RegisteredSaver = class RegisteredSaver {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RegisteredSaver();
+        const message = new tensorflow.RegisteredSaver();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4382,7 +4383,7 @@ $root.tensorflow.RegisteredSaver = class RegisteredSaver {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RegisteredSaver();
+        const message = new tensorflow.RegisteredSaver();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4402,16 +4403,16 @@ $root.tensorflow.RegisteredSaver = class RegisteredSaver {
     }
 };
 
-$root.tensorflow.RegisteredSaver.prototype.name = "";
-$root.tensorflow.RegisteredSaver.prototype.object_name = "";
+tensorflow.RegisteredSaver.prototype.name = "";
+tensorflow.RegisteredSaver.prototype.object_name = "";
 
-$root.tensorflow.SaverDef = class SaverDef {
+tensorflow.SaverDef = class SaverDef {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SaverDef();
+        const message = new tensorflow.SaverDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4446,7 +4447,7 @@ $root.tensorflow.SaverDef = class SaverDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SaverDef();
+        const message = new tensorflow.SaverDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4470,7 +4471,7 @@ $root.tensorflow.SaverDef = class SaverDef {
                     message.keep_checkpoint_every_n_hours = reader.float();
                     break;
                 case "version":
-                    message.version = reader.enum($root.tensorflow.SaverDef.CheckpointFormatVersion);
+                    message.version = reader.enum(tensorflow.SaverDef.CheckpointFormatVersion);
                     break;
                 default:
                     reader.field(tag, message);
@@ -4481,27 +4482,27 @@ $root.tensorflow.SaverDef = class SaverDef {
     }
 };
 
-$root.tensorflow.SaverDef.prototype.filename_tensor_name = "";
-$root.tensorflow.SaverDef.prototype.save_tensor_name = "";
-$root.tensorflow.SaverDef.prototype.restore_op_name = "";
-$root.tensorflow.SaverDef.prototype.max_to_keep = 0;
-$root.tensorflow.SaverDef.prototype.sharded = false;
-$root.tensorflow.SaverDef.prototype.keep_checkpoint_every_n_hours = 0;
-$root.tensorflow.SaverDef.prototype.version = 0;
+tensorflow.SaverDef.prototype.filename_tensor_name = "";
+tensorflow.SaverDef.prototype.save_tensor_name = "";
+tensorflow.SaverDef.prototype.restore_op_name = "";
+tensorflow.SaverDef.prototype.max_to_keep = 0;
+tensorflow.SaverDef.prototype.sharded = false;
+tensorflow.SaverDef.prototype.keep_checkpoint_every_n_hours = 0;
+tensorflow.SaverDef.prototype.version = 0;
 
-$root.tensorflow.SaverDef.CheckpointFormatVersion = {
+tensorflow.SaverDef.CheckpointFormatVersion = {
     "LEGACY": 0,
     "V1": 1,
     "V2": 2
 };
 
-$root.tensorflow.BundleHeaderProto = class BundleHeaderProto {
+tensorflow.BundleHeaderProto = class BundleHeaderProto {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.BundleHeaderProto();
+        const message = new tensorflow.BundleHeaderProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4513,7 +4514,7 @@ $root.tensorflow.BundleHeaderProto = class BundleHeaderProto {
                     message.endianness = reader.int32();
                     break;
                 case 3:
-                    message.version = $root.tensorflow.VersionDef.decode(reader, reader.uint32());
+                    message.version = tensorflow.VersionDef.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4524,7 +4525,7 @@ $root.tensorflow.BundleHeaderProto = class BundleHeaderProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.BundleHeaderProto();
+        const message = new tensorflow.BundleHeaderProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4533,10 +4534,10 @@ $root.tensorflow.BundleHeaderProto = class BundleHeaderProto {
                     message.num_shards = reader.int32();
                     break;
                 case "endianness":
-                    message.endianness = reader.enum($root.tensorflow.BundleHeaderProto.Endianness);
+                    message.endianness = reader.enum(tensorflow.BundleHeaderProto.Endianness);
                     break;
                 case "version":
-                    message.version = $root.tensorflow.VersionDef.decodeText(reader);
+                    message.version = tensorflow.VersionDef.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -4547,23 +4548,23 @@ $root.tensorflow.BundleHeaderProto = class BundleHeaderProto {
     }
 };
 
-$root.tensorflow.BundleHeaderProto.prototype.num_shards = 0;
-$root.tensorflow.BundleHeaderProto.prototype.endianness = 0;
-$root.tensorflow.BundleHeaderProto.prototype.version = null;
+tensorflow.BundleHeaderProto.prototype.num_shards = 0;
+tensorflow.BundleHeaderProto.prototype.endianness = 0;
+tensorflow.BundleHeaderProto.prototype.version = null;
 
-$root.tensorflow.BundleHeaderProto.Endianness = {
+tensorflow.BundleHeaderProto.Endianness = {
     "LITTLE": 0,
     "BIG": 1
 };
 
-$root.tensorflow.BundleEntryProto = class BundleEntryProto {
+tensorflow.BundleEntryProto = class BundleEntryProto {
 
     constructor() {
         this.slices = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.BundleEntryProto();
+        const message = new tensorflow.BundleEntryProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4572,7 +4573,7 @@ $root.tensorflow.BundleEntryProto = class BundleEntryProto {
                     message.dtype = reader.int32();
                     break;
                 case 2:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.shard_id = reader.int32();
@@ -4587,7 +4588,7 @@ $root.tensorflow.BundleEntryProto = class BundleEntryProto {
                     message.crc32c = reader.fixed32();
                     break;
                 case 7:
-                    message.slices.push($root.tensorflow.TensorSliceProto.decode(reader, reader.uint32()));
+                    message.slices.push(tensorflow.TensorSliceProto.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4598,16 +4599,16 @@ $root.tensorflow.BundleEntryProto = class BundleEntryProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.BundleEntryProto();
+        const message = new tensorflow.BundleEntryProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "shard_id":
                     message.shard_id = reader.int32();
@@ -4622,7 +4623,7 @@ $root.tensorflow.BundleEntryProto = class BundleEntryProto {
                     message.crc32c = reader.fixed32();
                     break;
                 case "slices":
-                    message.slices.push($root.tensorflow.TensorSliceProto.decodeText(reader));
+                    message.slices.push(tensorflow.TensorSliceProto.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -4633,27 +4634,27 @@ $root.tensorflow.BundleEntryProto = class BundleEntryProto {
     }
 };
 
-$root.tensorflow.BundleEntryProto.prototype.dtype = 0;
-$root.tensorflow.BundleEntryProto.prototype.shape = null;
-$root.tensorflow.BundleEntryProto.prototype.shard_id = 0;
-$root.tensorflow.BundleEntryProto.prototype.offset = protobuf.Int64.create(0);
-$root.tensorflow.BundleEntryProto.prototype.size = protobuf.Int64.create(0);
-$root.tensorflow.BundleEntryProto.prototype.crc32c = 0;
+tensorflow.BundleEntryProto.prototype.dtype = 0;
+tensorflow.BundleEntryProto.prototype.shape = null;
+tensorflow.BundleEntryProto.prototype.shard_id = 0;
+tensorflow.BundleEntryProto.prototype.offset = protobuf.Int64.create(0);
+tensorflow.BundleEntryProto.prototype.size = protobuf.Int64.create(0);
+tensorflow.BundleEntryProto.prototype.crc32c = 0;
 
-$root.tensorflow.TensorSliceProto = class TensorSliceProto {
+tensorflow.TensorSliceProto = class TensorSliceProto {
 
     constructor() {
         this.extent = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorSliceProto();
+        const message = new tensorflow.TensorSliceProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.extent.push($root.tensorflow.TensorSliceProto.Extent.decode(reader, reader.uint32()));
+                    message.extent.push(tensorflow.TensorSliceProto.Extent.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4664,13 +4665,13 @@ $root.tensorflow.TensorSliceProto = class TensorSliceProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorSliceProto();
+        const message = new tensorflow.TensorSliceProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "extent":
-                    message.extent.push($root.tensorflow.TensorSliceProto.Extent.decodeText(reader));
+                    message.extent.push(tensorflow.TensorSliceProto.Extent.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -4681,18 +4682,18 @@ $root.tensorflow.TensorSliceProto = class TensorSliceProto {
     }
 };
 
-$root.tensorflow.TensorSliceProto.Extent = class Extent {
+tensorflow.TensorSliceProto.Extent = class Extent {
 
     constructor() {
     }
 
     get has_length() {
-        $root.tensorflow.TensorSliceProto.Extent.has_lengthSet = $root.tensorflow.TensorSliceProto.Extent.has_lengthSet || new Set([ "length"]);
-        return Object.keys(this).find((key) => $root.tensorflow.TensorSliceProto.Extent.has_lengthSet.has(key) && this[key] != null);
+        tensorflow.TensorSliceProto.Extent.has_lengthSet = tensorflow.TensorSliceProto.Extent.has_lengthSet || new Set([ "length"]);
+        return Object.keys(this).find((key) => tensorflow.TensorSliceProto.Extent.has_lengthSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorSliceProto.Extent();
+        const message = new tensorflow.TensorSliceProto.Extent();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4712,7 +4713,7 @@ $root.tensorflow.TensorSliceProto.Extent = class Extent {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorSliceProto.Extent();
+        const message = new tensorflow.TensorSliceProto.Extent();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4732,16 +4733,16 @@ $root.tensorflow.TensorSliceProto.Extent = class Extent {
     }
 };
 
-$root.tensorflow.TensorSliceProto.Extent.prototype.start = protobuf.Int64.create(0);
+tensorflow.TensorSliceProto.Extent.prototype.start = protobuf.Int64.create(0);
 
-$root.tensorflow.SavedSliceMeta = class SavedSliceMeta {
+tensorflow.SavedSliceMeta = class SavedSliceMeta {
 
     constructor() {
         this.slice = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedSliceMeta();
+        const message = new tensorflow.SavedSliceMeta();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4750,13 +4751,13 @@ $root.tensorflow.SavedSliceMeta = class SavedSliceMeta {
                     message.name = reader.string();
                     break;
                 case 2:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.type = reader.int32();
                     break;
                 case 4:
-                    message.slice.push($root.tensorflow.TensorSliceProto.decode(reader, reader.uint32()));
+                    message.slice.push(tensorflow.TensorSliceProto.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4767,7 +4768,7 @@ $root.tensorflow.SavedSliceMeta = class SavedSliceMeta {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedSliceMeta();
+        const message = new tensorflow.SavedSliceMeta();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4776,13 +4777,13 @@ $root.tensorflow.SavedSliceMeta = class SavedSliceMeta {
                     message.name = reader.string();
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "type":
-                    message.type = reader.enum($root.tensorflow.DataType);
+                    message.type = reader.enum(tensorflow.DataType);
                     break;
                 case "slice":
-                    message.slice.push($root.tensorflow.TensorSliceProto.decodeText(reader));
+                    message.slice.push(tensorflow.TensorSliceProto.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -4793,27 +4794,27 @@ $root.tensorflow.SavedSliceMeta = class SavedSliceMeta {
     }
 };
 
-$root.tensorflow.SavedSliceMeta.prototype.name = "";
-$root.tensorflow.SavedSliceMeta.prototype.shape = null;
-$root.tensorflow.SavedSliceMeta.prototype.type = 0;
+tensorflow.SavedSliceMeta.prototype.name = "";
+tensorflow.SavedSliceMeta.prototype.shape = null;
+tensorflow.SavedSliceMeta.prototype.type = 0;
 
-$root.tensorflow.SavedTensorSliceMeta = class SavedTensorSliceMeta {
+tensorflow.SavedTensorSliceMeta = class SavedTensorSliceMeta {
 
     constructor() {
         this.tensor = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedTensorSliceMeta();
+        const message = new tensorflow.SavedTensorSliceMeta();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.tensor.push($root.tensorflow.SavedSliceMeta.decode(reader, reader.uint32()));
+                    message.tensor.push(tensorflow.SavedSliceMeta.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.versions = $root.tensorflow.VersionDef.decode(reader, reader.uint32());
+                    message.versions = tensorflow.VersionDef.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4824,16 +4825,16 @@ $root.tensorflow.SavedTensorSliceMeta = class SavedTensorSliceMeta {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedTensorSliceMeta();
+        const message = new tensorflow.SavedTensorSliceMeta();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "tensor":
-                    message.tensor.push($root.tensorflow.SavedSliceMeta.decodeText(reader));
+                    message.tensor.push(tensorflow.SavedSliceMeta.decodeText(reader));
                     break;
                 case "versions":
-                    message.versions = $root.tensorflow.VersionDef.decodeText(reader);
+                    message.versions = tensorflow.VersionDef.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -4844,15 +4845,15 @@ $root.tensorflow.SavedTensorSliceMeta = class SavedTensorSliceMeta {
     }
 };
 
-$root.tensorflow.SavedTensorSliceMeta.prototype.versions = null;
+tensorflow.SavedTensorSliceMeta.prototype.versions = null;
 
-$root.tensorflow.SavedSlice = class SavedSlice {
+tensorflow.SavedSlice = class SavedSlice {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedSlice();
+        const message = new tensorflow.SavedSlice();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4861,10 +4862,10 @@ $root.tensorflow.SavedSlice = class SavedSlice {
                     message.name = reader.string();
                     break;
                 case 2:
-                    message.slice = $root.tensorflow.TensorSliceProto.decode(reader, reader.uint32());
+                    message.slice = tensorflow.TensorSliceProto.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.data = $root.tensorflow.TensorProto.decode(reader, reader.uint32());
+                    message.data = tensorflow.TensorProto.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4875,7 +4876,7 @@ $root.tensorflow.SavedSlice = class SavedSlice {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedSlice();
+        const message = new tensorflow.SavedSlice();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -4884,10 +4885,10 @@ $root.tensorflow.SavedSlice = class SavedSlice {
                     message.name = reader.string();
                     break;
                 case "slice":
-                    message.slice = $root.tensorflow.TensorSliceProto.decodeText(reader);
+                    message.slice = tensorflow.TensorSliceProto.decodeText(reader);
                     break;
                 case "data":
-                    message.data = $root.tensorflow.TensorProto.decodeText(reader);
+                    message.data = tensorflow.TensorProto.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -4898,26 +4899,26 @@ $root.tensorflow.SavedSlice = class SavedSlice {
     }
 };
 
-$root.tensorflow.SavedSlice.prototype.name = "";
-$root.tensorflow.SavedSlice.prototype.slice = null;
-$root.tensorflow.SavedSlice.prototype.data = null;
+tensorflow.SavedSlice.prototype.name = "";
+tensorflow.SavedSlice.prototype.slice = null;
+tensorflow.SavedSlice.prototype.data = null;
 
-$root.tensorflow.SavedTensorSlices = class SavedTensorSlices {
+tensorflow.SavedTensorSlices = class SavedTensorSlices {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SavedTensorSlices();
+        const message = new tensorflow.SavedTensorSlices();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.meta = $root.tensorflow.SavedTensorSliceMeta.decode(reader, reader.uint32());
+                    message.meta = tensorflow.SavedTensorSliceMeta.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.data = $root.tensorflow.SavedSlice.decode(reader, reader.uint32());
+                    message.data = tensorflow.SavedSlice.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -4928,16 +4929,16 @@ $root.tensorflow.SavedTensorSlices = class SavedTensorSlices {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SavedTensorSlices();
+        const message = new tensorflow.SavedTensorSlices();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "meta":
-                    message.meta = $root.tensorflow.SavedTensorSliceMeta.decodeText(reader);
+                    message.meta = tensorflow.SavedTensorSliceMeta.decodeText(reader);
                     break;
                 case "data":
-                    message.data = $root.tensorflow.SavedSlice.decodeText(reader);
+                    message.data = tensorflow.SavedSlice.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -4948,21 +4949,21 @@ $root.tensorflow.SavedTensorSlices = class SavedTensorSlices {
     }
 };
 
-$root.tensorflow.SavedTensorSlices.prototype.meta = null;
-$root.tensorflow.SavedTensorSlices.prototype.data = null;
+tensorflow.SavedTensorSlices.prototype.meta = null;
+tensorflow.SavedTensorSlices.prototype.data = null;
 
-$root.tensorflow.Event = class Event {
+tensorflow.Event = class Event {
 
     constructor() {
     }
 
     get what() {
-        $root.tensorflow.Event.whatSet = $root.tensorflow.Event.whatSet || new Set([ "file_version", "graph_def", "summary", "log_message", "session_log", "tagged_run_metadata", "meta_graph_def"]);
-        return Object.keys(this).find((key) => $root.tensorflow.Event.whatSet.has(key) && this[key] != null);
+        tensorflow.Event.whatSet = tensorflow.Event.whatSet || new Set([ "file_version", "graph_def", "summary", "log_message", "session_log", "tagged_run_metadata", "meta_graph_def"]);
+        return Object.keys(this).find((key) => tensorflow.Event.whatSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.Event();
+        const message = new tensorflow.Event();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -4980,16 +4981,16 @@ $root.tensorflow.Event = class Event {
                     message.graph_def = reader.bytes();
                     break;
                 case 5:
-                    message.summary = $root.tensorflow.Summary.decode(reader, reader.uint32());
+                    message.summary = tensorflow.Summary.decode(reader, reader.uint32());
                     break;
                 case 6:
-                    message.log_message = $root.tensorflow.LogMessage.decode(reader, reader.uint32());
+                    message.log_message = tensorflow.LogMessage.decode(reader, reader.uint32());
                     break;
                 case 7:
-                    message.session_log = $root.tensorflow.SessionLog.decode(reader, reader.uint32());
+                    message.session_log = tensorflow.SessionLog.decode(reader, reader.uint32());
                     break;
                 case 8:
-                    message.tagged_run_metadata = $root.tensorflow.TaggedRunMetadata.decode(reader, reader.uint32());
+                    message.tagged_run_metadata = tensorflow.TaggedRunMetadata.decode(reader, reader.uint32());
                     break;
                 case 9:
                     message.meta_graph_def = reader.bytes();
@@ -5003,7 +5004,7 @@ $root.tensorflow.Event = class Event {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.Event();
+        const message = new tensorflow.Event();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5021,16 +5022,16 @@ $root.tensorflow.Event = class Event {
                     message.graph_def = reader.bytes();
                     break;
                 case "summary":
-                    message.summary = $root.tensorflow.Summary.decodeText(reader);
+                    message.summary = tensorflow.Summary.decodeText(reader);
                     break;
                 case "log_message":
-                    message.log_message = $root.tensorflow.LogMessage.decodeText(reader);
+                    message.log_message = tensorflow.LogMessage.decodeText(reader);
                     break;
                 case "session_log":
-                    message.session_log = $root.tensorflow.SessionLog.decodeText(reader);
+                    message.session_log = tensorflow.SessionLog.decodeText(reader);
                     break;
                 case "tagged_run_metadata":
-                    message.tagged_run_metadata = $root.tensorflow.TaggedRunMetadata.decodeText(reader);
+                    message.tagged_run_metadata = tensorflow.TaggedRunMetadata.decodeText(reader);
                     break;
                 case "meta_graph_def":
                     message.meta_graph_def = reader.bytes();
@@ -5044,16 +5045,16 @@ $root.tensorflow.Event = class Event {
     }
 };
 
-$root.tensorflow.Event.prototype.wall_time = 0;
-$root.tensorflow.Event.prototype.step = protobuf.Int64.create(0);
+tensorflow.Event.prototype.wall_time = 0;
+tensorflow.Event.prototype.step = protobuf.Int64.create(0);
 
-$root.tensorflow.LogMessage = class LogMessage {
+tensorflow.LogMessage = class LogMessage {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.LogMessage();
+        const message = new tensorflow.LogMessage();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5073,13 +5074,13 @@ $root.tensorflow.LogMessage = class LogMessage {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.LogMessage();
+        const message = new tensorflow.LogMessage();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "level":
-                    message.level = reader.enum($root.tensorflow.LogMessage.Level);
+                    message.level = reader.enum(tensorflow.LogMessage.Level);
                     break;
                 case "message":
                     message.message = reader.string();
@@ -5093,10 +5094,10 @@ $root.tensorflow.LogMessage = class LogMessage {
     }
 };
 
-$root.tensorflow.LogMessage.prototype.level = 0;
-$root.tensorflow.LogMessage.prototype.message = "";
+tensorflow.LogMessage.prototype.level = 0;
+tensorflow.LogMessage.prototype.message = "";
 
-$root.tensorflow.LogMessage.Level = {
+tensorflow.LogMessage.Level = {
     "UNKNOWN": 0,
     "DEBUGGING": 10,
     "INFO": 20,
@@ -5105,13 +5106,13 @@ $root.tensorflow.LogMessage.Level = {
     "FATAL": 50
 };
 
-$root.tensorflow.SessionLog = class SessionLog {
+tensorflow.SessionLog = class SessionLog {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SessionLog();
+        const message = new tensorflow.SessionLog();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5134,13 +5135,13 @@ $root.tensorflow.SessionLog = class SessionLog {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SessionLog();
+        const message = new tensorflow.SessionLog();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "status":
-                    message.status = reader.enum($root.tensorflow.SessionLog.SessionStatus);
+                    message.status = reader.enum(tensorflow.SessionLog.SessionStatus);
                     break;
                 case "checkpoint_path":
                     message.checkpoint_path = reader.string();
@@ -5157,24 +5158,24 @@ $root.tensorflow.SessionLog = class SessionLog {
     }
 };
 
-$root.tensorflow.SessionLog.prototype.status = 0;
-$root.tensorflow.SessionLog.prototype.checkpoint_path = "";
-$root.tensorflow.SessionLog.prototype.msg = "";
+tensorflow.SessionLog.prototype.status = 0;
+tensorflow.SessionLog.prototype.checkpoint_path = "";
+tensorflow.SessionLog.prototype.msg = "";
 
-$root.tensorflow.SessionLog.SessionStatus = {
+tensorflow.SessionLog.SessionStatus = {
     "STATUS_UNSPECIFIED": 0,
     "START": 1,
     "STOP": 2,
     "CHECKPOINT": 3
 };
 
-$root.tensorflow.TaggedRunMetadata = class TaggedRunMetadata {
+tensorflow.TaggedRunMetadata = class TaggedRunMetadata {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TaggedRunMetadata();
+        const message = new tensorflow.TaggedRunMetadata();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5194,7 +5195,7 @@ $root.tensorflow.TaggedRunMetadata = class TaggedRunMetadata {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TaggedRunMetadata();
+        const message = new tensorflow.TaggedRunMetadata();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5214,30 +5215,30 @@ $root.tensorflow.TaggedRunMetadata = class TaggedRunMetadata {
     }
 };
 
-$root.tensorflow.TaggedRunMetadata.prototype.tag = "";
-$root.tensorflow.TaggedRunMetadata.prototype.run_metadata = new Uint8Array([]);
+tensorflow.TaggedRunMetadata.prototype.tag = "";
+tensorflow.TaggedRunMetadata.prototype.run_metadata = new Uint8Array([]);
 
-$root.tensorflow.WorkerHealth = {
+tensorflow.WorkerHealth = {
     "OK": 0,
     "RECEIVED_SHUTDOWN_SIGNAL": 1,
     "INTERNAL_ERROR": 2,
     "SHUTTING_DOWN": 3
 };
 
-$root.tensorflow.WorkerShutdownMode = {
+tensorflow.WorkerShutdownMode = {
     "DEFAULT": 0,
     "NOT_CONFIGURED": 1,
     "WAIT_FOR_COORDINATOR": 2,
     "SHUTDOWN_AFTER_TIMEOUT": 3
 };
 
-$root.tensorflow.WatchdogConfig = class WatchdogConfig {
+tensorflow.WatchdogConfig = class WatchdogConfig {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.WatchdogConfig();
+        const message = new tensorflow.WatchdogConfig();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5254,7 +5255,7 @@ $root.tensorflow.WatchdogConfig = class WatchdogConfig {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.WatchdogConfig();
+        const message = new tensorflow.WatchdogConfig();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5271,15 +5272,15 @@ $root.tensorflow.WatchdogConfig = class WatchdogConfig {
     }
 };
 
-$root.tensorflow.WatchdogConfig.prototype.timeout_ms = protobuf.Int64.create(0);
+tensorflow.WatchdogConfig.prototype.timeout_ms = protobuf.Int64.create(0);
 
-$root.tensorflow.RequestedExitCode = class RequestedExitCode {
+tensorflow.RequestedExitCode = class RequestedExitCode {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RequestedExitCode();
+        const message = new tensorflow.RequestedExitCode();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5296,7 +5297,7 @@ $root.tensorflow.RequestedExitCode = class RequestedExitCode {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RequestedExitCode();
+        const message = new tensorflow.RequestedExitCode();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5313,15 +5314,15 @@ $root.tensorflow.RequestedExitCode = class RequestedExitCode {
     }
 };
 
-$root.tensorflow.RequestedExitCode.prototype.exit_code = 0;
+tensorflow.RequestedExitCode.prototype.exit_code = 0;
 
-$root.tensorflow.WorkerHeartbeatRequest = class WorkerHeartbeatRequest {
+tensorflow.WorkerHeartbeatRequest = class WorkerHeartbeatRequest {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.WorkerHeartbeatRequest();
+        const message = new tensorflow.WorkerHeartbeatRequest();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5330,10 +5331,10 @@ $root.tensorflow.WorkerHeartbeatRequest = class WorkerHeartbeatRequest {
                     message.shutdown_mode = reader.int32();
                     break;
                 case 2:
-                    message.watchdog_config = $root.tensorflow.WatchdogConfig.decode(reader, reader.uint32());
+                    message.watchdog_config = tensorflow.WatchdogConfig.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.exit_code = $root.tensorflow.RequestedExitCode.decode(reader, reader.uint32());
+                    message.exit_code = tensorflow.RequestedExitCode.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5344,19 +5345,19 @@ $root.tensorflow.WorkerHeartbeatRequest = class WorkerHeartbeatRequest {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.WorkerHeartbeatRequest();
+        const message = new tensorflow.WorkerHeartbeatRequest();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "shutdown_mode":
-                    message.shutdown_mode = reader.enum($root.tensorflow.WorkerShutdownMode);
+                    message.shutdown_mode = reader.enum(tensorflow.WorkerShutdownMode);
                     break;
                 case "watchdog_config":
-                    message.watchdog_config = $root.tensorflow.WatchdogConfig.decodeText(reader);
+                    message.watchdog_config = tensorflow.WatchdogConfig.decodeText(reader);
                     break;
                 case "exit_code":
-                    message.exit_code = $root.tensorflow.RequestedExitCode.decodeText(reader);
+                    message.exit_code = tensorflow.RequestedExitCode.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -5367,18 +5368,18 @@ $root.tensorflow.WorkerHeartbeatRequest = class WorkerHeartbeatRequest {
     }
 };
 
-$root.tensorflow.WorkerHeartbeatRequest.prototype.shutdown_mode = 0;
-$root.tensorflow.WorkerHeartbeatRequest.prototype.watchdog_config = null;
-$root.tensorflow.WorkerHeartbeatRequest.prototype.exit_code = null;
+tensorflow.WorkerHeartbeatRequest.prototype.shutdown_mode = 0;
+tensorflow.WorkerHeartbeatRequest.prototype.watchdog_config = null;
+tensorflow.WorkerHeartbeatRequest.prototype.exit_code = null;
 
-$root.tensorflow.WorkerHeartbeatResponse = class WorkerHeartbeatResponse {
+tensorflow.WorkerHeartbeatResponse = class WorkerHeartbeatResponse {
 
     constructor() {
         this.worker_log = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.WorkerHeartbeatResponse();
+        const message = new tensorflow.WorkerHeartbeatResponse();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5387,7 +5388,7 @@ $root.tensorflow.WorkerHeartbeatResponse = class WorkerHeartbeatResponse {
                     message.health_status = reader.int32();
                     break;
                 case 2:
-                    message.worker_log.push($root.tensorflow.Event.decode(reader, reader.uint32()));
+                    message.worker_log.push(tensorflow.Event.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.hostname = reader.string();
@@ -5401,16 +5402,16 @@ $root.tensorflow.WorkerHeartbeatResponse = class WorkerHeartbeatResponse {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.WorkerHeartbeatResponse();
+        const message = new tensorflow.WorkerHeartbeatResponse();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "health_status":
-                    message.health_status = reader.enum($root.tensorflow.WorkerHealth);
+                    message.health_status = reader.enum(tensorflow.WorkerHealth);
                     break;
                 case "worker_log":
-                    message.worker_log.push($root.tensorflow.Event.decodeText(reader));
+                    message.worker_log.push(tensorflow.Event.decodeText(reader));
                     break;
                 case "hostname":
                     message.hostname = reader.string();
@@ -5424,16 +5425,16 @@ $root.tensorflow.WorkerHeartbeatResponse = class WorkerHeartbeatResponse {
     }
 };
 
-$root.tensorflow.WorkerHeartbeatResponse.prototype.health_status = 0;
-$root.tensorflow.WorkerHeartbeatResponse.prototype.hostname = "";
+tensorflow.WorkerHeartbeatResponse.prototype.health_status = 0;
+tensorflow.WorkerHeartbeatResponse.prototype.hostname = "";
 
-$root.tensorflow.SummaryDescription = class SummaryDescription {
+tensorflow.SummaryDescription = class SummaryDescription {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SummaryDescription();
+        const message = new tensorflow.SummaryDescription();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5450,7 +5451,7 @@ $root.tensorflow.SummaryDescription = class SummaryDescription {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SummaryDescription();
+        const message = new tensorflow.SummaryDescription();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5467,9 +5468,9 @@ $root.tensorflow.SummaryDescription = class SummaryDescription {
     }
 };
 
-$root.tensorflow.SummaryDescription.prototype.type_hint = "";
+tensorflow.SummaryDescription.prototype.type_hint = "";
 
-$root.tensorflow.HistogramProto = class HistogramProto {
+tensorflow.HistogramProto = class HistogramProto {
 
     constructor() {
         this.bucket_limit = [];
@@ -5477,7 +5478,7 @@ $root.tensorflow.HistogramProto = class HistogramProto {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.HistogramProto();
+        const message = new tensorflow.HistogramProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5512,7 +5513,7 @@ $root.tensorflow.HistogramProto = class HistogramProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.HistogramProto();
+        const message = new tensorflow.HistogramProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5547,25 +5548,25 @@ $root.tensorflow.HistogramProto = class HistogramProto {
     }
 };
 
-$root.tensorflow.HistogramProto.prototype.min = 0;
-$root.tensorflow.HistogramProto.prototype.max = 0;
-$root.tensorflow.HistogramProto.prototype.num = 0;
-$root.tensorflow.HistogramProto.prototype.sum = 0;
-$root.tensorflow.HistogramProto.prototype.sum_squares = 0;
+tensorflow.HistogramProto.prototype.min = 0;
+tensorflow.HistogramProto.prototype.max = 0;
+tensorflow.HistogramProto.prototype.num = 0;
+tensorflow.HistogramProto.prototype.sum = 0;
+tensorflow.HistogramProto.prototype.sum_squares = 0;
 
-$root.tensorflow.SummaryMetadata = class SummaryMetadata {
+tensorflow.SummaryMetadata = class SummaryMetadata {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SummaryMetadata();
+        const message = new tensorflow.SummaryMetadata();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.plugin_data = $root.tensorflow.SummaryMetadata.PluginData.decode(reader, reader.uint32());
+                    message.plugin_data = tensorflow.SummaryMetadata.PluginData.decode(reader, reader.uint32());
                     break;
                 case 2:
                     message.display_name = reader.string();
@@ -5585,13 +5586,13 @@ $root.tensorflow.SummaryMetadata = class SummaryMetadata {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SummaryMetadata();
+        const message = new tensorflow.SummaryMetadata();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "plugin_data":
-                    message.plugin_data = $root.tensorflow.SummaryMetadata.PluginData.decodeText(reader);
+                    message.plugin_data = tensorflow.SummaryMetadata.PluginData.decodeText(reader);
                     break;
                 case "display_name":
                     message.display_name = reader.string();
@@ -5600,7 +5601,7 @@ $root.tensorflow.SummaryMetadata = class SummaryMetadata {
                     message.summary_description = reader.string();
                     break;
                 case "data_class":
-                    message.data_class = reader.enum($root.tensorflow.DataClass);
+                    message.data_class = reader.enum(tensorflow.DataClass);
                     break;
                 default:
                     reader.field(tag, message);
@@ -5611,18 +5612,18 @@ $root.tensorflow.SummaryMetadata = class SummaryMetadata {
     }
 };
 
-$root.tensorflow.SummaryMetadata.prototype.plugin_data = null;
-$root.tensorflow.SummaryMetadata.prototype.display_name = "";
-$root.tensorflow.SummaryMetadata.prototype.summary_description = "";
-$root.tensorflow.SummaryMetadata.prototype.data_class = 0;
+tensorflow.SummaryMetadata.prototype.plugin_data = null;
+tensorflow.SummaryMetadata.prototype.display_name = "";
+tensorflow.SummaryMetadata.prototype.summary_description = "";
+tensorflow.SummaryMetadata.prototype.data_class = 0;
 
-$root.tensorflow.SummaryMetadata.PluginData = class PluginData {
+tensorflow.SummaryMetadata.PluginData = class PluginData {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SummaryMetadata.PluginData();
+        const message = new tensorflow.SummaryMetadata.PluginData();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5642,7 +5643,7 @@ $root.tensorflow.SummaryMetadata.PluginData = class PluginData {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SummaryMetadata.PluginData();
+        const message = new tensorflow.SummaryMetadata.PluginData();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5662,30 +5663,30 @@ $root.tensorflow.SummaryMetadata.PluginData = class PluginData {
     }
 };
 
-$root.tensorflow.SummaryMetadata.PluginData.prototype.plugin_name = "";
-$root.tensorflow.SummaryMetadata.PluginData.prototype.content = new Uint8Array([]);
+tensorflow.SummaryMetadata.PluginData.prototype.plugin_name = "";
+tensorflow.SummaryMetadata.PluginData.prototype.content = new Uint8Array([]);
 
-$root.tensorflow.DataClass = {
+tensorflow.DataClass = {
     "DATA_CLASS_UNKNOWN": 0,
     "DATA_CLASS_SCALAR": 1,
     "DATA_CLASS_TENSOR": 2,
     "DATA_CLASS_BLOB_SEQUENCE": 3
 };
 
-$root.tensorflow.Summary = class Summary {
+tensorflow.Summary = class Summary {
 
     constructor() {
         this.value = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.Summary();
+        const message = new tensorflow.Summary();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.value.push($root.tensorflow.Summary.Value.decode(reader, reader.uint32()));
+                    message.value.push(tensorflow.Summary.Value.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5696,13 +5697,13 @@ $root.tensorflow.Summary = class Summary {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.Summary();
+        const message = new tensorflow.Summary();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "value":
-                    message.value.push($root.tensorflow.Summary.Value.decodeText(reader));
+                    message.value.push(tensorflow.Summary.Value.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -5713,13 +5714,13 @@ $root.tensorflow.Summary = class Summary {
     }
 };
 
-$root.tensorflow.Summary.Image = class Image {
+tensorflow.Summary.Image = class Image {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.Summary.Image();
+        const message = new tensorflow.Summary.Image();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5745,7 +5746,7 @@ $root.tensorflow.Summary.Image = class Image {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.Summary.Image();
+        const message = new tensorflow.Summary.Image();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5771,18 +5772,18 @@ $root.tensorflow.Summary.Image = class Image {
     }
 };
 
-$root.tensorflow.Summary.Image.prototype.height = 0;
-$root.tensorflow.Summary.Image.prototype.width = 0;
-$root.tensorflow.Summary.Image.prototype.colorspace = 0;
-$root.tensorflow.Summary.Image.prototype.encoded_image_string = new Uint8Array([]);
+tensorflow.Summary.Image.prototype.height = 0;
+tensorflow.Summary.Image.prototype.width = 0;
+tensorflow.Summary.Image.prototype.colorspace = 0;
+tensorflow.Summary.Image.prototype.encoded_image_string = new Uint8Array([]);
 
-$root.tensorflow.Summary.Audio = class Audio {
+tensorflow.Summary.Audio = class Audio {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.Summary.Audio();
+        const message = new tensorflow.Summary.Audio();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5811,7 +5812,7 @@ $root.tensorflow.Summary.Audio = class Audio {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.Summary.Audio();
+        const message = new tensorflow.Summary.Audio();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5840,24 +5841,24 @@ $root.tensorflow.Summary.Audio = class Audio {
     }
 };
 
-$root.tensorflow.Summary.Audio.prototype.sample_rate = 0;
-$root.tensorflow.Summary.Audio.prototype.num_channels = protobuf.Int64.create(0);
-$root.tensorflow.Summary.Audio.prototype.length_frames = protobuf.Int64.create(0);
-$root.tensorflow.Summary.Audio.prototype.encoded_audio_string = new Uint8Array([]);
-$root.tensorflow.Summary.Audio.prototype.content_type = "";
+tensorflow.Summary.Audio.prototype.sample_rate = 0;
+tensorflow.Summary.Audio.prototype.num_channels = protobuf.Int64.create(0);
+tensorflow.Summary.Audio.prototype.length_frames = protobuf.Int64.create(0);
+tensorflow.Summary.Audio.prototype.encoded_audio_string = new Uint8Array([]);
+tensorflow.Summary.Audio.prototype.content_type = "";
 
-$root.tensorflow.Summary.Value = class Value {
+tensorflow.Summary.Value = class Value {
 
     constructor() {
     }
 
     get value() {
-        $root.tensorflow.Summary.Value.valueSet = $root.tensorflow.Summary.Value.valueSet || new Set([ "simple_value", "obsolete_old_style_histogram", "image", "histo", "audio", "tensor"]);
-        return Object.keys(this).find((key) => $root.tensorflow.Summary.Value.valueSet.has(key) && this[key] != null);
+        tensorflow.Summary.Value.valueSet = tensorflow.Summary.Value.valueSet || new Set([ "simple_value", "obsolete_old_style_histogram", "image", "histo", "audio", "tensor"]);
+        return Object.keys(this).find((key) => tensorflow.Summary.Value.valueSet.has(key) && this[key] != null);
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.Summary.Value();
+        const message = new tensorflow.Summary.Value();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5869,7 +5870,7 @@ $root.tensorflow.Summary.Value = class Value {
                     message.tag = reader.string();
                     break;
                 case 9:
-                    message.metadata = $root.tensorflow.SummaryMetadata.decode(reader, reader.uint32());
+                    message.metadata = tensorflow.SummaryMetadata.decode(reader, reader.uint32());
                     break;
                 case 2:
                     message.simple_value = reader.float();
@@ -5878,16 +5879,16 @@ $root.tensorflow.Summary.Value = class Value {
                     message.obsolete_old_style_histogram = reader.bytes();
                     break;
                 case 4:
-                    message.image = $root.tensorflow.Summary.Image.decode(reader, reader.uint32());
+                    message.image = tensorflow.Summary.Image.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.histo = $root.tensorflow.HistogramProto.decode(reader, reader.uint32());
+                    message.histo = tensorflow.HistogramProto.decode(reader, reader.uint32());
                     break;
                 case 6:
-                    message.audio = $root.tensorflow.Summary.Audio.decode(reader, reader.uint32());
+                    message.audio = tensorflow.Summary.Audio.decode(reader, reader.uint32());
                     break;
                 case 8:
-                    message.tensor = $root.tensorflow.TensorProto.decode(reader, reader.uint32());
+                    message.tensor = tensorflow.TensorProto.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5898,7 +5899,7 @@ $root.tensorflow.Summary.Value = class Value {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.Summary.Value();
+        const message = new tensorflow.Summary.Value();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -5910,7 +5911,7 @@ $root.tensorflow.Summary.Value = class Value {
                     message.tag = reader.string();
                     break;
                 case "metadata":
-                    message.metadata = $root.tensorflow.SummaryMetadata.decodeText(reader);
+                    message.metadata = tensorflow.SummaryMetadata.decodeText(reader);
                     break;
                 case "simple_value":
                     message.simple_value = reader.float();
@@ -5919,16 +5920,16 @@ $root.tensorflow.Summary.Value = class Value {
                     message.obsolete_old_style_histogram = reader.bytes();
                     break;
                 case "image":
-                    message.image = $root.tensorflow.Summary.Image.decodeText(reader);
+                    message.image = tensorflow.Summary.Image.decodeText(reader);
                     break;
                 case "histo":
-                    message.histo = $root.tensorflow.HistogramProto.decodeText(reader);
+                    message.histo = tensorflow.HistogramProto.decodeText(reader);
                     break;
                 case "audio":
-                    message.audio = $root.tensorflow.Summary.Audio.decodeText(reader);
+                    message.audio = tensorflow.Summary.Audio.decodeText(reader);
                     break;
                 case "tensor":
-                    message.tensor = $root.tensorflow.TensorProto.decodeText(reader);
+                    message.tensor = tensorflow.TensorProto.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -5939,17 +5940,17 @@ $root.tensorflow.Summary.Value = class Value {
     }
 };
 
-$root.tensorflow.Summary.Value.prototype.node_name = "";
-$root.tensorflow.Summary.Value.prototype.tag = "";
-$root.tensorflow.Summary.Value.prototype.metadata = null;
+tensorflow.Summary.Value.prototype.node_name = "";
+tensorflow.Summary.Value.prototype.tag = "";
+tensorflow.Summary.Value.prototype.metadata = null;
 
-$root.tensorflow.GPUOptions = class GPUOptions {
+tensorflow.GPUOptions = class GPUOptions {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.GPUOptions();
+        const message = new tensorflow.GPUOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -5979,7 +5980,7 @@ $root.tensorflow.GPUOptions = class GPUOptions {
                     message.force_gpu_compatible = reader.bool();
                     break;
                 case 9:
-                    message.experimental = $root.tensorflow.GPUOptions.Experimental.decode(reader, reader.uint32());
+                    message.experimental = tensorflow.GPUOptions.Experimental.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -5990,7 +5991,7 @@ $root.tensorflow.GPUOptions = class GPUOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.GPUOptions();
+        const message = new tensorflow.GPUOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6020,7 +6021,7 @@ $root.tensorflow.GPUOptions = class GPUOptions {
                     message.force_gpu_compatible = reader.bool();
                     break;
                 case "experimental":
-                    message.experimental = $root.tensorflow.GPUOptions.Experimental.decodeText(reader);
+                    message.experimental = tensorflow.GPUOptions.Experimental.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -6031,30 +6032,30 @@ $root.tensorflow.GPUOptions = class GPUOptions {
     }
 };
 
-$root.tensorflow.GPUOptions.prototype.per_process_gpu_memory_fraction = 0;
-$root.tensorflow.GPUOptions.prototype.allow_growth = false;
-$root.tensorflow.GPUOptions.prototype.allocator_type = "";
-$root.tensorflow.GPUOptions.prototype.deferred_deletion_bytes = protobuf.Int64.create(0);
-$root.tensorflow.GPUOptions.prototype.visible_device_list = "";
-$root.tensorflow.GPUOptions.prototype.polling_active_delay_usecs = 0;
-$root.tensorflow.GPUOptions.prototype.polling_inactive_delay_msecs = 0;
-$root.tensorflow.GPUOptions.prototype.force_gpu_compatible = false;
-$root.tensorflow.GPUOptions.prototype.experimental = null;
+tensorflow.GPUOptions.prototype.per_process_gpu_memory_fraction = 0;
+tensorflow.GPUOptions.prototype.allow_growth = false;
+tensorflow.GPUOptions.prototype.allocator_type = "";
+tensorflow.GPUOptions.prototype.deferred_deletion_bytes = protobuf.Int64.create(0);
+tensorflow.GPUOptions.prototype.visible_device_list = "";
+tensorflow.GPUOptions.prototype.polling_active_delay_usecs = 0;
+tensorflow.GPUOptions.prototype.polling_inactive_delay_msecs = 0;
+tensorflow.GPUOptions.prototype.force_gpu_compatible = false;
+tensorflow.GPUOptions.prototype.experimental = null;
 
-$root.tensorflow.GPUOptions.Experimental = class Experimental {
+tensorflow.GPUOptions.Experimental = class Experimental {
 
     constructor() {
         this.virtual_devices = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.GPUOptions.Experimental();
+        const message = new tensorflow.GPUOptions.Experimental();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.virtual_devices.push($root.tensorflow.GPUOptions.Experimental.VirtualDevices.decode(reader, reader.uint32()));
+                    message.virtual_devices.push(tensorflow.GPUOptions.Experimental.VirtualDevices.decode(reader, reader.uint32()));
                     break;
                 case 2:
                     message.use_unified_memory = reader.bool();
@@ -6095,13 +6096,13 @@ $root.tensorflow.GPUOptions.Experimental = class Experimental {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.GPUOptions.Experimental();
+        const message = new tensorflow.GPUOptions.Experimental();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "virtual_devices":
-                    message.virtual_devices.push($root.tensorflow.GPUOptions.Experimental.VirtualDevices.decodeText(reader));
+                    message.virtual_devices.push(tensorflow.GPUOptions.Experimental.VirtualDevices.decodeText(reader));
                     break;
                 case "use_unified_memory":
                     message.use_unified_memory = reader.bool();
@@ -6142,18 +6143,18 @@ $root.tensorflow.GPUOptions.Experimental = class Experimental {
     }
 };
 
-$root.tensorflow.GPUOptions.Experimental.prototype.use_unified_memory = false;
-$root.tensorflow.GPUOptions.Experimental.prototype.num_dev_to_dev_copy_streams = 0;
-$root.tensorflow.GPUOptions.Experimental.prototype.collective_ring_order = "";
-$root.tensorflow.GPUOptions.Experimental.prototype.timestamped_allocator = false;
-$root.tensorflow.GPUOptions.Experimental.prototype.kernel_tracker_max_interval = 0;
-$root.tensorflow.GPUOptions.Experimental.prototype.kernel_tracker_max_bytes = 0;
-$root.tensorflow.GPUOptions.Experimental.prototype.kernel_tracker_max_pending = 0;
-$root.tensorflow.GPUOptions.Experimental.prototype.internal_fragmentation_fraction = 0;
-$root.tensorflow.GPUOptions.Experimental.prototype.use_cuda_malloc_async = false;
-$root.tensorflow.GPUOptions.Experimental.prototype.disallow_retry_on_allocation_failure = false;
+tensorflow.GPUOptions.Experimental.prototype.use_unified_memory = false;
+tensorflow.GPUOptions.Experimental.prototype.num_dev_to_dev_copy_streams = 0;
+tensorflow.GPUOptions.Experimental.prototype.collective_ring_order = "";
+tensorflow.GPUOptions.Experimental.prototype.timestamped_allocator = false;
+tensorflow.GPUOptions.Experimental.prototype.kernel_tracker_max_interval = 0;
+tensorflow.GPUOptions.Experimental.prototype.kernel_tracker_max_bytes = 0;
+tensorflow.GPUOptions.Experimental.prototype.kernel_tracker_max_pending = 0;
+tensorflow.GPUOptions.Experimental.prototype.internal_fragmentation_fraction = 0;
+tensorflow.GPUOptions.Experimental.prototype.use_cuda_malloc_async = false;
+tensorflow.GPUOptions.Experimental.prototype.disallow_retry_on_allocation_failure = false;
 
-$root.tensorflow.GPUOptions.Experimental.VirtualDevices = class VirtualDevices {
+tensorflow.GPUOptions.Experimental.VirtualDevices = class VirtualDevices {
 
     constructor() {
         this.memory_limit_mb = [];
@@ -6161,7 +6162,7 @@ $root.tensorflow.GPUOptions.Experimental.VirtualDevices = class VirtualDevices {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.GPUOptions.Experimental.VirtualDevices();
+        const message = new tensorflow.GPUOptions.Experimental.VirtualDevices();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6181,7 +6182,7 @@ $root.tensorflow.GPUOptions.Experimental.VirtualDevices = class VirtualDevices {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.GPUOptions.Experimental.VirtualDevices();
+        const message = new tensorflow.GPUOptions.Experimental.VirtualDevices();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6201,13 +6202,13 @@ $root.tensorflow.GPUOptions.Experimental.VirtualDevices = class VirtualDevices {
     }
 };
 
-$root.tensorflow.OptimizerOptions = class OptimizerOptions {
+tensorflow.OptimizerOptions = class OptimizerOptions {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.OptimizerOptions();
+        const message = new tensorflow.OptimizerOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6242,7 +6243,7 @@ $root.tensorflow.OptimizerOptions = class OptimizerOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.OptimizerOptions();
+        const message = new tensorflow.OptimizerOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6260,10 +6261,10 @@ $root.tensorflow.OptimizerOptions = class OptimizerOptions {
                     message.do_function_inlining = reader.bool();
                     break;
                 case "opt_level":
-                    message.opt_level = reader.enum($root.tensorflow.OptimizerOptions.Level);
+                    message.opt_level = reader.enum(tensorflow.OptimizerOptions.Level);
                     break;
                 case "global_jit_level":
-                    message.global_jit_level = reader.enum($root.tensorflow.OptimizerOptions.GlobalJitLevel);
+                    message.global_jit_level = reader.enum(tensorflow.OptimizerOptions.GlobalJitLevel);
                     break;
                 case "cpu_global_jit":
                     message.cpu_global_jit = reader.bool();
@@ -6277,33 +6278,33 @@ $root.tensorflow.OptimizerOptions = class OptimizerOptions {
     }
 };
 
-$root.tensorflow.OptimizerOptions.prototype.do_common_subexpression_elimination = false;
-$root.tensorflow.OptimizerOptions.prototype.do_constant_folding = false;
-$root.tensorflow.OptimizerOptions.prototype.max_folded_constant_in_bytes = protobuf.Int64.create(0);
-$root.tensorflow.OptimizerOptions.prototype.do_function_inlining = false;
-$root.tensorflow.OptimizerOptions.prototype.opt_level = 0;
-$root.tensorflow.OptimizerOptions.prototype.global_jit_level = 0;
-$root.tensorflow.OptimizerOptions.prototype.cpu_global_jit = false;
+tensorflow.OptimizerOptions.prototype.do_common_subexpression_elimination = false;
+tensorflow.OptimizerOptions.prototype.do_constant_folding = false;
+tensorflow.OptimizerOptions.prototype.max_folded_constant_in_bytes = protobuf.Int64.create(0);
+tensorflow.OptimizerOptions.prototype.do_function_inlining = false;
+tensorflow.OptimizerOptions.prototype.opt_level = 0;
+tensorflow.OptimizerOptions.prototype.global_jit_level = 0;
+tensorflow.OptimizerOptions.prototype.cpu_global_jit = false;
 
-$root.tensorflow.OptimizerOptions.Level = {
+tensorflow.OptimizerOptions.Level = {
     "L1": 0,
     "L0": -1
 };
 
-$root.tensorflow.OptimizerOptions.GlobalJitLevel = {
+tensorflow.OptimizerOptions.GlobalJitLevel = {
     "DEFAULT": 0,
     "OFF": -1,
     "ON_1": 1,
     "ON_2": 2
 };
 
-$root.tensorflow.GraphOptions = class GraphOptions {
+tensorflow.GraphOptions = class GraphOptions {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.GraphOptions();
+        const message = new tensorflow.GraphOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6312,7 +6313,7 @@ $root.tensorflow.GraphOptions = class GraphOptions {
                     message.enable_recv_scheduling = reader.bool();
                     break;
                 case 3:
-                    message.optimizer_options = $root.tensorflow.OptimizerOptions.decode(reader, reader.uint32());
+                    message.optimizer_options = tensorflow.OptimizerOptions.decode(reader, reader.uint32());
                     break;
                 case 4:
                     message.build_cost_model = reader.int64();
@@ -6333,7 +6334,7 @@ $root.tensorflow.GraphOptions = class GraphOptions {
                     message.timeline_step = reader.int32();
                     break;
                 case 10:
-                    message.rewrite_options = $root.tensorflow.RewriterConfig.decode(reader, reader.uint32());
+                    message.rewrite_options = tensorflow.RewriterConfig.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6344,7 +6345,7 @@ $root.tensorflow.GraphOptions = class GraphOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.GraphOptions();
+        const message = new tensorflow.GraphOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6353,7 +6354,7 @@ $root.tensorflow.GraphOptions = class GraphOptions {
                     message.enable_recv_scheduling = reader.bool();
                     break;
                 case "optimizer_options":
-                    message.optimizer_options = $root.tensorflow.OptimizerOptions.decodeText(reader);
+                    message.optimizer_options = tensorflow.OptimizerOptions.decodeText(reader);
                     break;
                 case "build_cost_model":
                     message.build_cost_model = reader.int64();
@@ -6374,7 +6375,7 @@ $root.tensorflow.GraphOptions = class GraphOptions {
                     message.timeline_step = reader.int32();
                     break;
                 case "rewrite_options":
-                    message.rewrite_options = $root.tensorflow.RewriterConfig.decodeText(reader);
+                    message.rewrite_options = tensorflow.RewriterConfig.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -6385,23 +6386,23 @@ $root.tensorflow.GraphOptions = class GraphOptions {
     }
 };
 
-$root.tensorflow.GraphOptions.prototype.enable_recv_scheduling = false;
-$root.tensorflow.GraphOptions.prototype.optimizer_options = null;
-$root.tensorflow.GraphOptions.prototype.build_cost_model = protobuf.Int64.create(0);
-$root.tensorflow.GraphOptions.prototype.build_cost_model_after = protobuf.Int64.create(0);
-$root.tensorflow.GraphOptions.prototype.infer_shapes = false;
-$root.tensorflow.GraphOptions.prototype.place_pruned_graph = false;
-$root.tensorflow.GraphOptions.prototype.enable_bfloat16_sendrecv = false;
-$root.tensorflow.GraphOptions.prototype.timeline_step = 0;
-$root.tensorflow.GraphOptions.prototype.rewrite_options = null;
+tensorflow.GraphOptions.prototype.enable_recv_scheduling = false;
+tensorflow.GraphOptions.prototype.optimizer_options = null;
+tensorflow.GraphOptions.prototype.build_cost_model = protobuf.Int64.create(0);
+tensorflow.GraphOptions.prototype.build_cost_model_after = protobuf.Int64.create(0);
+tensorflow.GraphOptions.prototype.infer_shapes = false;
+tensorflow.GraphOptions.prototype.place_pruned_graph = false;
+tensorflow.GraphOptions.prototype.enable_bfloat16_sendrecv = false;
+tensorflow.GraphOptions.prototype.timeline_step = 0;
+tensorflow.GraphOptions.prototype.rewrite_options = null;
 
-$root.tensorflow.ThreadPoolOptionProto = class ThreadPoolOptionProto {
+tensorflow.ThreadPoolOptionProto = class ThreadPoolOptionProto {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.ThreadPoolOptionProto();
+        const message = new tensorflow.ThreadPoolOptionProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6421,7 +6422,7 @@ $root.tensorflow.ThreadPoolOptionProto = class ThreadPoolOptionProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.ThreadPoolOptionProto();
+        const message = new tensorflow.ThreadPoolOptionProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6441,16 +6442,16 @@ $root.tensorflow.ThreadPoolOptionProto = class ThreadPoolOptionProto {
     }
 };
 
-$root.tensorflow.ThreadPoolOptionProto.prototype.num_threads = 0;
-$root.tensorflow.ThreadPoolOptionProto.prototype.global_name = "";
+tensorflow.ThreadPoolOptionProto.prototype.num_threads = 0;
+tensorflow.ThreadPoolOptionProto.prototype.global_name = "";
 
-$root.tensorflow.RPCOptions = class RPCOptions {
+tensorflow.RPCOptions = class RPCOptions {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RPCOptions();
+        const message = new tensorflow.RPCOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6482,7 +6483,7 @@ $root.tensorflow.RPCOptions = class RPCOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RPCOptions();
+        const message = new tensorflow.RPCOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6514,20 +6515,20 @@ $root.tensorflow.RPCOptions = class RPCOptions {
     }
 };
 
-$root.tensorflow.RPCOptions.prototype.use_rpc_for_inprocess_master = false;
-$root.tensorflow.RPCOptions.prototype.compression_algorithm = "";
-$root.tensorflow.RPCOptions.prototype.compression_level = 0;
-$root.tensorflow.RPCOptions.prototype.cache_rpc_response = false;
-$root.tensorflow.RPCOptions.prototype.disable_session_connection_sharing = false;
-$root.tensorflow.RPCOptions.prototype.num_channels_per_target = 0;
+tensorflow.RPCOptions.prototype.use_rpc_for_inprocess_master = false;
+tensorflow.RPCOptions.prototype.compression_algorithm = "";
+tensorflow.RPCOptions.prototype.compression_level = 0;
+tensorflow.RPCOptions.prototype.cache_rpc_response = false;
+tensorflow.RPCOptions.prototype.disable_session_connection_sharing = false;
+tensorflow.RPCOptions.prototype.num_channels_per_target = 0;
 
-$root.tensorflow.SessionMetadata = class SessionMetadata {
+tensorflow.SessionMetadata = class SessionMetadata {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.SessionMetadata();
+        const message = new tensorflow.SessionMetadata();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6547,7 +6548,7 @@ $root.tensorflow.SessionMetadata = class SessionMetadata {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.SessionMetadata();
+        const message = new tensorflow.SessionMetadata();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6567,10 +6568,10 @@ $root.tensorflow.SessionMetadata = class SessionMetadata {
     }
 };
 
-$root.tensorflow.SessionMetadata.prototype.name = "";
-$root.tensorflow.SessionMetadata.prototype.version = protobuf.Int64.create(0);
+tensorflow.SessionMetadata.prototype.name = "";
+tensorflow.SessionMetadata.prototype.version = protobuf.Int64.create(0);
 
-$root.tensorflow.ConfigProto = class ConfigProto {
+tensorflow.ConfigProto = class ConfigProto {
 
     constructor() {
         this.device_count = {};
@@ -6579,7 +6580,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.ConfigProto();
+        const message = new tensorflow.ConfigProto();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6597,7 +6598,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     message.use_per_session_threads = reader.bool();
                     break;
                 case 12:
-                    message.session_inter_op_thread_pool.push($root.tensorflow.ThreadPoolOptionProto.decode(reader, reader.uint32()));
+                    message.session_inter_op_thread_pool.push(tensorflow.ThreadPoolOptionProto.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     message.placement_period = reader.int32();
@@ -6606,7 +6607,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     message.device_filters.push(reader.string());
                     break;
                 case 6:
-                    message.gpu_options = $root.tensorflow.GPUOptions.decode(reader, reader.uint32());
+                    message.gpu_options = tensorflow.GPUOptions.decode(reader, reader.uint32());
                     break;
                 case 7:
                     message.allow_soft_placement = reader.bool();
@@ -6615,16 +6616,16 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     message.log_device_placement = reader.bool();
                     break;
                 case 10:
-                    message.graph_options = $root.tensorflow.GraphOptions.decode(reader, reader.uint32());
+                    message.graph_options = tensorflow.GraphOptions.decode(reader, reader.uint32());
                     break;
                 case 11:
                     message.operation_timeout_in_ms = reader.int64();
                     break;
                 case 13:
-                    message.rpc_options = $root.tensorflow.RPCOptions.decode(reader, reader.uint32());
+                    message.rpc_options = tensorflow.RPCOptions.decode(reader, reader.uint32());
                     break;
                 case 14:
-                    message.cluster_def = $root.tensorflow.ClusterDef.decode(reader, reader.uint32());
+                    message.cluster_def = tensorflow.ClusterDef.decode(reader, reader.uint32());
                     break;
                 case 15:
                     message.isolate_session_state = reader.bool();
@@ -6633,7 +6634,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     message.share_cluster_devices_in_session = reader.bool();
                     break;
                 case 16:
-                    message.experimental = $root.tensorflow.ConfigProto.Experimental.decode(reader, reader.uint32());
+                    message.experimental = tensorflow.ConfigProto.Experimental.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6644,7 +6645,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.ConfigProto();
+        const message = new tensorflow.ConfigProto();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6662,7 +6663,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     message.use_per_session_threads = reader.bool();
                     break;
                 case "session_inter_op_thread_pool":
-                    message.session_inter_op_thread_pool.push($root.tensorflow.ThreadPoolOptionProto.decodeText(reader));
+                    message.session_inter_op_thread_pool.push(tensorflow.ThreadPoolOptionProto.decodeText(reader));
                     break;
                 case "placement_period":
                     message.placement_period = reader.int32();
@@ -6671,7 +6672,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     reader.array(message.device_filters, () => reader.string());
                     break;
                 case "gpu_options":
-                    message.gpu_options = $root.tensorflow.GPUOptions.decodeText(reader);
+                    message.gpu_options = tensorflow.GPUOptions.decodeText(reader);
                     break;
                 case "allow_soft_placement":
                     message.allow_soft_placement = reader.bool();
@@ -6680,16 +6681,16 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     message.log_device_placement = reader.bool();
                     break;
                 case "graph_options":
-                    message.graph_options = $root.tensorflow.GraphOptions.decodeText(reader);
+                    message.graph_options = tensorflow.GraphOptions.decodeText(reader);
                     break;
                 case "operation_timeout_in_ms":
                     message.operation_timeout_in_ms = reader.int64();
                     break;
                 case "rpc_options":
-                    message.rpc_options = $root.tensorflow.RPCOptions.decodeText(reader);
+                    message.rpc_options = tensorflow.RPCOptions.decodeText(reader);
                     break;
                 case "cluster_def":
-                    message.cluster_def = $root.tensorflow.ClusterDef.decodeText(reader);
+                    message.cluster_def = tensorflow.ClusterDef.decodeText(reader);
                     break;
                 case "isolate_session_state":
                     message.isolate_session_state = reader.bool();
@@ -6698,7 +6699,7 @@ $root.tensorflow.ConfigProto = class ConfigProto {
                     message.share_cluster_devices_in_session = reader.bool();
                     break;
                 case "experimental":
-                    message.experimental = $root.tensorflow.ConfigProto.Experimental.decodeText(reader);
+                    message.experimental = tensorflow.ConfigProto.Experimental.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -6709,28 +6710,28 @@ $root.tensorflow.ConfigProto = class ConfigProto {
     }
 };
 
-$root.tensorflow.ConfigProto.prototype.intra_op_parallelism_threads = 0;
-$root.tensorflow.ConfigProto.prototype.inter_op_parallelism_threads = 0;
-$root.tensorflow.ConfigProto.prototype.use_per_session_threads = false;
-$root.tensorflow.ConfigProto.prototype.placement_period = 0;
-$root.tensorflow.ConfigProto.prototype.gpu_options = null;
-$root.tensorflow.ConfigProto.prototype.allow_soft_placement = false;
-$root.tensorflow.ConfigProto.prototype.log_device_placement = false;
-$root.tensorflow.ConfigProto.prototype.graph_options = null;
-$root.tensorflow.ConfigProto.prototype.operation_timeout_in_ms = protobuf.Int64.create(0);
-$root.tensorflow.ConfigProto.prototype.rpc_options = null;
-$root.tensorflow.ConfigProto.prototype.cluster_def = null;
-$root.tensorflow.ConfigProto.prototype.isolate_session_state = false;
-$root.tensorflow.ConfigProto.prototype.share_cluster_devices_in_session = false;
-$root.tensorflow.ConfigProto.prototype.experimental = null;
+tensorflow.ConfigProto.prototype.intra_op_parallelism_threads = 0;
+tensorflow.ConfigProto.prototype.inter_op_parallelism_threads = 0;
+tensorflow.ConfigProto.prototype.use_per_session_threads = false;
+tensorflow.ConfigProto.prototype.placement_period = 0;
+tensorflow.ConfigProto.prototype.gpu_options = null;
+tensorflow.ConfigProto.prototype.allow_soft_placement = false;
+tensorflow.ConfigProto.prototype.log_device_placement = false;
+tensorflow.ConfigProto.prototype.graph_options = null;
+tensorflow.ConfigProto.prototype.operation_timeout_in_ms = protobuf.Int64.create(0);
+tensorflow.ConfigProto.prototype.rpc_options = null;
+tensorflow.ConfigProto.prototype.cluster_def = null;
+tensorflow.ConfigProto.prototype.isolate_session_state = false;
+tensorflow.ConfigProto.prototype.share_cluster_devices_in_session = false;
+tensorflow.ConfigProto.prototype.experimental = null;
 
-$root.tensorflow.ConfigProto.Experimental = class Experimental {
+tensorflow.ConfigProto.Experimental = class Experimental {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.ConfigProto.Experimental();
+        const message = new tensorflow.ConfigProto.Experimental();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6763,7 +6764,7 @@ $root.tensorflow.ConfigProto.Experimental = class Experimental {
                     message.share_cluster_devices_in_session = reader.bool();
                     break;
                 case 11:
-                    message.session_metadata = $root.tensorflow.SessionMetadata.decode(reader, reader.uint32());
+                    message.session_metadata = tensorflow.SessionMetadata.decode(reader, reader.uint32());
                     break;
                 case 12:
                     message.optimize_for_static_graph = reader.bool();
@@ -6793,7 +6794,7 @@ $root.tensorflow.ConfigProto.Experimental = class Experimental {
                     message.xla_prefer_single_graph_cluster = reader.bool();
                     break;
                 case 23:
-                    message.coordination_config = $root.tensorflow.CoordinationServiceConfig.decode(reader, reader.uint32());
+                    message.coordination_config = tensorflow.CoordinationServiceConfig.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6804,7 +6805,7 @@ $root.tensorflow.ConfigProto.Experimental = class Experimental {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.ConfigProto.Experimental();
+        const message = new tensorflow.ConfigProto.Experimental();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -6837,7 +6838,7 @@ $root.tensorflow.ConfigProto.Experimental = class Experimental {
                     message.share_cluster_devices_in_session = reader.bool();
                     break;
                 case "session_metadata":
-                    message.session_metadata = $root.tensorflow.SessionMetadata.decodeText(reader);
+                    message.session_metadata = tensorflow.SessionMetadata.decodeText(reader);
                     break;
                 case "optimize_for_static_graph":
                     message.optimize_for_static_graph = reader.bool();
@@ -6846,7 +6847,7 @@ $root.tensorflow.ConfigProto.Experimental = class Experimental {
                     message.enable_mlir_bridge = reader.bool();
                     break;
                 case "mlir_bridge_rollout":
-                    message.mlir_bridge_rollout = reader.enum($root.tensorflow.ConfigProto.Experimental.MlirBridgeRollout);
+                    message.mlir_bridge_rollout = reader.enum(tensorflow.ConfigProto.Experimental.MlirBridgeRollout);
                     break;
                 case "enable_mlir_graph_optimization":
                     message.enable_mlir_graph_optimization = reader.bool();
@@ -6867,7 +6868,7 @@ $root.tensorflow.ConfigProto.Experimental = class Experimental {
                     message.xla_prefer_single_graph_cluster = reader.bool();
                     break;
                 case "coordination_config":
-                    message.coordination_config = $root.tensorflow.CoordinationServiceConfig.decodeText(reader);
+                    message.coordination_config = tensorflow.CoordinationServiceConfig.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -6878,28 +6879,28 @@ $root.tensorflow.ConfigProto.Experimental = class Experimental {
     }
 };
 
-$root.tensorflow.ConfigProto.Experimental.prototype.collective_group_leader = "";
-$root.tensorflow.ConfigProto.Experimental.prototype.executor_type = "";
-$root.tensorflow.ConfigProto.Experimental.prototype.recv_buf_max_chunk = 0;
-$root.tensorflow.ConfigProto.Experimental.prototype.use_numa_affinity = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.collective_deterministic_sequential_execution = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.collective_nccl = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.share_session_state_in_clusterspec_propagation = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.disable_thread_spinning = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.share_cluster_devices_in_session = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.session_metadata = null;
-$root.tensorflow.ConfigProto.Experimental.prototype.optimize_for_static_graph = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.enable_mlir_bridge = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.mlir_bridge_rollout = 0;
-$root.tensorflow.ConfigProto.Experimental.prototype.enable_mlir_graph_optimization = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.disable_output_partition_graphs = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.xla_fusion_autotuner_thresh = protobuf.Int64.create(0);
-$root.tensorflow.ConfigProto.Experimental.prototype.use_tfrt = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.disable_functional_ops_lowering = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.xla_prefer_single_graph_cluster = false;
-$root.tensorflow.ConfigProto.Experimental.prototype.coordination_config = null;
+tensorflow.ConfigProto.Experimental.prototype.collective_group_leader = "";
+tensorflow.ConfigProto.Experimental.prototype.executor_type = "";
+tensorflow.ConfigProto.Experimental.prototype.recv_buf_max_chunk = 0;
+tensorflow.ConfigProto.Experimental.prototype.use_numa_affinity = false;
+tensorflow.ConfigProto.Experimental.prototype.collective_deterministic_sequential_execution = false;
+tensorflow.ConfigProto.Experimental.prototype.collective_nccl = false;
+tensorflow.ConfigProto.Experimental.prototype.share_session_state_in_clusterspec_propagation = false;
+tensorflow.ConfigProto.Experimental.prototype.disable_thread_spinning = false;
+tensorflow.ConfigProto.Experimental.prototype.share_cluster_devices_in_session = false;
+tensorflow.ConfigProto.Experimental.prototype.session_metadata = null;
+tensorflow.ConfigProto.Experimental.prototype.optimize_for_static_graph = false;
+tensorflow.ConfigProto.Experimental.prototype.enable_mlir_bridge = false;
+tensorflow.ConfigProto.Experimental.prototype.mlir_bridge_rollout = 0;
+tensorflow.ConfigProto.Experimental.prototype.enable_mlir_graph_optimization = false;
+tensorflow.ConfigProto.Experimental.prototype.disable_output_partition_graphs = false;
+tensorflow.ConfigProto.Experimental.prototype.xla_fusion_autotuner_thresh = protobuf.Int64.create(0);
+tensorflow.ConfigProto.Experimental.prototype.use_tfrt = false;
+tensorflow.ConfigProto.Experimental.prototype.disable_functional_ops_lowering = false;
+tensorflow.ConfigProto.Experimental.prototype.xla_prefer_single_graph_cluster = false;
+tensorflow.ConfigProto.Experimental.prototype.coordination_config = null;
 
-$root.tensorflow.ConfigProto.Experimental.MlirBridgeRollout = {
+tensorflow.ConfigProto.Experimental.MlirBridgeRollout = {
     "MLIR_BRIDGE_ROLLOUT_UNSPECIFIED": 0,
     "MLIR_BRIDGE_ROLLOUT_ENABLED": 1,
     "MLIR_BRIDGE_ROLLOUT_DISABLED": 2,
@@ -6907,13 +6908,13 @@ $root.tensorflow.ConfigProto.Experimental.MlirBridgeRollout = {
     "MLIR_BRIDGE_ROLLOUT_SAFE_MODE_FALLBACK_ENABLED": 4
 };
 
-$root.tensorflow.RunOptions = class RunOptions {
+tensorflow.RunOptions = class RunOptions {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RunOptions();
+        const message = new tensorflow.RunOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -6931,13 +6932,13 @@ $root.tensorflow.RunOptions = class RunOptions {
                     message.output_partition_graphs = reader.bool();
                     break;
                 case 6:
-                    message.debug_options = $root.tensorflow.DebugOptions.decode(reader, reader.uint32());
+                    message.debug_options = tensorflow.DebugOptions.decode(reader, reader.uint32());
                     break;
                 case 7:
                     message.report_tensor_allocations_upon_oom = reader.bool();
                     break;
                 case 8:
-                    message.experimental = $root.tensorflow.RunOptions.Experimental.decode(reader, reader.uint32());
+                    message.experimental = tensorflow.RunOptions.Experimental.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6948,13 +6949,13 @@ $root.tensorflow.RunOptions = class RunOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RunOptions();
+        const message = new tensorflow.RunOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "trace_level":
-                    message.trace_level = reader.enum($root.tensorflow.RunOptions.TraceLevel);
+                    message.trace_level = reader.enum(tensorflow.RunOptions.TraceLevel);
                     break;
                 case "timeout_in_ms":
                     message.timeout_in_ms = reader.int64();
@@ -6966,13 +6967,13 @@ $root.tensorflow.RunOptions = class RunOptions {
                     message.output_partition_graphs = reader.bool();
                     break;
                 case "debug_options":
-                    message.debug_options = $root.tensorflow.DebugOptions.decodeText(reader);
+                    message.debug_options = tensorflow.DebugOptions.decodeText(reader);
                     break;
                 case "report_tensor_allocations_upon_oom":
                     message.report_tensor_allocations_upon_oom = reader.bool();
                     break;
                 case "experimental":
-                    message.experimental = $root.tensorflow.RunOptions.Experimental.decodeText(reader);
+                    message.experimental = tensorflow.RunOptions.Experimental.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -6983,28 +6984,28 @@ $root.tensorflow.RunOptions = class RunOptions {
     }
 };
 
-$root.tensorflow.RunOptions.prototype.trace_level = 0;
-$root.tensorflow.RunOptions.prototype.timeout_in_ms = protobuf.Int64.create(0);
-$root.tensorflow.RunOptions.prototype.inter_op_thread_pool = 0;
-$root.tensorflow.RunOptions.prototype.output_partition_graphs = false;
-$root.tensorflow.RunOptions.prototype.debug_options = null;
-$root.tensorflow.RunOptions.prototype.report_tensor_allocations_upon_oom = false;
-$root.tensorflow.RunOptions.prototype.experimental = null;
+tensorflow.RunOptions.prototype.trace_level = 0;
+tensorflow.RunOptions.prototype.timeout_in_ms = protobuf.Int64.create(0);
+tensorflow.RunOptions.prototype.inter_op_thread_pool = 0;
+tensorflow.RunOptions.prototype.output_partition_graphs = false;
+tensorflow.RunOptions.prototype.debug_options = null;
+tensorflow.RunOptions.prototype.report_tensor_allocations_upon_oom = false;
+tensorflow.RunOptions.prototype.experimental = null;
 
-$root.tensorflow.RunOptions.TraceLevel = {
+tensorflow.RunOptions.TraceLevel = {
     "NO_TRACE": 0,
     "SOFTWARE_TRACE": 1,
     "HARDWARE_TRACE": 2,
     "FULL_TRACE": 3
 };
 
-$root.tensorflow.RunOptions.Experimental = class Experimental {
+tensorflow.RunOptions.Experimental = class Experimental {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RunOptions.Experimental();
+        const message = new tensorflow.RunOptions.Experimental();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7016,7 +7017,7 @@ $root.tensorflow.RunOptions.Experimental = class Experimental {
                     message.use_run_handler_pool = reader.bool();
                     break;
                 case 3:
-                    message.run_handler_pool_options = $root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions.decode(reader, reader.uint32());
+                    message.run_handler_pool_options = tensorflow.RunOptions.Experimental.RunHandlerPoolOptions.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7027,7 +7028,7 @@ $root.tensorflow.RunOptions.Experimental = class Experimental {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RunOptions.Experimental();
+        const message = new tensorflow.RunOptions.Experimental();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7039,7 +7040,7 @@ $root.tensorflow.RunOptions.Experimental = class Experimental {
                     message.use_run_handler_pool = reader.bool();
                     break;
                 case "run_handler_pool_options":
-                    message.run_handler_pool_options = $root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions.decodeText(reader);
+                    message.run_handler_pool_options = tensorflow.RunOptions.Experimental.RunHandlerPoolOptions.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -7050,17 +7051,17 @@ $root.tensorflow.RunOptions.Experimental = class Experimental {
     }
 };
 
-$root.tensorflow.RunOptions.Experimental.prototype.collective_graph_key = protobuf.Int64.create(0);
-$root.tensorflow.RunOptions.Experimental.prototype.use_run_handler_pool = false;
-$root.tensorflow.RunOptions.Experimental.prototype.run_handler_pool_options = null;
+tensorflow.RunOptions.Experimental.prototype.collective_graph_key = protobuf.Int64.create(0);
+tensorflow.RunOptions.Experimental.prototype.use_run_handler_pool = false;
+tensorflow.RunOptions.Experimental.prototype.run_handler_pool_options = null;
 
-$root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions = class RunHandlerPoolOptions {
+tensorflow.RunOptions.Experimental.RunHandlerPoolOptions = class RunHandlerPoolOptions {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions();
+        const message = new tensorflow.RunOptions.Experimental.RunHandlerPoolOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7077,7 +7078,7 @@ $root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions = class RunHandle
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions();
+        const message = new tensorflow.RunOptions.Experimental.RunHandlerPoolOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7094,9 +7095,9 @@ $root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions = class RunHandle
     }
 };
 
-$root.tensorflow.RunOptions.Experimental.RunHandlerPoolOptions.prototype.priority = protobuf.Int64.create(0);
+tensorflow.RunOptions.Experimental.RunHandlerPoolOptions.prototype.priority = protobuf.Int64.create(0);
 
-$root.tensorflow.RunMetadata = class RunMetadata {
+tensorflow.RunMetadata = class RunMetadata {
 
     constructor() {
         this.partition_graphs = [];
@@ -7104,22 +7105,22 @@ $root.tensorflow.RunMetadata = class RunMetadata {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RunMetadata();
+        const message = new tensorflow.RunMetadata();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.step_stats = $root.tensorflow.StepStats.decode(reader, reader.uint32());
+                    message.step_stats = tensorflow.StepStats.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.cost_graph = $root.tensorflow.CostGraphDef.decode(reader, reader.uint32());
+                    message.cost_graph = tensorflow.CostGraphDef.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.partition_graphs.push($root.tensorflow.GraphDef.decode(reader, reader.uint32()));
+                    message.partition_graphs.push(tensorflow.GraphDef.decode(reader, reader.uint32()));
                     break;
                 case 4:
-                    message.function_graphs.push($root.tensorflow.RunMetadata.FunctionGraphs.decode(reader, reader.uint32()));
+                    message.function_graphs.push(tensorflow.RunMetadata.FunctionGraphs.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7130,22 +7131,22 @@ $root.tensorflow.RunMetadata = class RunMetadata {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RunMetadata();
+        const message = new tensorflow.RunMetadata();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "step_stats":
-                    message.step_stats = $root.tensorflow.StepStats.decodeText(reader);
+                    message.step_stats = tensorflow.StepStats.decodeText(reader);
                     break;
                 case "cost_graph":
-                    message.cost_graph = $root.tensorflow.CostGraphDef.decodeText(reader);
+                    message.cost_graph = tensorflow.CostGraphDef.decodeText(reader);
                     break;
                 case "partition_graphs":
-                    message.partition_graphs.push($root.tensorflow.GraphDef.decodeText(reader));
+                    message.partition_graphs.push(tensorflow.GraphDef.decodeText(reader));
                     break;
                 case "function_graphs":
-                    message.function_graphs.push($root.tensorflow.RunMetadata.FunctionGraphs.decodeText(reader));
+                    message.function_graphs.push(tensorflow.RunMetadata.FunctionGraphs.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -7156,29 +7157,29 @@ $root.tensorflow.RunMetadata = class RunMetadata {
     }
 };
 
-$root.tensorflow.RunMetadata.prototype.step_stats = null;
-$root.tensorflow.RunMetadata.prototype.cost_graph = null;
+tensorflow.RunMetadata.prototype.step_stats = null;
+tensorflow.RunMetadata.prototype.cost_graph = null;
 
-$root.tensorflow.RunMetadata.FunctionGraphs = class FunctionGraphs {
+tensorflow.RunMetadata.FunctionGraphs = class FunctionGraphs {
 
     constructor() {
         this.partition_graphs = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RunMetadata.FunctionGraphs();
+        const message = new tensorflow.RunMetadata.FunctionGraphs();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.partition_graphs.push($root.tensorflow.GraphDef.decode(reader, reader.uint32()));
+                    message.partition_graphs.push(tensorflow.GraphDef.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.pre_optimization_graph = $root.tensorflow.GraphDef.decode(reader, reader.uint32());
+                    message.pre_optimization_graph = tensorflow.GraphDef.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.post_optimization_graph = $root.tensorflow.GraphDef.decode(reader, reader.uint32());
+                    message.post_optimization_graph = tensorflow.GraphDef.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7189,19 +7190,19 @@ $root.tensorflow.RunMetadata.FunctionGraphs = class FunctionGraphs {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RunMetadata.FunctionGraphs();
+        const message = new tensorflow.RunMetadata.FunctionGraphs();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "partition_graphs":
-                    message.partition_graphs.push($root.tensorflow.GraphDef.decodeText(reader));
+                    message.partition_graphs.push(tensorflow.GraphDef.decodeText(reader));
                     break;
                 case "pre_optimization_graph":
-                    message.pre_optimization_graph = $root.tensorflow.GraphDef.decodeText(reader);
+                    message.pre_optimization_graph = tensorflow.GraphDef.decodeText(reader);
                     break;
                 case "post_optimization_graph":
-                    message.post_optimization_graph = $root.tensorflow.GraphDef.decodeText(reader);
+                    message.post_optimization_graph = tensorflow.GraphDef.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -7212,16 +7213,16 @@ $root.tensorflow.RunMetadata.FunctionGraphs = class FunctionGraphs {
     }
 };
 
-$root.tensorflow.RunMetadata.FunctionGraphs.prototype.pre_optimization_graph = null;
-$root.tensorflow.RunMetadata.FunctionGraphs.prototype.post_optimization_graph = null;
+tensorflow.RunMetadata.FunctionGraphs.prototype.pre_optimization_graph = null;
+tensorflow.RunMetadata.FunctionGraphs.prototype.post_optimization_graph = null;
 
-$root.tensorflow.TensorConnection = class TensorConnection {
+tensorflow.TensorConnection = class TensorConnection {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorConnection();
+        const message = new tensorflow.TensorConnection();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7241,7 +7242,7 @@ $root.tensorflow.TensorConnection = class TensorConnection {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorConnection();
+        const message = new tensorflow.TensorConnection();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7261,10 +7262,10 @@ $root.tensorflow.TensorConnection = class TensorConnection {
     }
 };
 
-$root.tensorflow.TensorConnection.prototype.from_tensor = "";
-$root.tensorflow.TensorConnection.prototype.to_tensor = "";
+tensorflow.TensorConnection.prototype.from_tensor = "";
+tensorflow.TensorConnection.prototype.to_tensor = "";
 
-$root.tensorflow.CallableOptions = class CallableOptions {
+tensorflow.CallableOptions = class CallableOptions {
 
     constructor() {
         this.feed = [];
@@ -7276,7 +7277,7 @@ $root.tensorflow.CallableOptions = class CallableOptions {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CallableOptions();
+        const message = new tensorflow.CallableOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7291,10 +7292,10 @@ $root.tensorflow.CallableOptions = class CallableOptions {
                     message.target.push(reader.string());
                     break;
                 case 4:
-                    message.run_options = $root.tensorflow.RunOptions.decode(reader, reader.uint32());
+                    message.run_options = tensorflow.RunOptions.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.tensor_connection.push($root.tensorflow.TensorConnection.decode(reader, reader.uint32()));
+                    message.tensor_connection.push(tensorflow.TensorConnection.decode(reader, reader.uint32()));
                     break;
                 case 6:
                     reader.entry(message.feed_devices, () => reader.string(), () => reader.string());
@@ -7314,7 +7315,7 @@ $root.tensorflow.CallableOptions = class CallableOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CallableOptions();
+        const message = new tensorflow.CallableOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7329,10 +7330,10 @@ $root.tensorflow.CallableOptions = class CallableOptions {
                     reader.array(message.target, () => reader.string());
                     break;
                 case "run_options":
-                    message.run_options = $root.tensorflow.RunOptions.decodeText(reader);
+                    message.run_options = tensorflow.RunOptions.decodeText(reader);
                     break;
                 case "tensor_connection":
-                    message.tensor_connection.push($root.tensorflow.TensorConnection.decodeText(reader));
+                    message.tensor_connection.push(tensorflow.TensorConnection.decodeText(reader));
                     break;
                 case "feed_devices":
                     reader.entry(message.feed_devices, () => reader.string(), () => reader.string());
@@ -7352,10 +7353,10 @@ $root.tensorflow.CallableOptions = class CallableOptions {
     }
 };
 
-$root.tensorflow.CallableOptions.prototype.run_options = null;
-$root.tensorflow.CallableOptions.prototype.fetch_skip_sync = false;
+tensorflow.CallableOptions.prototype.run_options = null;
+tensorflow.CallableOptions.prototype.fetch_skip_sync = false;
 
-$root.tensorflow.CostGraphDef = class CostGraphDef {
+tensorflow.CostGraphDef = class CostGraphDef {
 
     constructor() {
         this.node = [];
@@ -7363,16 +7364,16 @@ $root.tensorflow.CostGraphDef = class CostGraphDef {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CostGraphDef();
+        const message = new tensorflow.CostGraphDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.node.push($root.tensorflow.CostGraphDef.Node.decode(reader, reader.uint32()));
+                    message.node.push(tensorflow.CostGraphDef.Node.decode(reader, reader.uint32()));
                     break;
                 case 2:
-                    message.cost.push($root.tensorflow.CostGraphDef.AggregatedCost.decode(reader, reader.uint32()));
+                    message.cost.push(tensorflow.CostGraphDef.AggregatedCost.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7383,16 +7384,16 @@ $root.tensorflow.CostGraphDef = class CostGraphDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CostGraphDef();
+        const message = new tensorflow.CostGraphDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "node":
-                    message.node.push($root.tensorflow.CostGraphDef.Node.decodeText(reader));
+                    message.node.push(tensorflow.CostGraphDef.Node.decodeText(reader));
                     break;
                 case "cost":
-                    message.cost.push($root.tensorflow.CostGraphDef.AggregatedCost.decodeText(reader));
+                    message.cost.push(tensorflow.CostGraphDef.AggregatedCost.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -7403,7 +7404,7 @@ $root.tensorflow.CostGraphDef = class CostGraphDef {
     }
 };
 
-$root.tensorflow.CostGraphDef.Node = class Node {
+tensorflow.CostGraphDef.Node = class Node {
 
     constructor() {
         this.input_info = [];
@@ -7412,7 +7413,7 @@ $root.tensorflow.CostGraphDef.Node = class Node {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CostGraphDef.Node();
+        const message = new tensorflow.CostGraphDef.Node();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7427,10 +7428,10 @@ $root.tensorflow.CostGraphDef.Node = class Node {
                     message.id = reader.int32();
                     break;
                 case 4:
-                    message.input_info.push($root.tensorflow.CostGraphDef.Node.InputInfo.decode(reader, reader.uint32()));
+                    message.input_info.push(tensorflow.CostGraphDef.Node.InputInfo.decode(reader, reader.uint32()));
                     break;
                 case 5:
-                    message.output_info.push($root.tensorflow.CostGraphDef.Node.OutputInfo.decode(reader, reader.uint32()));
+                    message.output_info.push(tensorflow.CostGraphDef.Node.OutputInfo.decode(reader, reader.uint32()));
                     break;
                 case 6:
                     message.temporary_memory_size = reader.int64();
@@ -7474,7 +7475,7 @@ $root.tensorflow.CostGraphDef.Node = class Node {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CostGraphDef.Node();
+        const message = new tensorflow.CostGraphDef.Node();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7489,10 +7490,10 @@ $root.tensorflow.CostGraphDef.Node = class Node {
                     message.id = reader.int32();
                     break;
                 case "input_info":
-                    message.input_info.push($root.tensorflow.CostGraphDef.Node.InputInfo.decodeText(reader));
+                    message.input_info.push(tensorflow.CostGraphDef.Node.InputInfo.decodeText(reader));
                     break;
                 case "output_info":
-                    message.output_info.push($root.tensorflow.CostGraphDef.Node.OutputInfo.decodeText(reader));
+                    message.output_info.push(tensorflow.CostGraphDef.Node.OutputInfo.decodeText(reader));
                     break;
                 case "temporary_memory_size":
                     message.temporary_memory_size = reader.int64();
@@ -7536,27 +7537,27 @@ $root.tensorflow.CostGraphDef.Node = class Node {
     }
 };
 
-$root.tensorflow.CostGraphDef.Node.prototype.name = "";
-$root.tensorflow.CostGraphDef.Node.prototype.device = "";
-$root.tensorflow.CostGraphDef.Node.prototype.id = 0;
-$root.tensorflow.CostGraphDef.Node.prototype.temporary_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.persistent_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.host_temp_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.device_temp_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.device_persistent_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.compute_cost = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.compute_time = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.memory_time = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.prototype.is_final = false;
-$root.tensorflow.CostGraphDef.Node.prototype.inaccurate = false;
+tensorflow.CostGraphDef.Node.prototype.name = "";
+tensorflow.CostGraphDef.Node.prototype.device = "";
+tensorflow.CostGraphDef.Node.prototype.id = 0;
+tensorflow.CostGraphDef.Node.prototype.temporary_memory_size = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.persistent_memory_size = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.host_temp_memory_size = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.device_temp_memory_size = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.device_persistent_memory_size = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.compute_cost = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.compute_time = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.memory_time = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.prototype.is_final = false;
+tensorflow.CostGraphDef.Node.prototype.inaccurate = false;
 
-$root.tensorflow.CostGraphDef.Node.InputInfo = class InputInfo {
+tensorflow.CostGraphDef.Node.InputInfo = class InputInfo {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CostGraphDef.Node.InputInfo();
+        const message = new tensorflow.CostGraphDef.Node.InputInfo();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7576,7 +7577,7 @@ $root.tensorflow.CostGraphDef.Node.InputInfo = class InputInfo {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CostGraphDef.Node.InputInfo();
+        const message = new tensorflow.CostGraphDef.Node.InputInfo();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7596,16 +7597,16 @@ $root.tensorflow.CostGraphDef.Node.InputInfo = class InputInfo {
     }
 };
 
-$root.tensorflow.CostGraphDef.Node.InputInfo.prototype.preceding_node = 0;
-$root.tensorflow.CostGraphDef.Node.InputInfo.prototype.preceding_port = 0;
+tensorflow.CostGraphDef.Node.InputInfo.prototype.preceding_node = 0;
+tensorflow.CostGraphDef.Node.InputInfo.prototype.preceding_port = 0;
 
-$root.tensorflow.CostGraphDef.Node.OutputInfo = class OutputInfo {
+tensorflow.CostGraphDef.Node.OutputInfo = class OutputInfo {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CostGraphDef.Node.OutputInfo();
+        const message = new tensorflow.CostGraphDef.Node.OutputInfo();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7617,7 +7618,7 @@ $root.tensorflow.CostGraphDef.Node.OutputInfo = class OutputInfo {
                     message.alias_input_port = reader.int64();
                     break;
                 case 3:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 4:
                     message.dtype = reader.int32();
@@ -7631,7 +7632,7 @@ $root.tensorflow.CostGraphDef.Node.OutputInfo = class OutputInfo {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CostGraphDef.Node.OutputInfo();
+        const message = new tensorflow.CostGraphDef.Node.OutputInfo();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7643,10 +7644,10 @@ $root.tensorflow.CostGraphDef.Node.OutputInfo = class OutputInfo {
                     message.alias_input_port = reader.int64();
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 default:
                     reader.field(tag, message);
@@ -7657,18 +7658,18 @@ $root.tensorflow.CostGraphDef.Node.OutputInfo = class OutputInfo {
     }
 };
 
-$root.tensorflow.CostGraphDef.Node.OutputInfo.prototype.size = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.OutputInfo.prototype.alias_input_port = protobuf.Int64.create(0);
-$root.tensorflow.CostGraphDef.Node.OutputInfo.prototype.shape = null;
-$root.tensorflow.CostGraphDef.Node.OutputInfo.prototype.dtype = 0;
+tensorflow.CostGraphDef.Node.OutputInfo.prototype.size = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.OutputInfo.prototype.alias_input_port = protobuf.Int64.create(0);
+tensorflow.CostGraphDef.Node.OutputInfo.prototype.shape = null;
+tensorflow.CostGraphDef.Node.OutputInfo.prototype.dtype = 0;
 
-$root.tensorflow.CostGraphDef.AggregatedCost = class AggregatedCost {
+tensorflow.CostGraphDef.AggregatedCost = class AggregatedCost {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CostGraphDef.AggregatedCost();
+        const message = new tensorflow.CostGraphDef.AggregatedCost();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7688,7 +7689,7 @@ $root.tensorflow.CostGraphDef.AggregatedCost = class AggregatedCost {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CostGraphDef.AggregatedCost();
+        const message = new tensorflow.CostGraphDef.AggregatedCost();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7708,16 +7709,16 @@ $root.tensorflow.CostGraphDef.AggregatedCost = class AggregatedCost {
     }
 };
 
-$root.tensorflow.CostGraphDef.AggregatedCost.prototype.cost = 0;
-$root.tensorflow.CostGraphDef.AggregatedCost.prototype.dimension = "";
+tensorflow.CostGraphDef.AggregatedCost.prototype.cost = 0;
+tensorflow.CostGraphDef.AggregatedCost.prototype.dimension = "";
 
-$root.tensorflow.AllocationRecord = class AllocationRecord {
+tensorflow.AllocationRecord = class AllocationRecord {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.AllocationRecord();
+        const message = new tensorflow.AllocationRecord();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7737,7 +7738,7 @@ $root.tensorflow.AllocationRecord = class AllocationRecord {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.AllocationRecord();
+        const message = new tensorflow.AllocationRecord();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7757,17 +7758,17 @@ $root.tensorflow.AllocationRecord = class AllocationRecord {
     }
 };
 
-$root.tensorflow.AllocationRecord.prototype.alloc_micros = protobuf.Int64.create(0);
-$root.tensorflow.AllocationRecord.prototype.alloc_bytes = protobuf.Int64.create(0);
+tensorflow.AllocationRecord.prototype.alloc_micros = protobuf.Int64.create(0);
+tensorflow.AllocationRecord.prototype.alloc_bytes = protobuf.Int64.create(0);
 
-$root.tensorflow.AllocatorMemoryUsed = class AllocatorMemoryUsed {
+tensorflow.AllocatorMemoryUsed = class AllocatorMemoryUsed {
 
     constructor() {
         this.allocation_records = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.AllocatorMemoryUsed();
+        const message = new tensorflow.AllocatorMemoryUsed();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7785,7 +7786,7 @@ $root.tensorflow.AllocatorMemoryUsed = class AllocatorMemoryUsed {
                     message.live_bytes = reader.int64();
                     break;
                 case 6:
-                    message.allocation_records.push($root.tensorflow.AllocationRecord.decode(reader, reader.uint32()));
+                    message.allocation_records.push(tensorflow.AllocationRecord.decode(reader, reader.uint32()));
                     break;
                 case 5:
                     message.allocator_bytes_in_use = reader.int64();
@@ -7799,7 +7800,7 @@ $root.tensorflow.AllocatorMemoryUsed = class AllocatorMemoryUsed {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.AllocatorMemoryUsed();
+        const message = new tensorflow.AllocatorMemoryUsed();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7817,7 +7818,7 @@ $root.tensorflow.AllocatorMemoryUsed = class AllocatorMemoryUsed {
                     message.live_bytes = reader.int64();
                     break;
                 case "allocation_records":
-                    message.allocation_records.push($root.tensorflow.AllocationRecord.decodeText(reader));
+                    message.allocation_records.push(tensorflow.AllocationRecord.decodeText(reader));
                     break;
                 case "allocator_bytes_in_use":
                     message.allocator_bytes_in_use = reader.int64();
@@ -7831,19 +7832,19 @@ $root.tensorflow.AllocatorMemoryUsed = class AllocatorMemoryUsed {
     }
 };
 
-$root.tensorflow.AllocatorMemoryUsed.prototype.allocator_name = "";
-$root.tensorflow.AllocatorMemoryUsed.prototype.total_bytes = protobuf.Int64.create(0);
-$root.tensorflow.AllocatorMemoryUsed.prototype.peak_bytes = protobuf.Int64.create(0);
-$root.tensorflow.AllocatorMemoryUsed.prototype.live_bytes = protobuf.Int64.create(0);
-$root.tensorflow.AllocatorMemoryUsed.prototype.allocator_bytes_in_use = protobuf.Int64.create(0);
+tensorflow.AllocatorMemoryUsed.prototype.allocator_name = "";
+tensorflow.AllocatorMemoryUsed.prototype.total_bytes = protobuf.Int64.create(0);
+tensorflow.AllocatorMemoryUsed.prototype.peak_bytes = protobuf.Int64.create(0);
+tensorflow.AllocatorMemoryUsed.prototype.live_bytes = protobuf.Int64.create(0);
+tensorflow.AllocatorMemoryUsed.prototype.allocator_bytes_in_use = protobuf.Int64.create(0);
 
-$root.tensorflow.NodeOutput = class NodeOutput {
+tensorflow.NodeOutput = class NodeOutput {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.NodeOutput();
+        const message = new tensorflow.NodeOutput();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7852,7 +7853,7 @@ $root.tensorflow.NodeOutput = class NodeOutput {
                     message.slot = reader.int32();
                     break;
                 case 3:
-                    message.tensor_description = $root.tensorflow.TensorDescription.decode(reader, reader.uint32());
+                    message.tensor_description = tensorflow.TensorDescription.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7863,7 +7864,7 @@ $root.tensorflow.NodeOutput = class NodeOutput {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.NodeOutput();
+        const message = new tensorflow.NodeOutput();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7872,7 +7873,7 @@ $root.tensorflow.NodeOutput = class NodeOutput {
                     message.slot = reader.int32();
                     break;
                 case "tensor_description":
-                    message.tensor_description = $root.tensorflow.TensorDescription.decodeText(reader);
+                    message.tensor_description = tensorflow.TensorDescription.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -7883,10 +7884,10 @@ $root.tensorflow.NodeOutput = class NodeOutput {
     }
 };
 
-$root.tensorflow.NodeOutput.prototype.slot = 0;
-$root.tensorflow.NodeOutput.prototype.tensor_description = null;
+tensorflow.NodeOutput.prototype.slot = 0;
+tensorflow.NodeOutput.prototype.tensor_description = null;
 
-$root.tensorflow.MemoryStats = class MemoryStats {
+tensorflow.MemoryStats = class MemoryStats {
 
     constructor() {
         this.persistent_tensor_alloc_ids = [];
@@ -7894,7 +7895,7 @@ $root.tensorflow.MemoryStats = class MemoryStats {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.MemoryStats();
+        const message = new tensorflow.MemoryStats();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7926,7 +7927,7 @@ $root.tensorflow.MemoryStats = class MemoryStats {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.MemoryStats();
+        const message = new tensorflow.MemoryStats();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -7958,12 +7959,12 @@ $root.tensorflow.MemoryStats = class MemoryStats {
     }
 };
 
-$root.tensorflow.MemoryStats.prototype.temp_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.MemoryStats.prototype.persistent_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.MemoryStats.prototype.device_temp_memory_size = protobuf.Int64.create(0);
-$root.tensorflow.MemoryStats.prototype.device_persistent_memory_size = protobuf.Int64.create(0);
+tensorflow.MemoryStats.prototype.temp_memory_size = protobuf.Int64.create(0);
+tensorflow.MemoryStats.prototype.persistent_memory_size = protobuf.Int64.create(0);
+tensorflow.MemoryStats.prototype.device_temp_memory_size = protobuf.Int64.create(0);
+tensorflow.MemoryStats.prototype.device_persistent_memory_size = protobuf.Int64.create(0);
 
-$root.tensorflow.NodeExecStats = class NodeExecStats {
+tensorflow.NodeExecStats = class NodeExecStats {
 
     constructor() {
         this.memory = [];
@@ -7972,7 +7973,7 @@ $root.tensorflow.NodeExecStats = class NodeExecStats {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.NodeExecStats();
+        const message = new tensorflow.NodeExecStats();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -7993,10 +7994,10 @@ $root.tensorflow.NodeExecStats = class NodeExecStats {
                     message.all_end_rel_micros = reader.int64();
                     break;
                 case 6:
-                    message.memory.push($root.tensorflow.AllocatorMemoryUsed.decode(reader, reader.uint32()));
+                    message.memory.push(tensorflow.AllocatorMemoryUsed.decode(reader, reader.uint32()));
                     break;
                 case 7:
-                    message.output.push($root.tensorflow.NodeOutput.decode(reader, reader.uint32()));
+                    message.output.push(tensorflow.NodeOutput.decode(reader, reader.uint32()));
                     break;
                 case 8:
                     message.timeline_label = reader.string();
@@ -8008,10 +8009,10 @@ $root.tensorflow.NodeExecStats = class NodeExecStats {
                     message.thread_id = reader.uint32();
                     break;
                 case 11:
-                    message.referenced_tensor.push($root.tensorflow.AllocationDescription.decode(reader, reader.uint32()));
+                    message.referenced_tensor.push(tensorflow.AllocationDescription.decode(reader, reader.uint32()));
                     break;
                 case 12:
-                    message.memory_stats = $root.tensorflow.MemoryStats.decode(reader, reader.uint32());
+                    message.memory_stats = tensorflow.MemoryStats.decode(reader, reader.uint32());
                     break;
                 case 13:
                     message.all_start_nanos = reader.int64();
@@ -8037,7 +8038,7 @@ $root.tensorflow.NodeExecStats = class NodeExecStats {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.NodeExecStats();
+        const message = new tensorflow.NodeExecStats();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8058,10 +8059,10 @@ $root.tensorflow.NodeExecStats = class NodeExecStats {
                     message.all_end_rel_micros = reader.int64();
                     break;
                 case "memory":
-                    message.memory.push($root.tensorflow.AllocatorMemoryUsed.decodeText(reader));
+                    message.memory.push(tensorflow.AllocatorMemoryUsed.decodeText(reader));
                     break;
                 case "output":
-                    message.output.push($root.tensorflow.NodeOutput.decodeText(reader));
+                    message.output.push(tensorflow.NodeOutput.decodeText(reader));
                     break;
                 case "timeline_label":
                     message.timeline_label = reader.string();
@@ -8073,10 +8074,10 @@ $root.tensorflow.NodeExecStats = class NodeExecStats {
                     message.thread_id = reader.uint32();
                     break;
                 case "referenced_tensor":
-                    message.referenced_tensor.push($root.tensorflow.AllocationDescription.decodeText(reader));
+                    message.referenced_tensor.push(tensorflow.AllocationDescription.decodeText(reader));
                     break;
                 case "memory_stats":
-                    message.memory_stats = $root.tensorflow.MemoryStats.decodeText(reader);
+                    message.memory_stats = tensorflow.MemoryStats.decodeText(reader);
                     break;
                 case "all_start_nanos":
                     message.all_start_nanos = reader.int64();
@@ -8102,22 +8103,22 @@ $root.tensorflow.NodeExecStats = class NodeExecStats {
     }
 };
 
-$root.tensorflow.NodeExecStats.prototype.node_name = "";
-$root.tensorflow.NodeExecStats.prototype.all_start_micros = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.op_start_rel_micros = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.op_end_rel_micros = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.all_end_rel_micros = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.timeline_label = "";
-$root.tensorflow.NodeExecStats.prototype.scheduled_micros = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.thread_id = 0;
-$root.tensorflow.NodeExecStats.prototype.memory_stats = null;
-$root.tensorflow.NodeExecStats.prototype.all_start_nanos = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.op_start_rel_nanos = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.op_end_rel_nanos = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.all_end_rel_nanos = protobuf.Int64.create(0);
-$root.tensorflow.NodeExecStats.prototype.scheduled_nanos = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.node_name = "";
+tensorflow.NodeExecStats.prototype.all_start_micros = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.op_start_rel_micros = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.op_end_rel_micros = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.all_end_rel_micros = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.timeline_label = "";
+tensorflow.NodeExecStats.prototype.scheduled_micros = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.thread_id = 0;
+tensorflow.NodeExecStats.prototype.memory_stats = null;
+tensorflow.NodeExecStats.prototype.all_start_nanos = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.op_start_rel_nanos = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.op_end_rel_nanos = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.all_end_rel_nanos = protobuf.Int64.create(0);
+tensorflow.NodeExecStats.prototype.scheduled_nanos = protobuf.Int64.create(0);
 
-$root.tensorflow.DeviceStepStats = class DeviceStepStats {
+tensorflow.DeviceStepStats = class DeviceStepStats {
 
     constructor() {
         this.node_stats = [];
@@ -8125,7 +8126,7 @@ $root.tensorflow.DeviceStepStats = class DeviceStepStats {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.DeviceStepStats();
+        const message = new tensorflow.DeviceStepStats();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8134,7 +8135,7 @@ $root.tensorflow.DeviceStepStats = class DeviceStepStats {
                     message.device = reader.string();
                     break;
                 case 2:
-                    message.node_stats.push($root.tensorflow.NodeExecStats.decode(reader, reader.uint32()));
+                    message.node_stats.push(tensorflow.NodeExecStats.decode(reader, reader.uint32()));
                     break;
                 case 3:
                     reader.entry(message.thread_names, () => reader.uint32(), () => reader.string());
@@ -8148,7 +8149,7 @@ $root.tensorflow.DeviceStepStats = class DeviceStepStats {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.DeviceStepStats();
+        const message = new tensorflow.DeviceStepStats();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8157,7 +8158,7 @@ $root.tensorflow.DeviceStepStats = class DeviceStepStats {
                     message.device = reader.string();
                     break;
                 case "node_stats":
-                    message.node_stats.push($root.tensorflow.NodeExecStats.decodeText(reader));
+                    message.node_stats.push(tensorflow.NodeExecStats.decodeText(reader));
                     break;
                 case "thread_names":
                     reader.entry(message.thread_names, () => reader.uint32(), () => reader.string());
@@ -8171,22 +8172,22 @@ $root.tensorflow.DeviceStepStats = class DeviceStepStats {
     }
 };
 
-$root.tensorflow.DeviceStepStats.prototype.device = "";
+tensorflow.DeviceStepStats.prototype.device = "";
 
-$root.tensorflow.StepStats = class StepStats {
+tensorflow.StepStats = class StepStats {
 
     constructor() {
         this.dev_stats = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.StepStats();
+        const message = new tensorflow.StepStats();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.dev_stats.push($root.tensorflow.DeviceStepStats.decode(reader, reader.uint32()));
+                    message.dev_stats.push(tensorflow.DeviceStepStats.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8197,13 +8198,13 @@ $root.tensorflow.StepStats = class StepStats {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.StepStats();
+        const message = new tensorflow.StepStats();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "dev_stats":
-                    message.dev_stats.push($root.tensorflow.DeviceStepStats.decodeText(reader));
+                    message.dev_stats.push(tensorflow.DeviceStepStats.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -8214,13 +8215,13 @@ $root.tensorflow.StepStats = class StepStats {
     }
 };
 
-$root.tensorflow.AllocationDescription = class AllocationDescription {
+tensorflow.AllocationDescription = class AllocationDescription {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.AllocationDescription();
+        const message = new tensorflow.AllocationDescription();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8252,7 +8253,7 @@ $root.tensorflow.AllocationDescription = class AllocationDescription {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.AllocationDescription();
+        const message = new tensorflow.AllocationDescription();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8284,20 +8285,20 @@ $root.tensorflow.AllocationDescription = class AllocationDescription {
     }
 };
 
-$root.tensorflow.AllocationDescription.prototype.requested_bytes = protobuf.Int64.create(0);
-$root.tensorflow.AllocationDescription.prototype.allocated_bytes = protobuf.Int64.create(0);
-$root.tensorflow.AllocationDescription.prototype.allocator_name = "";
-$root.tensorflow.AllocationDescription.prototype.allocation_id = protobuf.Int64.create(0);
-$root.tensorflow.AllocationDescription.prototype.has_single_reference = false;
-$root.tensorflow.AllocationDescription.prototype.ptr = protobuf.Uint64.create(0);
+tensorflow.AllocationDescription.prototype.requested_bytes = protobuf.Int64.create(0);
+tensorflow.AllocationDescription.prototype.allocated_bytes = protobuf.Int64.create(0);
+tensorflow.AllocationDescription.prototype.allocator_name = "";
+tensorflow.AllocationDescription.prototype.allocation_id = protobuf.Int64.create(0);
+tensorflow.AllocationDescription.prototype.has_single_reference = false;
+tensorflow.AllocationDescription.prototype.ptr = protobuf.Uint64.create(0);
 
-$root.tensorflow.TensorDescription = class TensorDescription {
+tensorflow.TensorDescription = class TensorDescription {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.TensorDescription();
+        const message = new tensorflow.TensorDescription();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8306,10 +8307,10 @@ $root.tensorflow.TensorDescription = class TensorDescription {
                     message.dtype = reader.int32();
                     break;
                 case 2:
-                    message.shape = $root.tensorflow.TensorShapeProto.decode(reader, reader.uint32());
+                    message.shape = tensorflow.TensorShapeProto.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.allocation_description = $root.tensorflow.AllocationDescription.decode(reader, reader.uint32());
+                    message.allocation_description = tensorflow.AllocationDescription.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8320,19 +8321,19 @@ $root.tensorflow.TensorDescription = class TensorDescription {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.TensorDescription();
+        const message = new tensorflow.TensorDescription();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "dtype":
-                    message.dtype = reader.enum($root.tensorflow.DataType);
+                    message.dtype = reader.enum(tensorflow.DataType);
                     break;
                 case "shape":
-                    message.shape = $root.tensorflow.TensorShapeProto.decodeText(reader);
+                    message.shape = tensorflow.TensorShapeProto.decodeText(reader);
                     break;
                 case "allocation_description":
-                    message.allocation_description = $root.tensorflow.AllocationDescription.decodeText(reader);
+                    message.allocation_description = tensorflow.AllocationDescription.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -8343,18 +8344,18 @@ $root.tensorflow.TensorDescription = class TensorDescription {
     }
 };
 
-$root.tensorflow.TensorDescription.prototype.dtype = 0;
-$root.tensorflow.TensorDescription.prototype.shape = null;
-$root.tensorflow.TensorDescription.prototype.allocation_description = null;
+tensorflow.TensorDescription.prototype.dtype = 0;
+tensorflow.TensorDescription.prototype.shape = null;
+tensorflow.TensorDescription.prototype.allocation_description = null;
 
-$root.tensorflow.JobDef = class JobDef {
+tensorflow.JobDef = class JobDef {
 
     constructor() {
         this.tasks = {};
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.JobDef();
+        const message = new tensorflow.JobDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8374,7 +8375,7 @@ $root.tensorflow.JobDef = class JobDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.JobDef();
+        const message = new tensorflow.JobDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8394,22 +8395,22 @@ $root.tensorflow.JobDef = class JobDef {
     }
 };
 
-$root.tensorflow.JobDef.prototype.name = "";
+tensorflow.JobDef.prototype.name = "";
 
-$root.tensorflow.ClusterDef = class ClusterDef {
+tensorflow.ClusterDef = class ClusterDef {
 
     constructor() {
         this.job = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.ClusterDef();
+        const message = new tensorflow.ClusterDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.job.push($root.tensorflow.JobDef.decode(reader, reader.uint32()));
+                    message.job.push(tensorflow.JobDef.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8420,13 +8421,13 @@ $root.tensorflow.ClusterDef = class ClusterDef {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.ClusterDef();
+        const message = new tensorflow.ClusterDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "job":
-                    message.job.push($root.tensorflow.JobDef.decodeText(reader));
+                    message.job.push(tensorflow.JobDef.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -8437,14 +8438,14 @@ $root.tensorflow.ClusterDef = class ClusterDef {
     }
 };
 
-$root.tensorflow.CoordinationServiceConfig = class CoordinationServiceConfig {
+tensorflow.CoordinationServiceConfig = class CoordinationServiceConfig {
 
     constructor() {
         this.coordinated_jobs = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.CoordinationServiceConfig();
+        const message = new tensorflow.CoordinationServiceConfig();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8476,7 +8477,7 @@ $root.tensorflow.CoordinationServiceConfig = class CoordinationServiceConfig {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.CoordinationServiceConfig();
+        const message = new tensorflow.CoordinationServiceConfig();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8508,13 +8509,13 @@ $root.tensorflow.CoordinationServiceConfig = class CoordinationServiceConfig {
     }
 };
 
-$root.tensorflow.CoordinationServiceConfig.prototype.service_type = "";
-$root.tensorflow.CoordinationServiceConfig.prototype.service_leader = "";
-$root.tensorflow.CoordinationServiceConfig.prototype.enable_health_check = false;
-$root.tensorflow.CoordinationServiceConfig.prototype.cluster_register_timeout_in_ms = protobuf.Int64.create(0);
-$root.tensorflow.CoordinationServiceConfig.prototype.heartbeat_timeout_in_ms = protobuf.Int64.create(0);
+tensorflow.CoordinationServiceConfig.prototype.service_type = "";
+tensorflow.CoordinationServiceConfig.prototype.service_leader = "";
+tensorflow.CoordinationServiceConfig.prototype.enable_health_check = false;
+tensorflow.CoordinationServiceConfig.prototype.cluster_register_timeout_in_ms = protobuf.Int64.create(0);
+tensorflow.CoordinationServiceConfig.prototype.heartbeat_timeout_in_ms = protobuf.Int64.create(0);
 
-$root.tensorflow.DebugTensorWatch = class DebugTensorWatch {
+tensorflow.DebugTensorWatch = class DebugTensorWatch {
 
     constructor() {
         this.debug_ops = [];
@@ -8522,7 +8523,7 @@ $root.tensorflow.DebugTensorWatch = class DebugTensorWatch {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.DebugTensorWatch();
+        const message = new tensorflow.DebugTensorWatch();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8551,7 +8552,7 @@ $root.tensorflow.DebugTensorWatch = class DebugTensorWatch {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.DebugTensorWatch();
+        const message = new tensorflow.DebugTensorWatch();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8580,24 +8581,24 @@ $root.tensorflow.DebugTensorWatch = class DebugTensorWatch {
     }
 };
 
-$root.tensorflow.DebugTensorWatch.prototype.node_name = "";
-$root.tensorflow.DebugTensorWatch.prototype.output_slot = 0;
-$root.tensorflow.DebugTensorWatch.prototype.tolerate_debug_op_creation_failures = false;
+tensorflow.DebugTensorWatch.prototype.node_name = "";
+tensorflow.DebugTensorWatch.prototype.output_slot = 0;
+tensorflow.DebugTensorWatch.prototype.tolerate_debug_op_creation_failures = false;
 
-$root.tensorflow.DebugOptions = class DebugOptions {
+tensorflow.DebugOptions = class DebugOptions {
 
     constructor() {
         this.debug_tensor_watch_opts = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.DebugOptions();
+        const message = new tensorflow.DebugOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 4:
-                    message.debug_tensor_watch_opts.push($root.tensorflow.DebugTensorWatch.decode(reader, reader.uint32()));
+                    message.debug_tensor_watch_opts.push(tensorflow.DebugTensorWatch.decode(reader, reader.uint32()));
                     break;
                 case 10:
                     message.global_step = reader.int64();
@@ -8614,13 +8615,13 @@ $root.tensorflow.DebugOptions = class DebugOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.DebugOptions();
+        const message = new tensorflow.DebugOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "debug_tensor_watch_opts":
-                    message.debug_tensor_watch_opts.push($root.tensorflow.DebugTensorWatch.decodeText(reader));
+                    message.debug_tensor_watch_opts.push(tensorflow.DebugTensorWatch.decodeText(reader));
                     break;
                 case "global_step":
                     message.global_step = reader.int64();
@@ -8637,17 +8638,17 @@ $root.tensorflow.DebugOptions = class DebugOptions {
     }
 };
 
-$root.tensorflow.DebugOptions.prototype.global_step = protobuf.Int64.create(0);
-$root.tensorflow.DebugOptions.prototype.reset_disk_byte_usage = false;
+tensorflow.DebugOptions.prototype.global_step = protobuf.Int64.create(0);
+tensorflow.DebugOptions.prototype.reset_disk_byte_usage = false;
 
-$root.tensorflow.DebuggedSourceFile = class DebuggedSourceFile {
+tensorflow.DebuggedSourceFile = class DebuggedSourceFile {
 
     constructor() {
         this.lines = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.DebuggedSourceFile();
+        const message = new tensorflow.DebuggedSourceFile();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8676,7 +8677,7 @@ $root.tensorflow.DebuggedSourceFile = class DebuggedSourceFile {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.DebuggedSourceFile();
+        const message = new tensorflow.DebuggedSourceFile();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8705,25 +8706,25 @@ $root.tensorflow.DebuggedSourceFile = class DebuggedSourceFile {
     }
 };
 
-$root.tensorflow.DebuggedSourceFile.prototype.host = "";
-$root.tensorflow.DebuggedSourceFile.prototype.file_path = "";
-$root.tensorflow.DebuggedSourceFile.prototype.last_modified = protobuf.Int64.create(0);
-$root.tensorflow.DebuggedSourceFile.prototype.bytes = protobuf.Int64.create(0);
+tensorflow.DebuggedSourceFile.prototype.host = "";
+tensorflow.DebuggedSourceFile.prototype.file_path = "";
+tensorflow.DebuggedSourceFile.prototype.last_modified = protobuf.Int64.create(0);
+tensorflow.DebuggedSourceFile.prototype.bytes = protobuf.Int64.create(0);
 
-$root.tensorflow.DebuggedSourceFiles = class DebuggedSourceFiles {
+tensorflow.DebuggedSourceFiles = class DebuggedSourceFiles {
 
     constructor() {
         this.source_files = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.DebuggedSourceFiles();
+        const message = new tensorflow.DebuggedSourceFiles();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.source_files.push($root.tensorflow.DebuggedSourceFile.decode(reader, reader.uint32()));
+                    message.source_files.push(tensorflow.DebuggedSourceFile.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8734,13 +8735,13 @@ $root.tensorflow.DebuggedSourceFiles = class DebuggedSourceFiles {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.DebuggedSourceFiles();
+        const message = new tensorflow.DebuggedSourceFiles();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "source_files":
-                    message.source_files.push($root.tensorflow.DebuggedSourceFile.decodeText(reader));
+                    message.source_files.push(tensorflow.DebuggedSourceFile.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -8751,13 +8752,13 @@ $root.tensorflow.DebuggedSourceFiles = class DebuggedSourceFiles {
     }
 };
 
-$root.tensorflow.AutoParallelOptions = class AutoParallelOptions {
+tensorflow.AutoParallelOptions = class AutoParallelOptions {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.AutoParallelOptions();
+        const message = new tensorflow.AutoParallelOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8777,7 +8778,7 @@ $root.tensorflow.AutoParallelOptions = class AutoParallelOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.AutoParallelOptions();
+        const message = new tensorflow.AutoParallelOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8797,17 +8798,17 @@ $root.tensorflow.AutoParallelOptions = class AutoParallelOptions {
     }
 };
 
-$root.tensorflow.AutoParallelOptions.prototype.enable = false;
-$root.tensorflow.AutoParallelOptions.prototype.num_replicas = 0;
+tensorflow.AutoParallelOptions.prototype.enable = false;
+tensorflow.AutoParallelOptions.prototype.num_replicas = 0;
 
-$root.tensorflow.ScopedAllocatorOptions = class ScopedAllocatorOptions {
+tensorflow.ScopedAllocatorOptions = class ScopedAllocatorOptions {
 
     constructor() {
         this.enable_op = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.ScopedAllocatorOptions();
+        const message = new tensorflow.ScopedAllocatorOptions();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8824,7 +8825,7 @@ $root.tensorflow.ScopedAllocatorOptions = class ScopedAllocatorOptions {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.ScopedAllocatorOptions();
+        const message = new tensorflow.ScopedAllocatorOptions();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -8841,7 +8842,7 @@ $root.tensorflow.ScopedAllocatorOptions = class ScopedAllocatorOptions {
     }
 };
 
-$root.tensorflow.RewriterConfig = class RewriterConfig {
+tensorflow.RewriterConfig = class RewriterConfig {
 
     constructor() {
         this.optimizers = [];
@@ -8849,7 +8850,7 @@ $root.tensorflow.RewriterConfig = class RewriterConfig {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RewriterConfig();
+        const message = new tensorflow.RewriterConfig();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -8936,25 +8937,25 @@ $root.tensorflow.RewriterConfig = class RewriterConfig {
                     message.meta_optimizer_timeout_ms = reader.int64();
                     break;
                 case 5:
-                    message.auto_parallel = $root.tensorflow.AutoParallelOptions.decode(reader, reader.uint32());
+                    message.auto_parallel = tensorflow.AutoParallelOptions.decode(reader, reader.uint32());
                     break;
                 case 21:
                     message.fail_on_optimizer_errors = reader.bool();
                     break;
                 case 16:
-                    message.scoped_allocator_opts = $root.tensorflow.ScopedAllocatorOptions.decode(reader, reader.uint32());
+                    message.scoped_allocator_opts = tensorflow.ScopedAllocatorOptions.decode(reader, reader.uint32());
                     break;
                 case 100:
                     message.optimizers.push(reader.string());
                     break;
                 case 200:
-                    message.custom_optimizers.push($root.tensorflow.RewriterConfig.CustomGraphOptimizer.decode(reader, reader.uint32()));
+                    message.custom_optimizers.push(tensorflow.RewriterConfig.CustomGraphOptimizer.decode(reader, reader.uint32()));
                     break;
                 case 300:
-                    message.inter_optimizer_verifier_config = $root.tensorflow.VerifierConfig.decode(reader, reader.uint32());
+                    message.inter_optimizer_verifier_config = tensorflow.VerifierConfig.decode(reader, reader.uint32());
                     break;
                 case 301:
-                    message.post_optimization_verifier_config = $root.tensorflow.VerifierConfig.decode(reader, reader.uint32());
+                    message.post_optimization_verifier_config = tensorflow.VerifierConfig.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8965,73 +8966,73 @@ $root.tensorflow.RewriterConfig = class RewriterConfig {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RewriterConfig();
+        const message = new tensorflow.RewriterConfig();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "cpu_layout_conversion":
-                    message.cpu_layout_conversion = reader.enum($root.tensorflow.RewriterConfig.CpuLayout);
+                    message.cpu_layout_conversion = reader.enum(tensorflow.RewriterConfig.CpuLayout);
                     break;
                 case "layout_optimizer":
-                    message.layout_optimizer = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.layout_optimizer = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "constant_folding":
-                    message.constant_folding = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.constant_folding = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "shape_optimization":
-                    message.shape_optimization = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.shape_optimization = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "remapping":
-                    message.remapping = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.remapping = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "common_subgraph_elimination":
-                    message.common_subgraph_elimination = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.common_subgraph_elimination = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "arithmetic_optimization":
-                    message.arithmetic_optimization = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.arithmetic_optimization = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "dependency_optimization":
-                    message.dependency_optimization = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.dependency_optimization = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "loop_optimization":
-                    message.loop_optimization = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.loop_optimization = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "function_optimization":
-                    message.function_optimization = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.function_optimization = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "debug_stripper":
-                    message.debug_stripper = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.debug_stripper = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "disable_model_pruning":
                     message.disable_model_pruning = reader.bool();
                     break;
                 case "scoped_allocator_optimization":
-                    message.scoped_allocator_optimization = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.scoped_allocator_optimization = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "pin_to_host_optimization":
-                    message.pin_to_host_optimization = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.pin_to_host_optimization = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "implementation_selector":
-                    message.implementation_selector = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.implementation_selector = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "auto_mixed_precision":
-                    message.auto_mixed_precision = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.auto_mixed_precision = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "auto_mixed_precision_mkl":
-                    message.auto_mixed_precision_mkl = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.auto_mixed_precision_mkl = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "auto_mixed_precision_cpu":
-                    message.auto_mixed_precision_cpu = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.auto_mixed_precision_cpu = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "disable_meta_optimizer":
                     message.disable_meta_optimizer = reader.bool();
                     break;
                 case "use_plugin_optimizers":
-                    message.use_plugin_optimizers = reader.enum($root.tensorflow.RewriterConfig.Toggle);
+                    message.use_plugin_optimizers = reader.enum(tensorflow.RewriterConfig.Toggle);
                     break;
                 case "meta_optimizer_iterations":
-                    message.meta_optimizer_iterations = reader.enum($root.tensorflow.RewriterConfig.NumIterationsType);
+                    message.meta_optimizer_iterations = reader.enum(tensorflow.RewriterConfig.NumIterationsType);
                     break;
                 case "min_graph_nodes":
                     message.min_graph_nodes = reader.int32();
@@ -9043,7 +9044,7 @@ $root.tensorflow.RewriterConfig = class RewriterConfig {
                     message.experimental_disable_folding_quantization_emulation = reader.bool();
                     break;
                 case "memory_optimization":
-                    message.memory_optimization = reader.enum($root.tensorflow.RewriterConfig.MemOptType);
+                    message.memory_optimization = reader.enum(tensorflow.RewriterConfig.MemOptType);
                     break;
                 case "memory_optimizer_target_node_name_scope":
                     message.memory_optimizer_target_node_name_scope = reader.string();
@@ -9052,25 +9053,25 @@ $root.tensorflow.RewriterConfig = class RewriterConfig {
                     message.meta_optimizer_timeout_ms = reader.int64();
                     break;
                 case "auto_parallel":
-                    message.auto_parallel = $root.tensorflow.AutoParallelOptions.decodeText(reader);
+                    message.auto_parallel = tensorflow.AutoParallelOptions.decodeText(reader);
                     break;
                 case "fail_on_optimizer_errors":
                     message.fail_on_optimizer_errors = reader.bool();
                     break;
                 case "scoped_allocator_opts":
-                    message.scoped_allocator_opts = $root.tensorflow.ScopedAllocatorOptions.decodeText(reader);
+                    message.scoped_allocator_opts = tensorflow.ScopedAllocatorOptions.decodeText(reader);
                     break;
                 case "optimizers":
                     reader.array(message.optimizers, () => reader.string());
                     break;
                 case "custom_optimizers":
-                    message.custom_optimizers.push($root.tensorflow.RewriterConfig.CustomGraphOptimizer.decodeText(reader));
+                    message.custom_optimizers.push(tensorflow.RewriterConfig.CustomGraphOptimizer.decodeText(reader));
                     break;
                 case "inter_optimizer_verifier_config":
-                    message.inter_optimizer_verifier_config = $root.tensorflow.VerifierConfig.decodeText(reader);
+                    message.inter_optimizer_verifier_config = tensorflow.VerifierConfig.decodeText(reader);
                     break;
                 case "post_optimization_verifier_config":
-                    message.post_optimization_verifier_config = $root.tensorflow.VerifierConfig.decodeText(reader);
+                    message.post_optimization_verifier_config = tensorflow.VerifierConfig.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -9081,59 +9082,59 @@ $root.tensorflow.RewriterConfig = class RewriterConfig {
     }
 };
 
-$root.tensorflow.RewriterConfig.prototype.cpu_layout_conversion = 0;
-$root.tensorflow.RewriterConfig.prototype.layout_optimizer = 0;
-$root.tensorflow.RewriterConfig.prototype.constant_folding = 0;
-$root.tensorflow.RewriterConfig.prototype.shape_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.remapping = 0;
-$root.tensorflow.RewriterConfig.prototype.common_subgraph_elimination = 0;
-$root.tensorflow.RewriterConfig.prototype.arithmetic_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.dependency_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.loop_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.function_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.debug_stripper = 0;
-$root.tensorflow.RewriterConfig.prototype.disable_model_pruning = false;
-$root.tensorflow.RewriterConfig.prototype.scoped_allocator_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.pin_to_host_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.implementation_selector = 0;
-$root.tensorflow.RewriterConfig.prototype.auto_mixed_precision = 0;
-$root.tensorflow.RewriterConfig.prototype.auto_mixed_precision_mkl = 0;
-$root.tensorflow.RewriterConfig.prototype.auto_mixed_precision_cpu = 0;
-$root.tensorflow.RewriterConfig.prototype.disable_meta_optimizer = false;
-$root.tensorflow.RewriterConfig.prototype.use_plugin_optimizers = 0;
-$root.tensorflow.RewriterConfig.prototype.meta_optimizer_iterations = 0;
-$root.tensorflow.RewriterConfig.prototype.min_graph_nodes = 0;
-$root.tensorflow.RewriterConfig.prototype.experimental_disable_compressed_tensor_optimization = false;
-$root.tensorflow.RewriterConfig.prototype.experimental_disable_folding_quantization_emulation = false;
-$root.tensorflow.RewriterConfig.prototype.memory_optimization = 0;
-$root.tensorflow.RewriterConfig.prototype.memory_optimizer_target_node_name_scope = "";
-$root.tensorflow.RewriterConfig.prototype.meta_optimizer_timeout_ms = protobuf.Int64.create(0);
-$root.tensorflow.RewriterConfig.prototype.auto_parallel = null;
-$root.tensorflow.RewriterConfig.prototype.fail_on_optimizer_errors = false;
-$root.tensorflow.RewriterConfig.prototype.scoped_allocator_opts = null;
-$root.tensorflow.RewriterConfig.prototype.inter_optimizer_verifier_config = null;
-$root.tensorflow.RewriterConfig.prototype.post_optimization_verifier_config = null;
+tensorflow.RewriterConfig.prototype.cpu_layout_conversion = 0;
+tensorflow.RewriterConfig.prototype.layout_optimizer = 0;
+tensorflow.RewriterConfig.prototype.constant_folding = 0;
+tensorflow.RewriterConfig.prototype.shape_optimization = 0;
+tensorflow.RewriterConfig.prototype.remapping = 0;
+tensorflow.RewriterConfig.prototype.common_subgraph_elimination = 0;
+tensorflow.RewriterConfig.prototype.arithmetic_optimization = 0;
+tensorflow.RewriterConfig.prototype.dependency_optimization = 0;
+tensorflow.RewriterConfig.prototype.loop_optimization = 0;
+tensorflow.RewriterConfig.prototype.function_optimization = 0;
+tensorflow.RewriterConfig.prototype.debug_stripper = 0;
+tensorflow.RewriterConfig.prototype.disable_model_pruning = false;
+tensorflow.RewriterConfig.prototype.scoped_allocator_optimization = 0;
+tensorflow.RewriterConfig.prototype.pin_to_host_optimization = 0;
+tensorflow.RewriterConfig.prototype.implementation_selector = 0;
+tensorflow.RewriterConfig.prototype.auto_mixed_precision = 0;
+tensorflow.RewriterConfig.prototype.auto_mixed_precision_mkl = 0;
+tensorflow.RewriterConfig.prototype.auto_mixed_precision_cpu = 0;
+tensorflow.RewriterConfig.prototype.disable_meta_optimizer = false;
+tensorflow.RewriterConfig.prototype.use_plugin_optimizers = 0;
+tensorflow.RewriterConfig.prototype.meta_optimizer_iterations = 0;
+tensorflow.RewriterConfig.prototype.min_graph_nodes = 0;
+tensorflow.RewriterConfig.prototype.experimental_disable_compressed_tensor_optimization = false;
+tensorflow.RewriterConfig.prototype.experimental_disable_folding_quantization_emulation = false;
+tensorflow.RewriterConfig.prototype.memory_optimization = 0;
+tensorflow.RewriterConfig.prototype.memory_optimizer_target_node_name_scope = "";
+tensorflow.RewriterConfig.prototype.meta_optimizer_timeout_ms = protobuf.Int64.create(0);
+tensorflow.RewriterConfig.prototype.auto_parallel = null;
+tensorflow.RewriterConfig.prototype.fail_on_optimizer_errors = false;
+tensorflow.RewriterConfig.prototype.scoped_allocator_opts = null;
+tensorflow.RewriterConfig.prototype.inter_optimizer_verifier_config = null;
+tensorflow.RewriterConfig.prototype.post_optimization_verifier_config = null;
 
-$root.tensorflow.RewriterConfig.Toggle = {
+tensorflow.RewriterConfig.Toggle = {
     "DEFAULT": 0,
     "ON": 1,
     "OFF": 2,
     "AGGRESSIVE": 3
 };
 
-$root.tensorflow.RewriterConfig.CpuLayout = {
+tensorflow.RewriterConfig.CpuLayout = {
     "NO_CONVERSION_ON_CPU": 0,
     "NCHW_TO_NHWC": 1,
     "NHWC_TO_NCHW": 2
 };
 
-$root.tensorflow.RewriterConfig.NumIterationsType = {
+tensorflow.RewriterConfig.NumIterationsType = {
     "DEFAULT_NUM_ITERS": 0,
     "ONE": 1,
     "TWO": 2
 };
 
-$root.tensorflow.RewriterConfig.MemOptType = {
+tensorflow.RewriterConfig.MemOptType = {
     "DEFAULT_MEM_OPT": 0,
     "NO_MEM_OPT": 1,
     "MANUAL": 2,
@@ -9143,14 +9144,14 @@ $root.tensorflow.RewriterConfig.MemOptType = {
     "HEURISTICS": 3
 };
 
-$root.tensorflow.RewriterConfig.CustomGraphOptimizer = class CustomGraphOptimizer {
+tensorflow.RewriterConfig.CustomGraphOptimizer = class CustomGraphOptimizer {
 
     constructor() {
         this.parameter_map = {};
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.RewriterConfig.CustomGraphOptimizer();
+        const message = new tensorflow.RewriterConfig.CustomGraphOptimizer();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -9159,7 +9160,7 @@ $root.tensorflow.RewriterConfig.CustomGraphOptimizer = class CustomGraphOptimize
                     message.name = reader.string();
                     break;
                 case 2:
-                    reader.entry(message.parameter_map, () => reader.string(), () => $root.tensorflow.AttrValue.decode(reader, reader.uint32()));
+                    reader.entry(message.parameter_map, () => reader.string(), () => tensorflow.AttrValue.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9170,7 +9171,7 @@ $root.tensorflow.RewriterConfig.CustomGraphOptimizer = class CustomGraphOptimize
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.RewriterConfig.CustomGraphOptimizer();
+        const message = new tensorflow.RewriterConfig.CustomGraphOptimizer();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -9179,7 +9180,7 @@ $root.tensorflow.RewriterConfig.CustomGraphOptimizer = class CustomGraphOptimize
                     message.name = reader.string();
                     break;
                 case "parameter_map":
-                    reader.entry(message.parameter_map, () => reader.string(), () => $root.tensorflow.AttrValue.decodeText(reader));
+                    reader.entry(message.parameter_map, () => reader.string(), () => tensorflow.AttrValue.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -9190,15 +9191,15 @@ $root.tensorflow.RewriterConfig.CustomGraphOptimizer = class CustomGraphOptimize
     }
 };
 
-$root.tensorflow.RewriterConfig.CustomGraphOptimizer.prototype.name = "";
+tensorflow.RewriterConfig.CustomGraphOptimizer.prototype.name = "";
 
-$root.tensorflow.VerifierConfig = class VerifierConfig {
+tensorflow.VerifierConfig = class VerifierConfig {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.VerifierConfig();
+        const message = new tensorflow.VerifierConfig();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -9218,7 +9219,7 @@ $root.tensorflow.VerifierConfig = class VerifierConfig {
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.VerifierConfig();
+        const message = new tensorflow.VerifierConfig();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -9227,7 +9228,7 @@ $root.tensorflow.VerifierConfig = class VerifierConfig {
                     message.verification_timeout_in_ms = reader.int64();
                     break;
                 case "structure_verifier":
-                    message.structure_verifier = reader.enum($root.tensorflow.VerifierConfig.Toggle);
+                    message.structure_verifier = reader.enum(tensorflow.VerifierConfig.Toggle);
                     break;
                 default:
                     reader.field(tag, message);
@@ -9238,22 +9239,22 @@ $root.tensorflow.VerifierConfig = class VerifierConfig {
     }
 };
 
-$root.tensorflow.VerifierConfig.prototype.verification_timeout_in_ms = protobuf.Int64.create(0);
-$root.tensorflow.VerifierConfig.prototype.structure_verifier = 0;
+tensorflow.VerifierConfig.prototype.verification_timeout_in_ms = protobuf.Int64.create(0);
+tensorflow.VerifierConfig.prototype.structure_verifier = 0;
 
-$root.tensorflow.VerifierConfig.Toggle = {
+tensorflow.VerifierConfig.Toggle = {
     "DEFAULT": 0,
     "ON": 1,
     "OFF": 2
 };
 
-$root.tensorflow.MemmappedFileSystemDirectoryElement = class MemmappedFileSystemDirectoryElement {
+tensorflow.MemmappedFileSystemDirectoryElement = class MemmappedFileSystemDirectoryElement {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.MemmappedFileSystemDirectoryElement();
+        const message = new tensorflow.MemmappedFileSystemDirectoryElement();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -9276,7 +9277,7 @@ $root.tensorflow.MemmappedFileSystemDirectoryElement = class MemmappedFileSystem
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.MemmappedFileSystemDirectoryElement();
+        const message = new tensorflow.MemmappedFileSystemDirectoryElement();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -9299,24 +9300,24 @@ $root.tensorflow.MemmappedFileSystemDirectoryElement = class MemmappedFileSystem
     }
 };
 
-$root.tensorflow.MemmappedFileSystemDirectoryElement.prototype.offset = protobuf.Uint64.create(0);
-$root.tensorflow.MemmappedFileSystemDirectoryElement.prototype.name = "";
-$root.tensorflow.MemmappedFileSystemDirectoryElement.prototype.length = protobuf.Uint64.create(0);
+tensorflow.MemmappedFileSystemDirectoryElement.prototype.offset = protobuf.Uint64.create(0);
+tensorflow.MemmappedFileSystemDirectoryElement.prototype.name = "";
+tensorflow.MemmappedFileSystemDirectoryElement.prototype.length = protobuf.Uint64.create(0);
 
-$root.tensorflow.MemmappedFileSystemDirectory = class MemmappedFileSystemDirectory {
+tensorflow.MemmappedFileSystemDirectory = class MemmappedFileSystemDirectory {
 
     constructor() {
         this.element = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.tensorflow.MemmappedFileSystemDirectory();
+        const message = new tensorflow.MemmappedFileSystemDirectory();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.element.push($root.tensorflow.MemmappedFileSystemDirectoryElement.decode(reader, reader.uint32()));
+                    message.element.push(tensorflow.MemmappedFileSystemDirectoryElement.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9327,13 +9328,13 @@ $root.tensorflow.MemmappedFileSystemDirectory = class MemmappedFileSystemDirecto
     }
 
     static decodeText(reader) {
-        const message = new $root.tensorflow.MemmappedFileSystemDirectory();
+        const message = new tensorflow.MemmappedFileSystemDirectory();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "element":
-                    message.element.push($root.tensorflow.MemmappedFileSystemDirectoryElement.decodeText(reader));
+                    message.element.push(tensorflow.MemmappedFileSystemDirectoryElement.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -9344,17 +9345,17 @@ $root.tensorflow.MemmappedFileSystemDirectory = class MemmappedFileSystemDirecto
     }
 };
 
-$root.google = {};
+var google = {};
 
-$root.google.protobuf = {};
+google.protobuf = {};
 
-$root.google.protobuf.Any = class Any {
+google.protobuf.Any = class Any {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.google.protobuf.Any();
+        const message = new google.protobuf.Any();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -9374,20 +9375,20 @@ $root.google.protobuf.Any = class Any {
     }
 
     static decodeText(reader) {
-        return reader.any(() => new $root.google.protobuf.Any());
+        return reader.any(() => new google.protobuf.Any());
     }
 };
 
-$root.google.protobuf.Any.prototype.type_url = "";
-$root.google.protobuf.Any.prototype.value = new Uint8Array([]);
+google.protobuf.Any.prototype.type_url = "";
+google.protobuf.Any.prototype.value = new Uint8Array([]);
 
-$root.google.protobuf.BoolValue = class BoolValue {
+google.protobuf.BoolValue = class BoolValue {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.google.protobuf.BoolValue();
+        const message = new google.protobuf.BoolValue();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -9404,7 +9405,7 @@ $root.google.protobuf.BoolValue = class BoolValue {
     }
 
     static decodeText(reader) {
-        const message = new $root.google.protobuf.BoolValue();
+        const message = new google.protobuf.BoolValue();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -9421,32 +9422,30 @@ $root.google.protobuf.BoolValue = class BoolValue {
     }
 };
 
-$root.google.protobuf.BoolValue.prototype.value = false;
+google.protobuf.BoolValue.prototype.value = false;
 
-$root.third_party = {};
+////////////////////
 
-$root.third_party.tensorflow = {};
+tensorflow.python = {};
 
-$root.third_party.tensorflow.python = {};
+tensorflow.python.keras = {};
 
-$root.third_party.tensorflow.python.keras = {};
+tensorflow.python.keras.protobuf = {};
 
-$root.third_party.tensorflow.python.keras.protobuf = {};
-
-$root.third_party.tensorflow.python.keras.protobuf.SavedMetadata = class SavedMetadata {
+tensorflow.python.keras.protobuf.SavedMetadata = class SavedMetadata {
 
     constructor() {
         this.nodes = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.third_party.tensorflow.python.keras.protobuf.SavedMetadata();
+        const message = new tensorflow.python.keras.protobuf.SavedMetadata();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.nodes.push($root.third_party.tensorflow.python.keras.protobuf.SavedObject.decode(reader, reader.uint32()));
+                    message.nodes.push(tensorflow.python.keras.protobuf.SavedObject.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9457,13 +9456,13 @@ $root.third_party.tensorflow.python.keras.protobuf.SavedMetadata = class SavedMe
     }
 
     static decodeText(reader) {
-        const message = new $root.third_party.tensorflow.python.keras.protobuf.SavedMetadata();
+        const message = new tensorflow.python.keras.protobuf.SavedMetadata();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
             switch (tag) {
                 case "nodes":
-                    message.nodes.push($root.third_party.tensorflow.python.keras.protobuf.SavedObject.decodeText(reader));
+                    message.nodes.push(tensorflow.python.keras.protobuf.SavedObject.decodeText(reader));
                     break;
                 default:
                     reader.field(tag, message);
@@ -9474,13 +9473,13 @@ $root.third_party.tensorflow.python.keras.protobuf.SavedMetadata = class SavedMe
     }
 };
 
-$root.third_party.tensorflow.python.keras.protobuf.SavedObject = class SavedObject {
+tensorflow.python.keras.protobuf.SavedObject = class SavedObject {
 
     constructor() {
     }
 
     static decode(reader, length) {
-        const message = new $root.third_party.tensorflow.python.keras.protobuf.SavedObject();
+        const message = new tensorflow.python.keras.protobuf.SavedObject();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -9498,7 +9497,7 @@ $root.third_party.tensorflow.python.keras.protobuf.SavedObject = class SavedObje
                     message.metadata = reader.string();
                     break;
                 case 6:
-                    message.version = $root.third_party.tensorflow.python.keras.protobuf.VersionDef.decode(reader, reader.uint32());
+                    message.version = tensorflow.python.keras.protobuf.VersionDef.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9509,7 +9508,7 @@ $root.third_party.tensorflow.python.keras.protobuf.SavedObject = class SavedObje
     }
 
     static decodeText(reader) {
-        const message = new $root.third_party.tensorflow.python.keras.protobuf.SavedObject();
+        const message = new tensorflow.python.keras.protobuf.SavedObject();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -9527,7 +9526,7 @@ $root.third_party.tensorflow.python.keras.protobuf.SavedObject = class SavedObje
                     message.metadata = reader.string();
                     break;
                 case "version":
-                    message.version = $root.third_party.tensorflow.python.keras.protobuf.VersionDef.decodeText(reader);
+                    message.version = tensorflow.python.keras.protobuf.VersionDef.decodeText(reader);
                     break;
                 default:
                     reader.field(tag, message);
@@ -9538,20 +9537,20 @@ $root.third_party.tensorflow.python.keras.protobuf.SavedObject = class SavedObje
     }
 };
 
-$root.third_party.tensorflow.python.keras.protobuf.SavedObject.prototype.node_id = 0;
-$root.third_party.tensorflow.python.keras.protobuf.SavedObject.prototype.node_path = "";
-$root.third_party.tensorflow.python.keras.protobuf.SavedObject.prototype.identifier = "";
-$root.third_party.tensorflow.python.keras.protobuf.SavedObject.prototype.metadata = "";
-$root.third_party.tensorflow.python.keras.protobuf.SavedObject.prototype.version = null;
+tensorflow.python.keras.protobuf.SavedObject.prototype.node_id = 0;
+tensorflow.python.keras.protobuf.SavedObject.prototype.node_path = "";
+tensorflow.python.keras.protobuf.SavedObject.prototype.identifier = "";
+tensorflow.python.keras.protobuf.SavedObject.prototype.metadata = "";
+tensorflow.python.keras.protobuf.SavedObject.prototype.version = null;
 
-$root.third_party.tensorflow.python.keras.protobuf.VersionDef = class VersionDef {
+tensorflow.python.keras.protobuf.VersionDef = class VersionDef {
 
     constructor() {
         this.bad_consumers = [];
     }
 
     static decode(reader, length) {
-        const message = new $root.third_party.tensorflow.python.keras.protobuf.VersionDef();
+        const message = new tensorflow.python.keras.protobuf.VersionDef();
         const end = length !== undefined ? reader.position + length : reader.length;
         while (reader.position < end) {
             const tag = reader.uint32();
@@ -9574,7 +9573,7 @@ $root.third_party.tensorflow.python.keras.protobuf.VersionDef = class VersionDef
     }
 
     static decodeText(reader) {
-        const message = new $root.third_party.tensorflow.python.keras.protobuf.VersionDef();
+        const message = new tensorflow.python.keras.protobuf.VersionDef();
         reader.start();
         while (!reader.end()) {
             const tag = reader.tag();
@@ -9597,5 +9596,5 @@ $root.third_party.tensorflow.python.keras.protobuf.VersionDef = class VersionDef
     }
 };
 
-$root.third_party.tensorflow.python.keras.protobuf.VersionDef.prototype.producer = 0;
-$root.third_party.tensorflow.python.keras.protobuf.VersionDef.prototype.min_consumer = 0;
+tensorflow.python.keras.protobuf.VersionDef.prototype.producer = 0;
+tensorflow.python.keras.protobuf.VersionDef.prototype.min_consumer = 0;

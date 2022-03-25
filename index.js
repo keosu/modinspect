@@ -1,4 +1,4 @@
-import { $root } from "./protos/tf-proto.js";
+import { tensorflow} from "./protos/tf-proto.js";
 import { protobuf } from "./protos/protobuf.js"
 import { openSync, readFileSync } from "fs";
 import { exit } from "process";
@@ -14,10 +14,10 @@ const buf = readFileSync(openSync(modelname));
 let gdef = null;
 if (modelname.endsWith('pb')) { 
     const reader = protobuf.BinaryReader.open(buf);
-    gdef = $root.tensorflow.GraphDef.decode(reader);
+    gdef = tensorflow.GraphDef.decode(reader);
 } else if (modelname.endsWith('pbtxt')) {
     const reader = protobuf.TextReader.open(buf);
-    gdef = $root.tensorflow.GraphDef.decodeText(reader);
+    gdef = tensorflow.GraphDef.decodeText(reader);
 }
 
 

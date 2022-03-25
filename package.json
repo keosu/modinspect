@@ -1,0 +1,8 @@
+{
+  "name": "modinspect",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "inspect nn models",
+  "main": "index.js",
+  "license": "MIT"
+}

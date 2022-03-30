@@ -1,4 +1,5 @@
- 
+#!/usr/bin/env node
+
 import { exit } from "process";
 import { CommGraph } from "./commgraph.js";
 

@@ -3,3 +3,5 @@
 current support:
 - tensorflow pb
 - tensorflow pbtxt
+- xmodel
+- onnx

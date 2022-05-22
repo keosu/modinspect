@@ -13,7 +13,9 @@
             ],
             "program": "${workspaceFolder}/index.js",
             "args": [
-                "/Users/answery/Work/graphviewer/bert_frozen_opt.pb"
+                // "/Users/answery/Work/graphviewer/bert_frozen_opt.pb"
+                "/Users/answery/Work/MSFT-ASR/msft/pytorch_model_eval_scripts/e.onnx"
+                // "/Users/answery/Work/graphviewer/xmodel/ssd_mobilenet_v1_coco_tf.xmodel"
             ]
         }
     ]

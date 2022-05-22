@@ -17,6 +17,9 @@ if (modelname.endsWith('pb')) {
     g.from_tf_pbtxt(modelname);
 } else if (modelname.endsWith('xmodel')) { 
     g.from_xmodel(modelname);
-}
+} else if (modelname.endsWith('onnx')) {
+    g.from_onnx(modelname);
+}    
 
 g.summary();   
+g.save_to_dot("tmp.dot")
